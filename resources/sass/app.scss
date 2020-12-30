@@ -1,8 +1,61 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+*{
+  margin: 0;
+  padding: 0;
+}
 
-// Variables
-@import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+/* ====================== */
+/* 【スマホ画面用】 */
+
+html{
+  width: 100%;
+  overflow: hidden;
+
+}
+.header_contents_wrapper{
+  display: flex;
+
+}
+header.contents_header {
+  height: 72px;
+  position: fixed;
+  top: 0;
+  background: #fff;
+  color: #008de3;
+  padding-top: 24px;
+  box-sizing: border-box;
+  transition: all .3s;
+  width: 100%;
+}
+
+.contents_title span {
+  font-family: 'Josefin Sans';
+  display: block;
+  font-size: 22px;
+  height: 28px;
+  margin: 0px 0px 0px 9px;
+  width: 33%;
+  max-width: calc(100% - 12px);
+}
+
+h1.contents_title {
+  line-height: 23px;
+  height: 23px;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.contents_headerbtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 16px;
+  height: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+}
+
