@@ -3,6 +3,15 @@
   padding: 0;
 }
 
+a {
+  background-color: transparent;
+  text-decoration: none;
+}
+
+div{
+  display: block;
+}
+
 ul{
   list-style: none;
   padding: 0;
@@ -15,12 +24,15 @@ li{
   margin: 0;
 }
 
+img {
+  border-style: none;
+}
+
 /* ====================== */
 /* 【スマホ画面用】 */
 
 html{
   width: 100%;
-  overflow: hidden;
 
 }
 .header_contents_wrapper{
@@ -41,7 +53,7 @@ header.contents_header {
   font-family: "Josefin Sans";
   display: block;
   font-size: 18px;
-  padding: 13px;
+  padding: 8px;
   margin: 0px 0px 0px 9px;
   max-width: calc(100% - 12px);
   background: #a8dee6;
@@ -57,7 +69,7 @@ h1.contents_title {
 
 .contents_headerbtn {
   position: absolute;
-  top: 32px;
+  top: 29px;
   right: 20px;
   width: 16px;
   height: 32px;
@@ -83,7 +95,6 @@ h1.contents_title {
 .style_topImage img{
   width: 60px;
   height: 60px;
-  background: yellow;
 }
 
 .style_title{
@@ -117,6 +128,7 @@ h1.contents_title {
 .search_btn_filter{
   border-color: #0584d2;
   margin: auto;
+  background: #fff;
 }
 
 .search_btn_wrap{
@@ -217,10 +229,6 @@ h1.contents_title {
   background: linear-gradient(180deg,rgba(17,30,38,0),rgba(17,30,38,.6) 237%);
 }
 
-.style_data{
-  padding: 16px 20px;
-}
-
 .style_img_text{
   position: absolute;
   color: #f8f9f9;
@@ -228,13 +236,253 @@ h1.contents_title {
   bottom: 8px;
 }
 
-.style_text_data{
-  font-size: 11px;
-  line-height: 16px;
-}
-
 .contents_style_ul{
   margin: auto; 
   max-width: 335px;
 }
 
+.style_text_data{
+  font-size: 11px;
+  line-height: 16px;
+}
+
+
+.style_data{
+  padding: 16px 20px;
+}
+
+.style_data_rank{
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0584d2;
+  margin-bottom: 4px;
+}
+
+.style_data_pricepone{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 18px;
+  margin-bottom: 4px;
+  color: #7d8b93;
+}
+
+.style_data_price_title{
+  flex: 0 0 71px;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.style_data_price_main{
+  font-style: normal;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.style_data_price_main span{
+  font-weight: 700;
+}
+
+.style_data_satisfaiwrap{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.style_data_satisfai_content{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30px;
+  margin-bottom: 8px;
+}
+
+.style_data_satisfaiScore{
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000;
+  margin-right: 3px;
+}
+
+.style_data_satisfaiCount{
+  font-size: 11px;
+  line-height: 16px;
+  color: #7d8b93;
+}
+.style_data_price{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 18px;
+  margin-bottom: 4px;
+  color: #7d8b93;
+}
+
+.style_data_priceMain{
+  font-style: normal;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.style_data_priceMain span{
+  font-weight: 700;
+}
+
+
+.style_wrap_more{
+  margin: 12px auto 48px;
+  padding: 20px;
+  max-width: 375px;
+}
+
+.style_wrap_more button{
+  width: 100%;
+  border: 1px solid #0584d2;
+  box-sizing: border-box;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  color: #0584d2;
+  background: #fff;
+}
+
+.style_wrap_more img{
+  margin-left: 6px;
+  width: 10px;
+  height: auto;
+}
+
+.style_subTitle{
+  text-align: center;
+  min-height: 24px;
+  line-height: 24px;
+  font-size: 22px;
+  padding-bottom: 24px;
+}
+
+.style_Linebtn_wrap{
+  margin: 30px auto 72px;
+  padding: 0 16px;
+}
+.style_line_content{
+  width: 100%;
+  max-width: 335px;
+  margin: auto;
+}
+.style_line_btn{
+  height: 50px;
+  width: 100%;
+  background: #00b900;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.style_line_btn img{
+  width: 33px;
+  height: 32px;
+  margin-right: 8px;
+}
+
+.style_line_btn span{
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.style_logo_text{
+  color: #7d8b93;
+  text-align: center;
+  font-size: 15px;
+  margin-top: 16px;
+}
+
+
+.footer_contents_wraper{
+  height: 235px;
+  text-align: center;
+  padding-top: 1px;
+}
+
+.footer_wave{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  bottom: -1px;
+}
+
+.footer_contents_main{
+  background: #5d6e78;
+  height: 201px;
+  padding-top: 1px;
+}
+.footer_contents_logo{
+  padding-top: 48px;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-family: 'Josefin Sans';
+  font-size: 1.7rem;
+  color: white;
+}
+
+.footer_contents_main small{
+  color: #fff;
+  margin-top: 53px;
+  font-size: 12px;
+  display: block;
+  height: 12px;
+  line-height: 12px;
+}
+
+//アクティブなメニューバー（開始）
+.header_floatMenu_usual{
+  top: 72px;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: #fff;
+  transition: opacity .3s;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+  background: #008de3;
+  color: #fff;
+}
+
+.header_floatMenu_usual.header_floatMenu_active{
+  pointer-events: auto;
+  opacity: 1;
+  display: none;
+}
+
+.header_floatMenu_wraper{
+  max-width: 600px;
+  padding: 32px;
+  margin: auto;
+}
+.header_floatMenu_usual li{
+  font-size: 22px;
+  line-height: 26px;
+  padding: 16px 0;
+}
+.header_floatMenu_wraper a{
+  color: #fff;
+}
+
+.header_floatMenu_usual li div{
+  width: 48px;
+  height: 0;
+  border-top: 2px solid #fff;
+}
+
+
+//アクティブなメニューバー（終了） 
