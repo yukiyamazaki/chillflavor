@@ -69,7 +69,7 @@ h1.contents_title {
 
 .contents_headerbtn {
   position: absolute;
-  top: 29px;
+  top: 21px;
   right: 20px;
   width: 16px;
   height: 32px;
@@ -79,6 +79,9 @@ h1.contents_title {
   justify-content: space-between;
   align-items: center;
   padding: 7px 0;
+  border: none;
+  font-size: 30px;
+  background: #fff;
 }
 
 .style_wrap_intro{
