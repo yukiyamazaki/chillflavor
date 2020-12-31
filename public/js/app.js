@@ -70014,7 +70014,7 @@ var Coach = function Coach() {
     src: "images/design/cheak_blue.svg"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "style_subTitle"
-  }, "\u30B3\u30FC\u30C8\u9078\u3073\u306B\u304A\u56F0\u308A\u3067\u3059\u304B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "\u30B3\u30FC\u30C8\u9078\u3073\u306B\u304A\u56F0\u308A\u3067\u3059\u304B\uFF1F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "style_Linebtn_wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "style_line_content"

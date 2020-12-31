@@ -128,7 +128,7 @@ const Coach = () => {
               <img src="images/design/cheak_blue.svg"/>
             </button>
           </div>
-          <h3 className="style_subTitle">コート選びにお困りですか</h3>
+          <h3 className="style_subTitle">コート選びにお困りですか？</h3>
           <div className="style_Linebtn_wrap">
             <div className="style_line_content">
               <a className="style_line_btn">
