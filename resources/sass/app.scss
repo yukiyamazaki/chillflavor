@@ -20,8 +20,6 @@ header.contents_header {
   height: 72px;
   position: fixed;
   top: 0;
-  background: #fff;
-  color: #008de3;
   padding-top: 24px;
   box-sizing: border-box;
   transition: all .3s;
@@ -29,13 +27,14 @@ header.contents_header {
 }
 
 .contents_title span {
-  font-family: 'Josefin Sans';
+  font-family: "Josefin Sans";
   display: block;
-  font-size: 22px;
-  height: 28px;
+  font-size: 18px;
+  padding: 13px;
   margin: 0px 0px 0px 9px;
-  width: 33%;
   max-width: calc(100% - 12px);
+  background: #a8dee6;
+  color: #111111;
 }
 
 h1.contents_title {
@@ -47,7 +46,7 @@ h1.contents_title {
 
 .contents_headerbtn {
   position: absolute;
-  top: 20px;
+  top: 32px;
   right: 20px;
   width: 16px;
   height: 32px;
