@@ -13,6 +13,7 @@ const App = () => {
     <React.Fragment>
       <GlobalNav />
       <Switch>
+        <div>aaa</div>
         <Route path="/" exact component={Top} />
         <Route path="/about" exact component={About} />
       </Switch>
