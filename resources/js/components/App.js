@@ -4,7 +4,7 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom';
 
 import GlobalNav from './GlobalNav';
 import Top from './Top';
-import About from './About';
+import Searchflavors from './Searchflavors';
 
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
       <GlobalNav />
       <Switch>
         <Route path="/" exact component={Top} />
-        <Route path="/about" exact component={About} />
+        <Route path="/searchflavors" exact component={Searchflavors} />
       </Switch>
     </React.Fragment>
     </BrowserRouter>

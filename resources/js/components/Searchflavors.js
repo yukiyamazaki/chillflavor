@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Coach = () => {
+const Searchflavors = () => {
   return(
     <>
       {/* header */}
@@ -9,7 +9,7 @@ const Coach = () => {
           <div className="header_contents_wrapper">
             <h1 className="contents_title">
               <a>
-                <span>TARUSHIRU</span>
+                <span>TARUSHIRUああああ</span>
               </a>
             </h1>
             <button className="contents_headerbtn">=</button>
@@ -161,4 +161,4 @@ const Coach = () => {
 }
 
 
-export default Coach;
+export default Searchflavors;
