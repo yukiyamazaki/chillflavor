@@ -492,3 +492,103 @@ h1.contents_title {
 
 //アクティブなメニューバー（終了） 
 
+
+// Flavorlist
+.flavor_list_main{
+
+}
+
+.flavor_category_contents{
+  margin-top: 30px;
+}
+
+.category_title {
+  font-size: 16px;
+  border-bottom: solid 1px red;
+  width: 90px;
+}
+
+.flavor_category_lists {
+  margin: 4px 0 10px 12px;
+}
+
+.flavor_category_content {
+  margin: 0px auto 17px auto;
+  width: 95%;
+}
+
+.flavor_category_lists span{
+  font-size: 14px;
+
+}
+
+
+// Flavor
+.content_flavor_img {
+  width: 100px;
+  height: 100px;
+  margin: 7px auto 0 auto;
+}
+
+.content_flavor_name {
+  text-align: center;
+  margin-top: 17px;
+  font-size: 34px;
+}
+
+.content_flavor_detail {
+  margin: 5px 13px 0px 13px;
+  padding: 8px 4px 7px 4px;
+  border: solid 1px blue;
+  border-radius: 8px;
+}
+
+.content_flavor_feature h2 {
+  font-size: 17px;
+  border-bottom: 1px solid red;
+  width: 41px;
+}
+
+
+.content_flavor_feature p {
+  word-break: break-all;
+  margin: 6px;
+  font-size: 13px;
+}
+
+.content_flavor_tags h2{
+  font-size: 17px;
+  border-bottom: 1px solid red;
+  width: 41px;
+}
+
+.content_flavor_tags {
+  margin-top: 20px;
+}
+
+.content_flavor_tag {
+  width: 88px;
+  height: 23px;
+  background: grey;
+  margin: 8px;
+  border-radius: 4px;
+}
+
+.content_flavor_combination {
+  margin-top: 25px;
+}
+
+.content_flavor_combination h2 {
+  font-size: 17px;
+  border-bottom: 1px solid red;
+  width: 176px;
+}
+
+.content_flavor_combination li{
+  margin: 6px 1px 7px 4px;
+}
+
+.content_flavor_combination span {
+  font-size: 15px;
+  margin: 15px 5px 7px 9px;
+}

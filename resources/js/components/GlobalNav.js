@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Navbar from './Navbar';
 
+
 const GlobalNav = () => {
   return(
     <React.Fragment>
@@ -9,17 +10,24 @@ const GlobalNav = () => {
       {/* headerコンポーネント */}
       <Navbar />
       <main className="home-main">
+
         <Link to="/Searchflavors">
-        <button className="home-btn">今日の気分<p>から探す</p>
+          <button className="home-btn">今日の気分<p>から探す</p>
         </button>
         </Link>
-        <Link to="/">
 
+        <Link to="/Flavorlist">
+          <button className="home-btn">カテゴリ<p>から探す</p></button>
         </Link>
 
-        <button className="home-btn">カテゴリ<p>から探す</p></button>
-        <button className="home-btn">ルーレット<p>で探す</p></button>
-        <button className="home-btn">シーシャマガジン</button>
+        <Link to="/">
+          <button className="home-btn">ルーレット<p>で探す</p></button>
+        </Link>
+
+        <Link to="/">
+        <button className="home-btn">マガジン</button>
+        </Link>
+
       </main>
 
     </div>
