@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 * {
   margin: 0;
   padding: 0;
@@ -31,11 +30,73 @@ img {
 }
 
 /* ====================== */
-
 /* 【スマホ画面用】 */
-
 html {
   width: 100%;
+}
+
+.home-wrap {
+  max-width: 600px;
+  margin: auto;
+  position: relative;
+}
+
+.home-header {
+  height: 25px;
+  padding: 20px;
+  font-size: 23px;
+}
+
+.home-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+}
+
+.home-header-logo {
+  text-align: left;
+}
+
+.home-header-logo span {
+  width: 132px;
+  height: 25px;
+  color: black;
+}
+
+.home-header-menuTrigger {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.home-header-menuTrigger div {
+  width: 16px;
+  position: relative;
+  margin-left: 24px;
+}
+
+.home-main {
+  display: flex;
+  flex-wrap: wrap;
+  width: 65%;
+  justify-content: space-between;
+  margin: 148px auto 0 auto;
+}
+
+.home-btn {
+  width: 120px;
+  height: 120px;
+  background: white;
+  border: solid grey 1px;
+  border-radius: 17px;
+  margin: 0 0 3px 0;
+  font-size: 18px;
+}
+
+.home-btn p {
+  font-size: 13px;
 }
 
 .header_contents_wrapper {
@@ -123,7 +184,7 @@ h1.contents_title {
 }
 
 .style_wrap_search {
-  margin: auto auto 42px;
+  margin: auto auto 15px;
   border-bottom: 1px solid #ebedee;
   position: -webkit-sticky;
   position: sticky;
@@ -147,8 +208,7 @@ h1.contents_title {
   margin: auto auto 12px;
 }
 
-.search_btn_how,
-.search_btn_filter {
+.search_btn_how, .search_btn_filter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,16 +220,14 @@ h1.contents_title {
   padding: 16px 0;
 }
 
-.search_btn_how img,
-.search_btn_filter img {
+.search_btn_how img, .search_btn_filter img {
   width: 16px;
   height: 16px;
   margin-right: 6px;
   content: "\25CF";
 }
 
-.search_btn_how span,
-.search_btn_filter span {
+.search_btn_how span, .search_btn_filter span {
   font-weight: 700;
   font-size: 16px;
   line-height: 16px;
@@ -202,23 +260,22 @@ h1.contents_title {
 }
 
 .style_wraper_content {
+  margin-bottom: 9px;
   max-width: 375px;
-  padding: 0 20px;
 }
 
 .content_main {
-  display: block;
-  margin: auto auto 20px;
+  display: flex;
   border: 1px solid #ebedee;
   box-sizing: border-box;
-  border-radius: 6px;
-  height: 391px;
+  border-radius: 7px;
+  height: 82px;
   overflow: hidden;
 }
 
 .style_img {
-  height: 253px;
-  width: 100%;
+  height: 100%;
+  width: 23%;
   position: relative;
 }
 
@@ -229,6 +286,7 @@ h1.contents_title {
   height: 100%;
   -o-object-position: center 21%;
      object-position: center 21%;
+  border-radius: 6px;
 }
 
 .style_img_textwrap {
@@ -248,9 +306,23 @@ h1.contents_title {
   bottom: 8px;
 }
 
+.style_flavor_text {
+  width: 70%;
+  margin: 4px 4px 4px 4px;
+}
+
+.style_flavor_name {
+  color: #0584d2;
+}
+
+.style_flavor_discription {
+  font-size: 11px;
+  margin: 5px 2px 4px 2px;
+}
+
 .contents_style_ul {
   margin: auto;
-  max-width: 335px;
+  max-width: 347px;
 }
 
 .style_text_data {
@@ -260,86 +332,6 @@ h1.contents_title {
 
 .style_data {
   padding: 16px 20px;
-}
-
-.style_data_rank {
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  color: #0584d2;
-  margin-bottom: 4px;
-}
-
-.style_data_pricepone {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 18px;
-  margin-bottom: 4px;
-  color: #7d8b93;
-}
-
-.style_data_price_title {
-  flex: 0 0 71px;
-  font-size: 11px;
-  line-height: 16px;
-}
-
-.style_data_price_main {
-  font-style: normal;
-  font-size: 12px;
-  line-height: 18px;
-}
-
-.style_data_price_main span {
-  font-weight: 700;
-}
-
-.style_data_satisfaiwrap {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.style_data_satisfai_content {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 30px;
-  margin-bottom: 8px;
-}
-
-.style_data_satisfaiScore {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 30px;
-  color: #000;
-  margin-right: 3px;
-}
-
-.style_data_satisfaiCount {
-  font-size: 11px;
-  line-height: 16px;
-  color: #7d8b93;
-}
-
-.style_data_price {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 18px;
-  margin-bottom: 4px;
-  color: #7d8b93;
-}
-
-.style_data_priceMain {
-  font-style: normal;
-  font-size: 12px;
-  line-height: 18px;
-}
-
-.style_data_priceMain span {
-  font-weight: 700;
 }
 
 .style_wrap_more {
@@ -497,4 +489,3 @@ h1.contents_title {
   height: 0;
   border-top: 2px solid #fff;
 }
-
