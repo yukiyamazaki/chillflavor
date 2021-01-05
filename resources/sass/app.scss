@@ -428,6 +428,11 @@ h1.contents_title {
 }
 
 // 絞り込みクリック時に表示
+.style_modalMenu_wrapper.style_modal_disable{
+  opacity: 0;
+  pointer-events: none;
+}
+
 .style_modalMenu_wrapper{
   position: fixed;
   top: 0;
