@@ -91,8 +91,8 @@ const Searchflavors = () => {
           </div>
           <h3 className="style_subTitle">フレイバー選びにお困りですか？</h3>
 
-          {/* 絞り込みbuttonをクリック時に表示 */}
-          <div className="style_modalMenu_wrapper">
+            {/* 絞り込みbuttonをクリック時に表示 */}
+            <div className="style_modalMenu_wrapper style_modal_disable">
             <div className="style_modalMenu_bg"></div>
             <div className="style_modal_content">
               <div className="style_modal_mainwapper">

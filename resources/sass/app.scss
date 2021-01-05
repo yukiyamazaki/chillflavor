@@ -67,6 +67,16 @@ button, input, select, textarea {
   font-size: 23px;
 }
 
+// header active
+.home-header.home-header-active{
+  background: #008de3;
+}
+
+.header-logo-active span{
+  color: white;
+}
+
+
 .home-header-inner{
   display: flex;
   justify-content: space-between;
@@ -428,6 +438,11 @@ h1.contents_title {
 }
 
 // 絞り込みクリック時に表示
+.style_modalMenu_wrapper.style_modal_disable{
+  opacity: 0;
+  pointer-events: none;
+}
+
 .style_modalMenu_wrapper{
   position: fixed;
   top: 0;
@@ -830,7 +845,7 @@ h1.contents_title {
 
 //アクティブなメニューバー（開始）
 .header_floatMenu_usual{
-  top: 72px;
+  top: 65px;
   height: 100%;
   width: 100%;
   position: fixed;
@@ -874,10 +889,6 @@ h1.contents_title {
 
 
 // Flavorlist
-.flavor_list_main{
-
-}
-
 .flavor_category_contents{
   margin-top: 30px;
 }
@@ -1023,3 +1034,69 @@ h1.contents_title {
   font-size: 9px;
   color: black;
 }
+
+
+// Roulette
+.roulette_titile {
+  margin-top: 61px;
+  text-align: center;
+}
+
+.select_feeling {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.style_roulette_testeItme {
+  flex: 0 0 80px;
+  margin: 0 1px 0 10px;
+}
+
+.style_roulette_teste{
+  display: none;
+}
+
+.style_roulette_teste+.style_roulette_label{
+  display: block;
+  box-sizing: border-box;
+  border-radius: 44px;
+  height: 88px;
+  width: 88px;
+  border: 1px solid #dde1e3;
+  transition: all .3s ease-in-out;
+  position: relative;
+}
+
+.style_roulette_teste:checked+.style_roulette_label{
+  background: #f2faff;
+  border-color: #0484d1;
+}
+
+.style_roulette_label_name {
+  position: absolute;
+  top: 28px;
+  left: 17px;
+}
+
+.style_roulette_start{
+  display: block;
+  margin: 0 auto;
+  width: 107px;
+  height: 44px;
+  text-align: center;
+  margin-top: 23px;
+}
+
+.style_roulette_start_btn {
+  background: white;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  border: 1px solid #0484d1;
+  transition: all .3s ease-in-out;
+}
+
+// Roulette(end)
