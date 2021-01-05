@@ -90,7 +90,46 @@ const Searchflavors = () => {
             </button>
           </div>
           <h3 className="style_subTitle">フレイバー選びにお困りですか？</h3>
+
+          {/* 絞り込みbuttonをクリック時に表示 */}
+          <div className="style_modalMenu_wrapper">
+            <div className="style_modalMenu_bg"></div>
+            <div className="style_modal_content">
+              <div className="style_modal_mainwapper">
+                <div className="style_main_choices">
+                  <div className="style_main_inputkeyword">キーワードで絞り込み</div>
+                  <div className="style_inputkeyword_wrap">
+                    <input type="text" className="style_inputkeyword_text"></input>
+                  </div>
+                  <div className="style_main_inputTitle">テイスト</div>
+                  <ul className="style_main_list">
+                    <li className="style_main_listItem">
+                      <input className="style_checkbox_teste" type="checkbox"></input>
+                      <label className="style_label_teste">
+                        あまめ
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+                <div className="style_main_modalFooter">
+                  <div className="style_modal_result">
+                    該当10つ
+                  </div>
+                  <button className="style_modal_btn">この条件で絞り込む</button>
+                  
+                </div>
+              </div>
+              <div className="style_modal_headerwapper">
+                コーチを絞り込む
+                <div className="style_modal_header_close">
+                  <img src="images/design/batumark.svg"></img>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </main>
+       
         <footer className="footer_contents_wraper">
           <div className="footer_wave">
             <img />
