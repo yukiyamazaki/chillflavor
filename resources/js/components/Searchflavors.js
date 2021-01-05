@@ -101,15 +101,82 @@ const Searchflavors = () => {
                   <div className="style_inputkeyword_wrap">
                     <input type="text" className="style_inputkeyword_text"></input>
                   </div>
+                  {/* CheckBox（teste） */}
                   <div className="style_main_inputTitle">テイスト</div>
                   <ul className="style_main_list">
                     <li className="style_main_listItem">
-                      <input className="style_checkbox_teste" type="checkbox"></input>
-                      <label className="style_label_teste">
-                        あまめ
+                      <input className="style_checkbox_teste" type="checkbox" id="taste_sweet"></input>
+                      <label className="style_label_teste" for="taste_sweet">
+                        <div className="taest_label_name">
+                            あまめ
+                        </div>
+                      </label>
+                    </li>
+                    <li className="style_main_listItem">
+                      <input className="style_checkbox_teste" type="checkbox" id="taste_fefresh"></input>
+                      <label className="style_label_teste" for="taste_fefresh">
+                        <div className="taest_label_name">
+                            さっぱり
+                        </div>
+                      </label>
+                    </li>
+                    <li className="style_main_listItem">
+                      <input className="style_checkbox_teste" type="checkbox" id="taste_hot"></input>
+                      <label className="style_label_teste" for="taste_hot">
+                        <div className="taest_label_name">
+                            からめ
+                        </div>
                       </label>
                     </li>
                   </ul>
+
+                  {/* CheckBox（type） */}
+                  <div className="style_main_inputTitle">タイプ</div>
+                  <ul className="style_main_list__type">
+                    <li className="style_main_listItem__type">
+                      <input className="style_checkbox_type" type="checkbox" id="type_main"></input>
+                      <label className="style_label_type" for="type_main">
+                        <div className="taest_label_name">
+                          王道
+                        </div>
+                      </label>
+                    </li>
+                    <li className="style_main_listItem__type">
+                      <input className="style_checkbox_type" type="checkbox" id="type_weird"></input>
+                      <label className="style_label_type" for="type_weird">
+                        <div className="taest_label_name">
+                          変わり種
+                        </div>
+                      </label>
+                    </li>
+                  </ul>
+
+                  {/* CheckBox（category） */}
+                  <div className="style_main_inputTitle">カテゴリ</div>
+                  {/* フルーツ系 */}
+                  <div className="style_main_input__category">
+                    <ul className="style_category_wrap">
+                      <li className="style_cate_listItem">
+                        <input type="checkbox" id="category_fruit" className="style_checkbox_category"></input>
+                        <label for="category_fruit" className="style_label_category">フルーツ系</label>
+                      </li>
+                      {/* カクテル */}
+                      <li className="style_cate_listItem">
+                        <input type="checkbox" id="category_drink" className="style_checkbox_category"></input>
+                        <label for="category_drink" className="style_label_category">カクテル系</label>
+                      </li>
+                      {/* スパイス系 */}
+                      <li className="style_cate_listItem">
+                        <input type="checkbox" id="category_spices" className="style_checkbox_category"></input>
+                        <label for="category_spices" className="style_label_category">スパイス系</label>
+                      </li>
+                      {/* その他 */}
+                      <li className="style_cate_listItem">
+                        <input type="checkbox" id="category_other" className="style_checkbox_category"></input>
+                        <label for="category_other" className="style_label_category">その他</label>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
                 <div className="style_main_modalFooter">
                   <div className="style_modal_result">
