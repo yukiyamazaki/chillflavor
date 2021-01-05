@@ -27,7 +27,6 @@ li{
 img {
   border-style: none;
 }
-
 /* ====================== */
 /* 【スマホ画面用】 */
 
@@ -35,6 +34,88 @@ html{
   width: 100%;
 
 }
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+
+// ===============================
+// HOMEページ
+.home-wrap{
+  max-width: 600px;
+  margin: auto;
+  position: relative;
+}
+
+.home-header{
+  height: 25px;
+  padding: 20px;
+  font-size: 23px;
+}
+
+.home-header-inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+}
+
+.home-header-logo{
+  text-align: left;
+}
+
+.home-header-logo span{
+  width: 132px;
+  height: 25px;
+  color: black;
+}
+
+.home-header-menuTrigger{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.home-header-menuTrigger div{
+  width: 16px;
+  position: relative;
+  margin-left: 24px;
+}
+
+.home-main {
+  display: flex;
+  flex-wrap: wrap;
+  width: 65%;
+  justify-content: space-between;
+  margin: 148px auto 0 auto;
+}
+
+.home-btn {
+  width: 120px;
+  height: 120px;
+  background: white;
+  border: solid grey 1px;
+  border-radius: 17px;
+  margin: 0 0 3px 0;
+  font-size: 18px;
+}
+
+.home-btn p {
+  font-size: 13px;
+}
+
+// =========================
+// Looking Forward Flavorページ
+
 .header_contents_wrapper{
   display: flex;
 
@@ -121,7 +202,7 @@ h1.contents_title {
 }
 
 .style_wrap_search{
-  margin: auto auto 42px;
+  margin: auto auto 15px;
   border-bottom: 1px solid #ebedee;
   position: sticky;
   top: 0;
@@ -195,24 +276,22 @@ h1.contents_title {
   list-style: none;
 }
 
-.style_wraper_content{
+.style_wraper_content {
+  margin-bottom: 9px;
   max-width: 375px;
-  padding: 0 20px;
 }
-
-.content_main{
-  display: block;
-  margin: auto auto 20px;
+.content_main {
+  display: flex;
   border: 1px solid #ebedee;
   box-sizing: border-box;
-  border-radius: 6px;
-  height: 391px;
+  border-radius: 7px;
+  height: 82px;
   overflow: hidden;
 }
 
-.style_img{
-  height: 253px;
-  width: 100%;
+.style_img {
+  height: 100%;
+  width: 23%;
   position: relative;
 }
 
@@ -221,6 +300,7 @@ h1.contents_title {
   width: 100%;
   height: 100%;
   object-position: center 21%;
+  border-radius: 6px;
 }
 .style_img_textwrap{
   width: 100%;
@@ -239,9 +319,23 @@ h1.contents_title {
   bottom: 8px;
 }
 
-.contents_style_ul{
-  margin: auto; 
-  max-width: 335px;
+.style_flavor_text {
+  width: 70%;
+  margin: 4px 4px 4px 4px;
+}
+
+.style_flavor_name{
+  color: #0584d2;
+}
+
+.style_flavor_discription {
+  font-size: 11px;
+  margin: 5px 2px 4px 2px;
+}
+
+.contents_style_ul {
+  margin: auto;
+  max-width: 347px;
 }
 
 .style_text_data{
@@ -249,90 +343,9 @@ h1.contents_title {
   line-height: 16px;
 }
 
-
 .style_data{
   padding: 16px 20px;
 }
-
-.style_data_rank{
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  color: #0584d2;
-  margin-bottom: 4px;
-}
-
-.style_data_pricepone{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 18px;
-  margin-bottom: 4px;
-  color: #7d8b93;
-}
-
-.style_data_price_title{
-  flex: 0 0 71px;
-  font-size: 11px;
-  line-height: 16px;
-}
-
-.style_data_price_main{
-  font-style: normal;
-  font-size: 12px;
-  line-height: 18px;
-}
-
-.style_data_price_main span{
-  font-weight: 700;
-}
-
-.style_data_satisfaiwrap{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.style_data_satisfai_content{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 30px;
-  margin-bottom: 8px;
-}
-
-.style_data_satisfaiScore{
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 30px;
-  color: #000;
-  margin-right: 3px;
-}
-
-.style_data_satisfaiCount{
-  font-size: 11px;
-  line-height: 16px;
-  color: #7d8b93;
-}
-.style_data_price{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 18px;
-  margin-bottom: 4px;
-  color: #7d8b93;
-}
-
-.style_data_priceMain{
-  font-style: normal;
-  font-size: 12px;
-  line-height: 18px;
-}
-
-.style_data_priceMain span{
-  font-weight: 700;
-}
-
 
 .style_wrap_more{
   margin: 12px auto 48px;
@@ -408,11 +421,217 @@ h1.contents_title {
   margin-top: 16px;
 }
 
+// 絞り込みクリック時に表示
+.style_modalMenu_wrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  transition: opacity .3s ease-in-out;
+  z-index: 1000;
+}
 
+.style_modalMenu_bg{
+  width: 100%;
+  height: 38px;
+  background: #111e26;
+  opacity: .3;
+}
+.style_modal_content{
+  background: #fff;
+}
+
+.style_modal_mainwapper{
+  height: calc(100vh - 75px);
+  margin: auto;
+  width: 375px;
+  box-sizing: border-box;
+  padding-top: 96px;
+  overflow-y: scroll;
+}
+
+.style_main_choices{
+  padding: 0 20px 140px;
+}
+
+.style_main_inputkeyword{
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+
+.style_inputkeyword_wrap{
+  margin: auto auto 40px;
+}
+.style_inputkeyword_text{
+  height: 56px;
+  width: 100%;
+  border: 1px solid #ebedee;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 0 16px;
+}
+
+.style_main_list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 335px;
+  margin: auto auto 32px;
+}
+
+.style_checkbox_teste{
+  display: none;
+}
+
+.style_label_teste{
+  background: #f8f9f9;
+  border-radius: 6px;
+  padding: 12px 8px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+  transition: border .25s,background-color .25s;
+}
+
+.style_label_teste{
+  background: #f2faff;
+  border: 1px solid #0584d2;
+}
+
+.style_label_teste::before{
+  content: ■;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: none;
+  border: 1px solid #dde1e3;
+  box-sizing: border-box;
+  background: yellow;
+  
+}
+
+.style_label_teste input:checked + .style_label_teste{
+  display: block;
+  content: "■";
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 23px;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #0484d1;
+}
+
+.style_main_modalFooter{
+  margin: auto;
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 -2px 4px rgba(0,0,0,.06);
+}
+
+.style_modal_result{
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  color: #bdc4c8;
+  margin-right: 27px;
+}
+
+.style_main_modalFooter button.style_modal_btn{
+  background: #0584d2;
+  pointer-events: auto;
+}
+
+.style_main_modalFooter button{
+  width: 216px;
+  height: 48px;
+  flex: 0 0 216px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ebedee;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  color: #fff;
+  transition: background-color .3s ease-in-out;
+  pointer-events: none;
+}
+
+.style_modal_headerwapper{
+  position: fixed;
+  max-width: 375px;
+  background: #fff;
+  top: 38px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 64px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.06);
+  line-height: 64px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+}
+
+.style_modal_header_close{
+  box-sizing: border-box;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  right: 19px;
+  top: 19px;
+  display: block;
+}
+
+.style_modal_header_close img{
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+
+// footer
 .footer_contents_wraper{
   height: 235px;
   text-align: center;
   padding-top: 1px;
+}
+
+.style_main_listItem{
+  width: 105px;
+  height: 160px;
+  flex: 0 0 105px;
 }
 
 .footer_wave{
@@ -489,3 +708,155 @@ h1.contents_title {
 
 
 //アクティブなメニューバー（終了） 
+
+
+// Flavorlist
+.flavor_list_main{
+
+}
+
+.flavor_category_contents{
+  margin-top: 30px;
+}
+
+.category_title {
+  font-size: 16px;
+  border-bottom: solid 1px red;
+  width: 90px;
+}
+
+.flavor_category_lists {
+  margin: 4px 0 10px 12px;
+}
+
+.flavor_category_content {
+  margin: 0px auto 17px auto;
+  width: 95%;
+}
+
+.flavor_category_lists span{
+  font-size: 14px;
+
+}
+
+
+// Flavor
+.content_flavor_img {
+  width: 100px;
+  height: 100px;
+  margin: 7px auto 0 auto;
+}
+
+.content_flavor_name {
+  text-align: center;
+  margin-top: 17px;
+  font-size: 34px;
+}
+
+.content_flavor_detail {
+  margin: 5px 13px 0px 13px;
+  padding: 8px 4px 7px 4px;
+  border: solid 1px blue;
+  border-radius: 8px;
+}
+
+.content_flavor_feature h2 {
+  font-size: 17px;
+  border-bottom: 1px solid red;
+  width: 41px;
+}
+
+
+.content_flavor_feature p {
+  word-break: break-all;
+  margin: 6px;
+  font-size: 13px;
+}
+
+.content_flavor_tags h2{
+  font-size: 17px;
+  border-bottom: 1px solid red;
+  width: 41px;
+}
+
+.content_flavor_tags {
+  margin-top: 20px;
+}
+
+.content_flavor_tag {
+  width: 88px;
+  height: 23px;
+  background: grey;
+  margin: 8px;
+  border-radius: 4px;
+}
+
+.content_flavor_combination {
+  margin-top: 25px;
+}
+
+.content_flavor_combination h2 {
+  font-size: 17px;
+  border-bottom: 1px solid red;
+  width: 176px;
+}
+
+.content_flavor_combination li{
+  margin: 6px 1px 7px 4px;
+}
+
+.content_flavor_combination span {
+  font-size: 15px;
+  margin: 15px 5px 7px 9px;
+}
+
+//Magazines
+.magazin_intro_wraper {
+  margin: 2px 4px 2px 4px;
+  word-break: break-all;
+}
+
+.magazine_contents h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 17px;
+  margin-bottom: 18px;
+}
+
+.magazin_content {
+  display: flex;
+  margin: 9px auto 0px auto;
+  width: 90%;
+  border-bottom: 1px grey solid;
+  padding: 0 4px 7px 4px;
+}
+
+.magazines_img {
+  width: 45%;
+  height: 100px;
+  margin: 10px 0px 0px 8px;
+}
+
+.magazines_img img {
+  width: 118px;
+  height: 86px;
+  border: solid 1px black;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.magazin_title {
+  font-size: 20px;
+  color: black;
+}
+.magazin_description {
+  color: black;
+  font-size: 14px;
+  margin-top: 4px;
+  width: 100%;
+  height: 43px;
+}
+.magazin_created_at {
+  font-size: 9px;
+  color: black;
+}
