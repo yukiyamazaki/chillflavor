@@ -1,10 +1,28 @@
-import React  from 'react';
+import React from 'react';
 import Navbar from './Navbar';
-import { useState } from 'react';
+import { useState,useEffect, Component } from 'react';
+import axios from 'axios';
 
 const Searchflavors = () => {
   const [modal,setModal] = useState(false);
+  const [flavors,setFlavors] = useState([]);
 
+  useEffect(() => {
+    getFlavors()
+  },[]);
+
+  //axios searchflavor dataの取得
+  const getFlavors = async() =>{
+  // This is error comform...
+    try {
+      const response = await axios.get('api/Searchflavors');
+      setFlavors(response.data.flavors);
+    }catch(error){
+      console.log('Searchflavor情報取得エラー');
+      return;
+    }
+  }
+ 
   //do the modal ON
   const handdleModal = e =>{
     e.preventDefault();
@@ -20,7 +38,6 @@ const Searchflavors = () => {
       setModal(false);
     }
   }
-  
 
   return(
     <>
@@ -33,13 +50,21 @@ const Searchflavors = () => {
         name='zakizaki'
         look='pppppppp'
        />
-
+        
         {/* ここからMain */}
         <main>
           <div className="style_wrap_intro">
             <div className="style_topImage">
               <img src="images/design/electnic.svg"></img>
             </div>
+
+          {/* test start */}
+            {flavors.map((flavor) =>
+              <li key={flavor.id}>{flavor.name}</li>
+            )}
+            <p>aaa</p>
+          {/* test finish */}
+
             <h2 className="style_title">フレイバーを選ぶ</h2>
             <div className="style_description">あなたのご希望をもとに<span>あなたにおすすめの順に</span>フレイバーを全て表示しています。希望条件が明確な場合は、絞り込んでみましょう。</div>
           </div>
@@ -137,7 +162,7 @@ const Searchflavors = () => {
                   <ul className="style_main_list">
                     <li className="style_main_listItem">
                       <input className="style_checkbox_teste" type="checkbox" id="taste_sweet"></input>
-                      <label className="style_label_teste" for="taste_sweet">
+                      <label className="style_label_teste" htmlFor="taste_sweet">
                         <div className="taest_label_name">
                             あまめ
                         </div>
@@ -145,7 +170,7 @@ const Searchflavors = () => {
                     </li>
                     <li className="style_main_listItem">
                       <input className="style_checkbox_teste" type="checkbox" id="taste_fefresh"></input>
-                      <label className="style_label_teste" for="taste_fefresh">
+                      <label className="style_label_teste" htmlFor="taste_fefresh">
                         <div className="taest_label_name">
                             さっぱり
                         </div>
@@ -153,7 +178,7 @@ const Searchflavors = () => {
                     </li>
                     <li className="style_main_listItem">
                       <input className="style_checkbox_teste" type="checkbox" id="taste_hot"></input>
-                      <label className="style_label_teste" for="taste_hot">
+                      <label className="style_label_teste" htmlFor="taste_hot">
                         <div className="taest_label_name">
                             からめ
                         </div>
@@ -166,7 +191,7 @@ const Searchflavors = () => {
                   <ul className="style_main_list__type">
                     <li className="style_main_listItem__type">
                       <input className="style_checkbox_type" type="checkbox" id="type_main"></input>
-                      <label className="style_label_type" for="type_main">
+                      <label className="style_label_type" htmlFor="type_main">
                         <div className="taest_label_name">
                           王道
                         </div>
@@ -174,7 +199,7 @@ const Searchflavors = () => {
                     </li>
                     <li className="style_main_listItem__type">
                       <input className="style_checkbox_type" type="checkbox" id="type_weird"></input>
-                      <label className="style_label_type" for="type_weird">
+                      <label className="style_label_type" htmlFor="type_weird">
                         <div className="taest_label_name">
                           変わり種
                         </div>
@@ -189,22 +214,22 @@ const Searchflavors = () => {
                     <ul className="style_category_wrap">
                       <li className="style_cate_listItem">
                         <input type="checkbox" id="category_fruit" className="style_checkbox_category"></input>
-                        <label for="category_fruit" className="style_label_category">フルーツ系</label>
+                        <label htmlFor="category_fruit" className="style_label_category">フルーツ系</label>
                       </li>
                       {/* カクテル */}
                       <li className="style_cate_listItem">
                         <input type="checkbox" id="category_drink" className="style_checkbox_category"></input>
-                        <label for="category_drink" className="style_label_category">カクテル系</label>
+                        <label htmlFor="category_drink" className="style_label_category">カクテル系</label>
                       </li>
                       {/* スパイス系 */}
                       <li className="style_cate_listItem">
                         <input type="checkbox" id="category_spices" className="style_checkbox_category"></input>
-                        <label for="category_spices" className="style_label_category">スパイス系</label>
+                        <label htmlFor="category_spices" className="style_label_category">スパイス系</label>
                       </li>
                       {/* その他 */}
                       <li className="style_cate_listItem">
                         <input type="checkbox" id="category_other" className="style_checkbox_category"></input>
-                        <label for="category_other" className="style_label_category">その他</label>
+                        <label htmlFor="category_other" className="style_label_category">その他</label>
                       </li>
                     </ul>
                   </div>

@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Flavor;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/Searchflavors',function (Request $request) {
+	$flavors = App\Models\Flavor::all();
+	return response()->json(['flavors' => $flavors]);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
