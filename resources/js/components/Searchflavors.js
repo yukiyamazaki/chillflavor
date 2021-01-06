@@ -1,12 +1,39 @@
-import React from 'react';
+import React  from 'react';
 import Navbar from './Navbar';
+import { useState } from 'react';
 
 const Searchflavors = () => {
+  const [modal,setModal] = useState(false);
+
+  //do the modal ON
+  const handdleModal = e =>{
+    e.preventDefault();
+    if(!modal){
+      setModal(true);
+    }
+  }
+
+   //do the modal OFF
+   const isModal_off = e => {
+    e.preventDefault();
+    if(modal){
+      setModal(false);
+    }
+  }
+  
+
   return(
     <>
       {/* header */}
       <div className="contents_header_wrap">
-       <Navbar />
+
+        {/* This is props TEST */}
+       <Navbar
+        id="12345"
+        name='zakizaki'
+        look='pppppppp'
+       />
+
         {/* ここからMain */}
         <main>
           <div className="style_wrap_intro">
@@ -22,7 +49,10 @@ const Searchflavors = () => {
                 <img/>
                 <span>フレイバの選び方</span>
               </button>
-              <button className="search_btn_filter">
+              <button 
+                className="search_btn_filter"
+                onClick={handdleModal} 
+              >
                 <img/>
                 <span>絞り込み</span>
               </button>
@@ -31,6 +61,7 @@ const Searchflavors = () => {
               20人
             </div>
           </div>
+
           {/* ここからコーチの結果を表示 */}
           <ul className="contents_style_ul">
             <li>
@@ -45,7 +76,6 @@ const Searchflavors = () => {
                       すっきりとした口当たりで・・・・
                     </div>
                   </div>
-                    
                 </a>
               </div>
             </li>
@@ -61,7 +91,6 @@ const Searchflavors = () => {
                       すっきりとした口当たりで・・・・
                     </div>
                   </div>
-                    
                 </a>
               </div>
             </li>
@@ -76,23 +105,25 @@ const Searchflavors = () => {
                     <div className="style_flavor_discription">
                       すっきりとした口当たりで・・・・
                     </div>
-                  </div>
-                    
+                  </div>  
                 </a>
               </div>
             </li>
-
           </ul>
+
           <div className="style_wrap_more">
             <button>
               もっとコートをみる
               <img src="images/design/cheak_blue.svg"/>
             </button>
           </div>
-          <h3 className="style_subTitle">フレイバー選びにお困りですか？</h3>
+          <h3 className="style_subTitle">
+            フレイバー選びにお困りですか？</h3>
 
             {/* 絞り込みbuttonをクリック時に表示 */}
-            <div className="style_modalMenu_wrapper style_modal_disable">
+            <div 
+              className={modal ? "style_modalMenu_wrapper" : "style_modalMenu_wrapper style_modal_disable"}
+            >
             <div className="style_modalMenu_bg"></div>
             <div className="style_modal_content">
               <div className="style_modal_mainwapper">
@@ -183,20 +214,22 @@ const Searchflavors = () => {
                     該当10つ
                   </div>
                   <button className="style_modal_btn">この条件で絞り込む</button>
-                  
                 </div>
               </div>
               <div className="style_modal_headerwapper">
                 コーチを絞り込む
-                <div className="style_modal_header_close">
+                <button       
+                  className="style_modal_header_close"
+                  onClick={isModal_off}
+                >
                   <img src="images/design/batumark.svg"></img>
-                </div>
+                </button>
               </div>
             </div>
           </div>
-
         </main>
        
+       {/* footer */}
         <footer className="footer_contents_wraper">
           <div className="footer_wave">
             <img />

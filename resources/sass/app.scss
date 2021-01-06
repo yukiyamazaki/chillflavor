@@ -65,15 +65,14 @@ button, input, select, textarea {
   height: 25px;
   padding: 20px;
   font-size: 23px;
+  background: white;
+  transition: background 0.3s;
 }
 
 // header active
 .home-header.home-header-active{
   background: #008de3;
-}
-
-.header-logo-active span{
-  color: white;
+  transition: background 0.3s;
 }
 
 
@@ -95,10 +94,33 @@ button, input, select, textarea {
   color: black;
 }
 
+.home-header-active span{
+  color: white;
+  transition: color 0.3s;
+}
+
+
 .home-header-menuTrigger{
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: 16px;
+}
+
+.home-header button{
+  background: white;
+  transition: background 0.3s;
+}
+
+.home-header-active button{
+  background: #008de3;
+  transition: background 0.3s;
+  color: white;
+}
+
+.home-header.home-header-active {
+  background: #008de3;
+  transition: background 0.3s;
 }
 
 .home-header-menuTrigger div{
@@ -730,6 +752,7 @@ h1.contents_title {
   right: 19px;
   top: 19px;
   display: block;
+  background: white;
 }
 
 .style_modal_header_close img{
@@ -861,7 +884,6 @@ h1.contents_title {
 .header_floatMenu_usual.header_floatMenu_active{
   pointer-events: auto;
   opacity: 1;
-  display: none;
 }
 
 .header_floatMenu_wraper{

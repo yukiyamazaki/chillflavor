@@ -9,5 +9,4 @@ const Magazine = () => {
     </>
   )
 }
-
 export default Magazine;
