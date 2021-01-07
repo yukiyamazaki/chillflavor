@@ -71189,6 +71189,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -71217,39 +71223,38 @@ var Searchflavors = function Searchflavors() {
       flavors = _useState4[0],
       setFlavors = _useState4[1];
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    getFlavors();
-  }, []); //axios searchflavor dataの取得
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+    name: '',
+    keyword: ''
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      formData = _useState6[0],
+      setFormData = _useState6[1]; //検索inputの定義
+  // const [keyword,setKeyword] = useState("");
+  //keyword input
+
+
+  var handleChange = function handleChange(event) {
+    // setKeyword(e.target.value);
+    setFormData(_objectSpread(_objectSpread({}, formData), {}, {
+      keyword: event.target.value
+    }));
+  }; //inputに入力した内容をコンソールに表示
+
+
+  console.log(formData.keyword); //axios searchflavor dataの取得
 
   var getFlavors = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('api/Searchflavors');
-
-            case 3:
-              response = _context.sent;
-              setFlavors(response.data.flavors);
-              _context.next = 11;
-              break;
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              console.log('Searchflavor情報取得エラー');
-              return _context.abrupt("return");
-
-            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 7]]);
+      }, _callee);
     }));
 
     return function getFlavors() {
@@ -71275,6 +71280,54 @@ var Searchflavors = function Searchflavors() {
     }
   };
 
+  var narrowFlavor = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+      var params;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              e.preventDefault(); //formに入力された値をもとに検索結果の取得
+
+              if (confirm('送信します。よろしいですか？')) {
+                _context2.next = 3;
+                break;
+              }
+
+              return _context2.abrupt("return");
+
+            case 3:
+              params = new FormData();
+              params.append("name", formData.keyword);
+              axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/Searchflavors', params).then(function (response) {
+                // 成功した時
+                console.log(response.data.flavors);
+                setFlavors(response.data.flavors);
+              })["catch"](function (error) {
+                // 失敗したとき
+                console.log('エラー');
+                console.log(params);
+              }); //submit buttonイベント発火後、inputの内容を初期化
+
+              setFormData({
+                keyword: ''
+              }); //modalを閉じる
+
+              setModal(false);
+
+            case 8:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function narrowFlavor(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "contents_header_wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -71287,11 +71340,7 @@ var Searchflavors = function Searchflavors() {
     className: "style_topImage"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: "images/design/electnic.svg"
-  })), flavors.map(function (flavor) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-      key: flavor.id
-    }, flavor.name);
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "style_title"
   }, "\u30D5\u30EC\u30A4\u30D0\u30FC\u3092\u9078\u3076"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_description"
@@ -71308,54 +71357,28 @@ var Searchflavors = function Searchflavors() {
     className: "style_count"
   }, "20\u4EBA")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
     className: "contents_style_ul"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_wraper_content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-    className: "content_main"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_img"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-    src: "\bimages/coaches/S__6979644.jpg",
-    alt: ""
+  }, flavors.map(function (flavor) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      key: flavor.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "style_wraper_content"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+      className: "content_main"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "style_img"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+      src: "\bimages/coaches/S__6979644.jpg",
+      alt: ""
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "style_flavor_text"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "style_flavor_name"
+    }, flavor.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "style_flavor_discription"
+    }, flavor.feature_intro)))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_name"
-  }, "\u30EC\u30E2\u30F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_discription"
-  }, "\u3059\u3063\u304D\u308A\u3068\u3057\u305F\u53E3\u5F53\u305F\u308A\u3067\u30FB\u30FB\u30FB\u30FB"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_wraper_content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-    className: "content_main"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_img"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-    src: "\bimages/coaches/S__6979644.jpg",
-    alt: ""
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_name"
-  }, "\u30EC\u30E2\u30F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_discription"
-  }, "\u3059\u3063\u304D\u308A\u3068\u3057\u305F\u53E3\u5F53\u305F\u308A\u3067\u30FB\u30FB\u30FB\u30FB"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_wraper_content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-    className: "content_main"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_img"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-    src: "\bimages/coaches/S__6979644.jpg",
-    alt: ""
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_name"
-  }, "\u30EC\u30E2\u30F3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_flavor_discription"
-  }, "\u3059\u3063\u304D\u308A\u3068\u3057\u305F\u53E3\u5F53\u305F\u308A\u3067\u30FB\u30FB\u30FB\u30FB")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_wrap_more"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "\u3082\u3063\u3068\u30B3\u30FC\u30C8\u3092\u307F\u308B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "\u3082\u3063\u3068\u3092\u307F\u308B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: "images/design/cheak_blue.svg"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
     className: "style_subTitle"
@@ -71365,8 +71388,10 @@ var Searchflavors = function Searchflavors() {
     className: "style_modalMenu_bg"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modal_content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "style_modal_mainwapper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    id: "narrowForm",
+    className: "style_modal_mainwapper",
+    method: "get"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_main_choices"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -71375,7 +71400,10 @@ var Searchflavors = function Searchflavors() {
     className: "style_inputkeyword_wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     type: "text",
-    className: "style_inputkeyword_text"
+    name: "name",
+    className: "style_inputkeyword_text",
+    value: formData.keyword,
+    onChange: handleChange
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_main_inputTitle"
   }, "\u30C6\u30A4\u30B9\u30C8"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
@@ -71486,10 +71514,11 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modal_result"
   }, "\u8A72\u5F5310\u3064"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    className: "style_modal_btn"
+    className: "style_modal_btn",
+    onClick: narrowFlavor
   }, "\u3053\u306E\u6761\u4EF6\u3067\u7D5E\u308A\u8FBC\u3080"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modal_headerwapper"
-  }, "\u30B3\u30FC\u30C1\u3092\u7D5E\u308A\u8FBC\u3080", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, "\u30D5\u30EC\u30A4\u30D0\u30FC\u3092\u7D5E\u308A\u8FBC\u3080", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "style_modal_header_close",
     onClick: isModal_off
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {

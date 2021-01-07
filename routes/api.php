@@ -15,8 +15,17 @@ use Illuminate\Support\Facades\DB;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/Searchflavors',function (Request $request) {
-	$flavors = App\Models\Flavor::all();
-	return response()->json(['flavors' => $flavors]);
-
+Route::post('/Searchflavors',function (Request $request) {
+    // 全件取得パターン
+    if (!$request->name) {
+        // 通常パターン（created_atで降順）
+        // $flavors = Flavor::orderby('created_at','desc')->get();
+        // return response()->json(['flavors' => $flavors]);
+        return "エラー";
+    }
+    // 絞り込みのケース
+    $res = $request->name;
+    $flavors = Flavor::where('name',$res)->get();
+    return response()->json(['flavors' => $flavors]);
 });
+

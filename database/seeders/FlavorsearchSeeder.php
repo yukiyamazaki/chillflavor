@@ -25,6 +25,30 @@ class FlavorsearchSeeder extends Seeder
                 'search_keyword' => 'レモンremonfruit',
                 'select_type' => '王道',
             ],
+            [
+                'name' => 'オレンジ',
+                'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
+                'image_id' => '22222',
+                'category' =>'Fruit',
+                'search_keyword' => 'レモンremonfruit',
+                'select_type' => '王道',
+            ],
+            [
+                'name' => 'かぼす',
+                'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
+                'image_id' => '11111',
+                'category' =>'Fruit',
+                'search_keyword' => 'かぼすremonfruit',
+                'select_type' => '変わり種',
+            ],
+            [
+                'name' => 'いちご',
+                'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
+                'image_id' => '11111',
+                'category' =>'Fruit',
+                'search_keyword' => 'いちごichigofruit',
+                'select_type' => '王道',
+            ],
         ]);
     }
 }

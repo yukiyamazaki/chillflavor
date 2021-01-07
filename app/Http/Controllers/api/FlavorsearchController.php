@@ -12,10 +12,5 @@ use Illuminate\Http\UploadedFile;
 
 class FlavorsearchController extends Controller
 {
-    public function index(){
-        $flavors = Flavor::all();
-        return respone()->json(['flavors' => $flavors]);
-    }
+    
 }
-
-
