@@ -6,23 +6,70 @@ import axios from 'axios';
 const Searchflavors = () => {
   const [modal,setModal] = useState(false);
   const [flavors,setFlavors] = useState([]);
-  const [formData,setFormData] = useState({
-    name:'',
-    keyword:'',
-  });
+  const [keyword,setKeyword] = useState("");
+  //絞り込みエリアのcheckbox
+  // 元のデータ
+  // const [checkdata,setCheckdata] = useState([]);
+  //  taste
+  const [tastes,setTaste] = useState([]);
+  //  type
+  const [types,setType] = useState([]);
+  //  category
+  const [categories,setCategory] = useState([]);
 
   //検索inputの定義
-  // const [keyword,setKeyword] = useState("");
   //keyword input
-  const handleChange = (event) =>{
+  const handleChange = (e) =>{
     // setKeyword(e.target.value);
-    setFormData({
-      ...formData,
-      keyword:event.target.value
-    });
+    setKeyword(e.target.value);
   }
+
   //inputに入力した内容をコンソールに表示
-  console.log(formData.keyword)
+  //キーワード検索
+  // console.log(keyword);
+  // // チェックボックス
+  // // taste
+  // console.log(tastes);
+  // // type
+  // console.log(types);
+  // // category
+  // console.log(categories);
+
+  // チェックボックス
+  
+  //taste
+  const changeTaste = (e) =>{
+    if(tastes.includes(e.target.value)){
+      //OFF
+      setTaste(tastes.filter(item => item !== e.target.value));
+    }else{
+      // ON
+      setTaste([...tastes, e.target.value]);
+    }
+  }
+  
+  //type
+  const changeType = (e) =>{
+    if(types.includes(e.target.value)){
+      //OFF
+      setType(types.filter(item => item !== e.target.value));
+    }else{
+      // ON
+      setType([...types, e.target.value]);
+    }
+  };
+  
+  //type
+  const changeCategory = (e) =>{
+    if(categories.includes(e.target.value)){
+      //OFF
+      setCategory(categories.filter(item => item !== e.target.value));
+    }else{
+      // ON
+      setCategory([...categories, e.target.value]);
+    }
+  };
+
 
   //axios searchflavor dataの取得
   const getFlavors = async() =>{
@@ -35,6 +82,9 @@ const Searchflavors = () => {
     //   return;
     // }
   }
+
+
+
  
   //do the modal ON
   const handdleModal = e =>{
@@ -58,25 +108,56 @@ const Searchflavors = () => {
     if(!confirm('送信します。よろしいですか？')) {
       return;
     }
-    const params = new FormData();
-    params.append("name",formData.keyword);
-    axios.post('api/Searchflavors',params)
-    .then(function(response){
-      // 成功した時
-      console.log(response.data.flavors);
-      setFlavors(response.data.flavors);
-    })
-    .catch(function(error){
-      // 失敗したとき
-      console.log('エラー');
-      console.log(params);
-    });
-    //submit buttonイベント発火後、inputの内容を初期化
-    setFormData({
-      keyword:''
-    });
-    //modalを閉じる
-    setModal(false);
+    //キーワード検索のinputに値があれば、checkboxは無視して検索
+    if(keyword){
+      const params = new FormData();
+      params.append("search_keyword",keyword);
+      axios.post('api/Searchflavors',params)
+      .then(function(response){
+        // 成功した時
+        console.log(response.data.flavors);
+        setFlavors(response.data.flavors);
+      })
+      .catch(function(error){
+        // 失敗したとき
+        console.log('Keywordエラー');
+      });
+      //input初期化
+      setKeyword("");
+      //modalを閉じる
+      setModal(false);
+
+    }else{
+      //checkboxの検索
+      const params = new FormData();
+      // params.append("checkData",checkdata);
+      // params.append("checkData","王道");
+      // axios.post('api/checkedFlavors',params)
+      // .then(function(response){
+      //   setFlavors(response.data.flavors);
+      //   console.log(response.data);
+      console.log(tastes);
+      
+      //checkされた全てのtasteをformDataに追加
+      tastes.forEach(function(taste){
+        params.append("taste",taste);
+      })
+      params.append("aaaaa","aaaa");
+      console.log(params.getAll('taste'));
+      console.log([...params.entries()]);
+      
+      axios.post('api/checkedFlavors',params)
+      .then(function(response){
+        console.log(response);
+        // alert(response.data.flavors);
+      })
+      .catch(function(error){
+        console.log('Checkedエラー');
+      });
+    }
+
+
+    
   }
 
   return(
@@ -167,7 +248,7 @@ const Searchflavors = () => {
                       type="text" 
                       name="name"
                       className="style_inputkeyword_text"
-                      value={formData.keyword}
+                      value={keyword}
                       onChange={handleChange}
                     />
                   </div>
@@ -176,10 +257,17 @@ const Searchflavors = () => {
                   <ul className="style_main_list">
                     <li className="style_main_listItem">
                       <input 
-                        className="style_checkbox_teste" type="checkbox"
+                        className="style_checkbox_teste" 
+                        type="checkbox"
                         id="taste_sweet"
+                        value="sweet"
+                        checked={tastes.includes('sweet')}
+                        onChange={changeTaste}
                       />
-                      <label className="style_label_teste" htmlFor="taste_sweet">
+                      <label 
+                        className="style_label_teste" 
+                        htmlFor="taste_sweet"
+                      >
                         <div className="taest_label_name">
                             あまめ
                         </div>
@@ -187,10 +275,16 @@ const Searchflavors = () => {
                     </li>
                     <li className="style_main_listItem">
                       <input 
-                        className="style_checkbox_teste" type="checkbox"
+                        className="style_checkbox_teste" 
+                        type="checkbox"
                         id="taste_fefresh"
+                        value="flesh"
+                        checked={tastes.includes('flesh')}
+                        onChange={changeTaste}
                       />
-                      <label className="style_label_teste" htmlFor="taste_fefresh">
+                      <label 
+                        className="style_label_teste" htmlFor="taste_fefresh"
+                      >
                         <div className="taest_label_name">
                             さっぱり
                         </div>
@@ -198,10 +292,17 @@ const Searchflavors = () => {
                     </li>
                     <li className="style_main_listItem">
                       <input 
-                        className="style_checkbox_teste" type="checkbox"
+                        className="style_checkbox_teste" 
+                        type="checkbox"
                         id="taste_hot"
+                        value="hot"
+                        checked={tastes.includes('hot')}
+                        onChange={changeTaste}
                         />
-                      <label className="style_label_teste" htmlFor="taste_hot">
+                      <label 
+                        className="style_label_teste" 
+                        htmlFor="taste_hot"
+                      >
                         <div className="taest_label_name">
                             からめ
                         </div>
@@ -214,10 +315,17 @@ const Searchflavors = () => {
                   <ul className="style_main_list__type">
                     <li className="style_main_listItem__type">
                       <input 
-                        className="style_checkbox_type" type="checkbox" 
+                        className="style_checkbox_type" 
+                        type="checkbox" 
                         id="type_main"
+                        value="main"
+                        checked={types.includes('main')}
+                        onChange={changeType}
                         />
-                      <label className="style_label_type" htmlFor="type_main">
+                      <label 
+                        className="style_label_type" 
+                        htmlFor="type_main"
+                      >
                         <div className="taest_label_name">
                           王道
                         </div>
@@ -225,10 +333,17 @@ const Searchflavors = () => {
                     </li>
                     <li className="style_main_listItem__type">
                       <input 
-                        className="style_checkbox_type" type="checkbox" 
+                        className="style_checkbox_type" 
+                        type="checkbox" 
                         id="type_weird"
+                        value="wired"
+                        checked={types.includes('wired')}
+                        onChange={changeType}
                         />
-                      <label className="style_label_type" htmlFor="type_weird">
+                      <label 
+                        className="style_label_type" 
+                        htmlFor="type_weird"
+                      >
                         <div className="taest_label_name">
                           変わり種
                         </div>
@@ -245,25 +360,38 @@ const Searchflavors = () => {
                         <input 
                           type="checkbox" 
                           id="category_fruit" className="style_checkbox_category"
+                          value="fruit"
+                          checked={categories.includes('fruit')}
+                          onChange={changeCategory}
                           />
-                        <label htmlFor="category_fruit" className="style_label_category">フルーツ系</label>
+                        <label 
+                          htmlFor="category_fruit" className="style_label_category"
+                        >フルーツ系</label>
                       </li>
                       {/* カクテル */}
                       <li className="style_cate_listItem">
                         <input 
                           type="checkbox" 
                           id="category_drink" className="style_checkbox_category"
-                          />
-                        <label htmlFor="category_drink" className="style_label_category">カクテル系</label>
+                          value="drink"
+                          checked={categories.includes('drink')}
+                          onChange={changeCategory}
+                        />
+                        <label 
+                          htmlFor="category_drink" className="style_label_category"
+                        >カクテル系</label>
                       </li>
                       {/* スパイス系 */}
                       <li className="style_cate_listItem">
                         <input 
                           type="checkbox" 
                           id="category_spices" className="style_checkbox_category"
-                          />
+                          value="spices"
+                          checked={categories.includes('spices')}
+                          onChange={changeCategory}
+                        />
                         <label 
-                        htmlFor="category_spices" className="style_label_category"
+                          htmlFor="category_spices" className="style_label_category"
                         >スパイス系</label>
                       </li>
                       {/* その他 */}
@@ -271,10 +399,13 @@ const Searchflavors = () => {
                         <input 
                           type="checkbox" 
                           id="category_other" className="style_checkbox_category"
-                          />
+                          value="other"
+                          checked={categories.includes('other')}
+                          onChange={changeCategory}
+                        />
                         <label 
                           htmlFor="category_other" className="style_label_category"
-                          >その他</label>
+                        >その他</label>
                       </li>
                     </ul>
                   </div>

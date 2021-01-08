@@ -71258,11 +71258,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -71292,26 +71294,89 @@ var Searchflavors = function Searchflavors() {
       flavors = _useState4[0],
       setFlavors = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
-    name: '',
-    keyword: ''
-  }),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      formData = _useState6[0],
-      setFormData = _useState6[1]; //検索inputの定義
-  // const [keyword,setKeyword] = useState("");
+      keyword = _useState6[0],
+      setKeyword = _useState6[1]; //絞り込みエリアのcheckbox
+  // 元のデータ
+  // const [checkdata,setCheckdata] = useState([]);
+  //  taste
+
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      tastes = _useState8[0],
+      setTaste = _useState8[1]; //  type
+
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      types = _useState10[0],
+      setType = _useState10[1]; //  category
+
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      categories = _useState12[0],
+      setCategory = _useState12[1]; //検索inputの定義
   //keyword input
 
 
-  var handleChange = function handleChange(event) {
+  var handleChange = function handleChange(e) {
     // setKeyword(e.target.value);
-    setFormData(_objectSpread(_objectSpread({}, formData), {}, {
-      keyword: event.target.value
-    }));
+    setKeyword(e.target.value);
   }; //inputに入力した内容をコンソールに表示
+  //キーワード検索
+  // console.log(keyword);
+  // // チェックボックス
+  // // taste
+  // console.log(tastes);
+  // // type
+  // console.log(types);
+  // // category
+  // console.log(categories);
+  // チェックボックス
+  //taste
 
 
-  console.log(formData.keyword); //axios searchflavor dataの取得
+  var changeTaste = function changeTaste(e) {
+    if (tastes.includes(e.target.value)) {
+      //OFF
+      setTaste(tastes.filter(function (item) {
+        return item !== e.target.value;
+      }));
+    } else {
+      // ON
+      setTaste([].concat(_toConsumableArray(tastes), [e.target.value]));
+    }
+  }; //type
+
+
+  var changeType = function changeType(e) {
+    if (types.includes(e.target.value)) {
+      //OFF
+      setType(types.filter(function (item) {
+        return item !== e.target.value;
+      }));
+    } else {
+      // ON
+      setType([].concat(_toConsumableArray(types), [e.target.value]));
+    }
+  }; //type
+
+
+  var changeCategory = function changeCategory(e) {
+    if (categories.includes(e.target.value)) {
+      //OFF
+      setCategory(categories.filter(function (item) {
+        return item !== e.target.value;
+      }));
+    } else {
+      // ON
+      setCategory([].concat(_toConsumableArray(categories), [e.target.value]));
+    }
+  }; //axios searchflavor dataの取得
+
 
   var getFlavors = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -71351,7 +71416,8 @@ var Searchflavors = function Searchflavors() {
 
   var narrowFlavor = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-      var params;
+      var params, _params;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -71366,25 +71432,49 @@ var Searchflavors = function Searchflavors() {
               return _context2.abrupt("return");
 
             case 3:
-              params = new FormData();
-              params.append("name", formData.keyword);
-              axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/Searchflavors', params).then(function (response) {
-                // 成功した時
-                console.log(response.data.flavors);
-                setFlavors(response.data.flavors);
-              })["catch"](function (error) {
-                // 失敗したとき
-                console.log('エラー');
-                console.log(params);
-              }); //submit buttonイベント発火後、inputの内容を初期化
+              //キーワード検索のinputに値があれば、checkboxは無視して検索
+              if (keyword) {
+                params = new FormData();
+                params.append("search_keyword", keyword);
+                axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/Searchflavors', params).then(function (response) {
+                  // 成功した時
+                  console.log(response.data.flavors);
+                  setFlavors(response.data.flavors);
+                })["catch"](function (error) {
+                  // 失敗したとき
+                  console.log('Keywordエラー');
+                }); //input初期化
 
-              setFormData({
-                keyword: ''
-              }); //modalを閉じる
+                setKeyword(""); //modalを閉じる
 
-              setModal(false);
+                setModal(false);
+              } else {
+                //checkboxの検索
+                _params = new FormData(); // params.append("checkData",checkdata);
+                // params.append("checkData","王道");
+                // axios.post('api/checkedFlavors',params)
+                // .then(function(response){
+                //   setFlavors(response.data.flavors);
+                //   console.log(response.data);
 
-            case 8:
+                console.log(tastes); //checkされた全てのtasteをformDataに追加
+
+                tastes.forEach(function (taste) {
+                  _params.append("taste", taste);
+                });
+
+                _params.append("aaaaa", "aaaa");
+
+                console.log(_params.getAll('taste'));
+                console.log(_toConsumableArray(_params.entries()));
+                axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/checkedFlavors', _params).then(function (response) {
+                  console.log(response); // alert(response.data.flavors);
+                })["catch"](function (error) {
+                  console.log('Checkedエラー');
+                });
+              }
+
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -71471,7 +71561,7 @@ var Searchflavors = function Searchflavors() {
     type: "text",
     name: "name",
     className: "style_inputkeyword_text",
-    value: formData.keyword,
+    value: keyword,
     onChange: handleChange
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_main_inputTitle"
@@ -71482,7 +71572,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     className: "style_checkbox_teste",
     type: "checkbox",
-    id: "taste_sweet"
+    id: "taste_sweet",
+    value: "sweet",
+    checked: tastes.includes('sweet'),
+    onChange: changeTaste
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_teste",
     htmlFor: "taste_sweet"
@@ -71493,7 +71586,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     className: "style_checkbox_teste",
     type: "checkbox",
-    id: "taste_fefresh"
+    id: "taste_fefresh",
+    value: "flesh",
+    checked: tastes.includes('flesh'),
+    onChange: changeTaste
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_teste",
     htmlFor: "taste_fefresh"
@@ -71504,7 +71600,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     className: "style_checkbox_teste",
     type: "checkbox",
-    id: "taste_hot"
+    id: "taste_hot",
+    value: "hot",
+    checked: tastes.includes('hot'),
+    onChange: changeTaste
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_teste",
     htmlFor: "taste_hot"
@@ -71519,7 +71618,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     className: "style_checkbox_type",
     type: "checkbox",
-    id: "type_main"
+    id: "type_main",
+    value: "main",
+    checked: types.includes('main'),
+    onChange: changeType
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_type",
     htmlFor: "type_main"
@@ -71530,7 +71632,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     className: "style_checkbox_type",
     type: "checkbox",
-    id: "type_weird"
+    id: "type_weird",
+    value: "wired",
+    checked: types.includes('wired'),
+    onChange: changeType
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_type",
     htmlFor: "type_weird"
@@ -71547,7 +71652,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     type: "checkbox",
     id: "category_fruit",
-    className: "style_checkbox_category"
+    className: "style_checkbox_category",
+    value: "fruit",
+    checked: categories.includes('fruit'),
+    onChange: changeCategory
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "category_fruit",
     className: "style_label_category"
@@ -71556,7 +71664,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     type: "checkbox",
     id: "category_drink",
-    className: "style_checkbox_category"
+    className: "style_checkbox_category",
+    value: "drink",
+    checked: categories.includes('drink'),
+    onChange: changeCategory
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "category_drink",
     className: "style_label_category"
@@ -71565,7 +71676,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     type: "checkbox",
     id: "category_spices",
-    className: "style_checkbox_category"
+    className: "style_checkbox_category",
+    value: "spices",
+    checked: categories.includes('spices'),
+    onChange: changeCategory
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "category_spices",
     className: "style_label_category"
@@ -71574,7 +71688,10 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     type: "checkbox",
     id: "category_other",
-    className: "style_checkbox_category"
+    className: "style_checkbox_category",
+    value: "other",
+    checked: categories.includes('other'),
+    onChange: changeCategory
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "category_other",
     className: "style_label_category"

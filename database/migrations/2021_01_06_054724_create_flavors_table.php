@@ -18,6 +18,7 @@ class CreateFlavorsTable extends Migration
                 $table->string('name',50);
                 $table->string('feature_intro',280)->nullable();
                 $table->integer('image_id')->nullable();
+                $table->string('taste')->nullable();
                 $table->string('category',50);
                 $table->string('search_keyword',280)->nullable();
                 $table->string('select_type',50)->nullable();
