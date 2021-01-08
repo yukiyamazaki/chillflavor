@@ -29,3 +29,10 @@ Route::post('/Searchflavors',function (Request $request) {
     return response()->json(['flavors' => $flavors]);
 });
 
+//detailFlavorページ
+Route::get('/Flavor',function (Request $request){
+    //テストでid=2
+    $flavor = Flavor::where('id',4)->first();
+    return response()->json(['flavor' => $flavor]);
+});
+
