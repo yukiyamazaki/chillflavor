@@ -71302,26 +71302,37 @@ var Searchflavors = function Searchflavors() {
       keyword = _useState6[0],
       setKeyword = _useState6[1];
 
-  console.log(!flavors.length); //絞り込みエリアのcheckbox
-  // 元のデータ
-  //  taste
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(5),
       _useState8 = _slicedToArray(_useState7, 2),
-      tastes = _useState8[0],
-      setTaste = _useState8[1]; //  type
-
+      limit = _useState8[0],
+      setLimit = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      types = _useState10[0],
-      setType = _useState10[1]; //  category
+      lists = _useState10[0],
+      setList = _useState10[1]; // console.log(limit);
+  // const flavorsList = flavors->take(1);
+  //絞り込みエリアのcheckbox
+  // 元のデータ
+  //  taste
 
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      categories = _useState12[0],
-      setCategory = _useState12[1]; //検索inputの定義
+      tastes = _useState12[0],
+      setTaste = _useState12[1]; //  type
+
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      types = _useState14[0],
+      setType = _useState14[1]; //  category
+
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState16 = _slicedToArray(_useState15, 2),
+      categories = _useState16[0],
+      setCategory = _useState16[1]; //検索inputの定義
   //keyword input
 
 
@@ -71391,39 +71402,39 @@ var Searchflavors = function Searchflavors() {
 
   var getFlavors = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var response;
+      var params;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/flavors');
+              params = new FormData();
+              axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/flavors', params).then(function (response) {
+                // 成功した時
+                setFlavors(response.data.flavors);
+              })["catch"](function (error) {
+                // 失敗したとき
+                console.log('Fitstエラー');
+              });
 
-            case 3:
-              response = _context.sent;
-              setFlavors(response.data.flavors);
-              _context.next = 11;
-              break;
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              console.log('Searchflavor情報取得エラー');
-              return _context.abrupt("return");
-
-            case 11:
+            case 2:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 7]]);
+      }, _callee);
     }));
 
     return function getFlavors() {
       return _ref.apply(this, arguments);
     };
   }();
+
+  var limitFlavors = flavors.slice(0, limit); //表示件数の制限
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    setList(limitFlavors);
+    console.log(lists);
+  }, [flavors, limit]); //初期状態のflavor表示
 
   if (!flavors.length) {
     getFlavors();
@@ -71458,7 +71469,6 @@ var Searchflavors = function Searchflavors() {
                 params.append("search_keyword", keyword);
                 axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/Searchflavors', params).then(function (response) {
                   // 成功した時
-                  console.log(response.data.flavors);
                   setFlavors(response.data.flavors);
                 })["catch"](function (error) {
                   // 失敗したとき
@@ -71482,7 +71492,6 @@ var Searchflavors = function Searchflavors() {
                 });
 
                 axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/checkedFlavors', _params).then(function (response) {
-                  console.log(response.data.flavors);
                   setFlavors(response.data.flavors);
                 })["catch"](function (error) {
                   console.log(error.data, 'formdataエラー');
@@ -71492,7 +71501,9 @@ var Searchflavors = function Searchflavors() {
                 setType("");
                 setCategory(""); //input初期化
 
-                setKeyword(""); //modalを閉じる
+                setKeyword(""); //limit初期値
+
+                setLimit(4); //modalを閉じる
 
                 setModal(false);
               }
@@ -71508,7 +71519,14 @@ var Searchflavors = function Searchflavors() {
     return function narrowFlavor(_x) {
       return _ref2.apply(this, arguments);
     };
-  }();
+  }(); //もっとみるで、取得件数を＋５
+
+
+  var isMoreflavors = function isMoreflavors(e) {
+    e.preventDefault();
+    setLimit(limit + 5);
+    console.log(limit);
+  };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "contents_header_wrap"
@@ -71539,7 +71557,7 @@ var Searchflavors = function Searchflavors() {
     className: "style_count"
   }, "20\u4EBA")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
     className: "contents_style_ul"
-  }, flavors.map(function (flavor) {
+  }, lists.map(function (flavor) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
       key: flavor.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -71560,7 +71578,9 @@ var Searchflavors = function Searchflavors() {
     }, flavor.feature_intro)))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_wrap_more"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "\u3082\u3063\u3068\u3092\u307F\u308B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: isMoreflavors
+  }, "\u3082\u3063\u3068\u307F\u308B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: "images/design/cheak_blue.svg"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
     className: "style_subTitle"

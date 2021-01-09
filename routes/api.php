@@ -13,7 +13,6 @@ Route::post('/flavors',function (Request $request) {
         return "キーワード検索エラー";
     }
     // 絞り込みのケース
-    $res = $request->search_keyword;
     $flavors = DB::table('flavors')->get();
     return response()->json(['flavors' => $flavors]);
 });

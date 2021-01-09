@@ -9,7 +9,12 @@ const Searchflavors = () => {
   const [modal,setModal] = useState(false);
   const [flavors,setFlavors] = useState([]);
   const [keyword,setKeyword] = useState("");
-  console.log(!flavors.length);
+  const [limit,setLimit] = useState(5)
+  const [lists,setList] = useState([]);
+
+  // console.log(limit);
+
+  // const flavorsList = flavors->take(1);
   //絞り込みエリアのcheckbox
   // 元のデータ
   //  taste
@@ -78,15 +83,26 @@ const Searchflavors = () => {
 
   //flavorsフィールドの￥初期値は全件表示
   const getFlavors = async() =>{
-    // This is error comform...
-    try {
-      const response = await axios.post('api/flavors');
-      setFlavors(response.data.flavors);
-    }catch(error){
-      console.log('Searchflavor情報取得エラー');
-      return;
-    }
+    const params = new FormData();
+      axios.post('api/flavors',params)
+      .then(function(response){
+        // 成功した時
+        setFlavors(response.data.flavors);
+      })
+      .catch(function(error){
+        // 失敗したとき
+        console.log('Fitstエラー');
+      });
   }
+
+  const limitFlavors = flavors.slice(0,limit);
+  //表示件数の制限
+  useEffect(() => {
+    setList(limitFlavors);
+    console.log(lists);
+  },[flavors,limit])
+
+  //初期状態のflavor表示
   if(!flavors.length){
     getFlavors();
   }
@@ -111,7 +127,6 @@ const Searchflavors = () => {
       axios.post('api/Searchflavors',params)
       .then(function(response){
         // 成功した時
-        console.log(response.data.flavors);
         setFlavors(response.data.flavors);
       })
       .catch(function(error){
@@ -138,7 +153,6 @@ const Searchflavors = () => {
       
       axios.post('api/checkedFlavors',params)
         .then((response)=>{
-          console.log(response.data.flavors);
           setFlavors(response.data.flavors);
         })
         .catch((error)=>{
@@ -151,9 +165,18 @@ const Searchflavors = () => {
         setCategory("");
         //input初期化
         setKeyword("");
+        //limit初期値
+        setLimit(4);
         //modalを閉じる
         setModal(false);
     }
+  }
+
+  //もっとみるで、取得件数を＋５
+  const isMoreflavors = e => {
+    e.preventDefault();
+    setLimit(limit + 5);
+    console.log(limit);
   }
 
   return(
@@ -197,7 +220,7 @@ const Searchflavors = () => {
 
           {/* ここからFlavorの検索結果を表示 */}
           <ul className="contents_style_ul">
-          {flavors.map((flavor) =>
+          {lists.map((flavor) =>
               <li key={flavor.id}>
                 <div className="style_wraper_content">
                   <a className="content_main">
@@ -217,8 +240,10 @@ const Searchflavors = () => {
           </ul>
 
           <div className="style_wrap_more">
-            <button>
-              もっとをみる
+            <button
+              onClick={isMoreflavors}
+            >
+              もっとみる
               <img src="images/design/cheak_blue.svg"/>
             </button>
           </div>
