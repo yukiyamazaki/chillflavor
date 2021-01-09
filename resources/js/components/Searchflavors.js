@@ -1,12 +1,15 @@
 import React from 'react';
-import Navbar from './Navbar';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import _ from 'lodash';
+
+import Navbar from './Navbar';
 
 const Searchflavors = () => {
   const [modal,setModal] = useState(false);
   const [flavors,setFlavors] = useState([]);
   const [keyword,setKeyword] = useState("");
+  console.log(!flavors.length);
   //絞り込みエリアのcheckbox
   // 元のデータ
   // const [checkdata,setCheckdata] = useState([]);
@@ -69,22 +72,6 @@ const Searchflavors = () => {
       setCategory([...categories, e.target.value]);
     }
   };
-
-
-  //axios searchflavor dataの取得
-  const getFlavors = async() =>{
-  // This is error comform...
-    // try {
-    //   const response = await axios.get('api/Searchflavors');
-    //   setFlavors(response.data.flavors);
-    // }catch(error){
-    //   console.log('Searchflavor情報取得エラー');
-    //   return;
-    // }
-  }
-
-
-
  
   //do the modal ON
   const handdleModal = e =>{
@@ -102,12 +89,34 @@ const Searchflavors = () => {
     }
   }
 
+  //flavorsフィールドの￥初期値は全件表示
+  const getFlavors = async() =>{
+    // This is error comform...
+    try {
+      const response = await axios.post('api/flavors');
+      setFlavors(response.data.flavors);
+    }catch(error){
+      console.log('Searchflavor情報取得エラー');
+      return;
+    }
+  }
+  if(!flavors.length){
+    getFlavors();
+  }
+
   const narrowFlavor = async(e) =>{
     e.preventDefault();
-  //formに入力された値をもとに検索結果の取得
+    //formに入力された値をもとに検索結果の取得
     if(!confirm('送信します。よろしいですか？')) {
       return;
     }
+
+    let sendParams = {
+      tastes: tastes,
+      types:types,
+      categories:categories,
+    }
+
     //キーワード検索のinputに値があれば、checkboxは無視して検索
     if(keyword){
       const params = new FormData();
@@ -128,37 +137,36 @@ const Searchflavors = () => {
       setModal(false);
 
     }else{
-      //checkboxの検索
-      const params = new FormData();
-      // params.append("checkData",checkdata);
-      // params.append("checkData","王道");
-      // axios.post('api/checkedFlavors',params)
-      // .then(function(response){
-      //   setFlavors(response.data.flavors);
-      //   console.log(response.data);
-      console.log(tastes);
-      
-      //checkされた全てのtasteをformDataに追加
-      tastes.forEach(function(taste){
-        params.append("taste",taste);
+      const params = new FormData;
+
+      _.forEach(sendParams, (value, key) => {
+        if (Array.isArray(value)) {
+          _.forEach(value, (v, _) => {
+            params.append(key + '[]', v)
+          })
+        } else {
+          params.append(key, value)
+        }
       })
-  
-      params.delete("aaaaa");
-      console.log(params.getAll('taste'));
-      console.log([...params.entries()]);
-      
       
       axios.post('api/checkedFlavors',params)
-      .then(function(response){
-        console.log(response);
-        // alert(response.data.flavors);
-      })
-      .catch(function(error){
-        console.log('Checkedエラー');
-      });
+        .then((response)=>{
+          console.log(response.data.flavors);
+          setFlavors(response.data.flavors);
+        })
+        .catch((error)=>{
+            console.log(error.data,'formdataエラー');
+        });
+
+        //初期化
+        setTaste("");
+        setType("");
+        setCategory("");
+        //input初期化
+        setKeyword("");
+        //modalを閉じる
+        setModal(false);
     }
-
-
     
   }
 

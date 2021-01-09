@@ -5,13 +5,24 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Flavor;
 use Illuminate\Support\Facades\DB;
 
+//初期状態
+Route::post('/flavors',function (Request $request) {
+    // 全件取得パターン
+    if (!$request) {
+        // 通常パターン
+        return "キーワード検索エラー";
+    }
+    // 絞り込みのケース
+    $res = $request->search_keyword;
+    $flavors = DB::table('flavors')->get();
+    return response()->json(['flavors' => $flavors]);
+});
+
 //キーワード検索時
 Route::post('/Searchflavors',function (Request $request) {
     // 全件取得パターン
     if (!$request->search_keyword) {
-        // 通常パターン（created_atで降順）
-        // $flavors = Flavor::orderby('created_at','desc')->get();
-        // return response()->json(['flavors' => $flavors]);
+        // 通常パターン
         return "キーワード検索エラー";
     }
     // 絞り込みのケース
@@ -23,29 +34,40 @@ Route::post('/Searchflavors',function (Request $request) {
 //チェックボックス検索時
 Route::post('/checkedFlavors',function (Request $request){
     if(!$request->all()){
-        return "チェックボックスエラー";
+        return response()->json(['flavors' => 'しっぱい']);
     }else{
-        // $flavors = $request->checkData;
-        // $res = $request->checkData;
-        //  $flavors = Flavor::where('select_type','王道')->get();
-        //$flavors=[配列が入っているはず]
-        // $flavors_taste = $request->taste;
-        foreach($request->all() as $flavor){
-            $flavors_taste[] = $flavor;
+        $flavors_Obj = $request->all();
+        $flavors_ids = array();
+
+        if(isset($flavors_Obj['tastes'])){
+            $flavors_taste = $flavors_Obj['tastes'];
+            foreach($flavors_taste as $flavor_taste){
+                $flavors_idList= Flavor::where('taste',$flavor_taste)->select('id')->get();
+                foreach($flavors_idList as $flavor_idList){
+                    $flavors_ununique[] = strval($flavor_idList['id']);
+                }
+                $flavors_ids = array_unique($flavors_ununique);
+            }
         }
-        
-        //$flavors_taste = ['sweet','hot'];//これはできる
-        $flavors = Flavor::whereIn('taste',$flavors_taste)->get();
-        
-
-        // foreach($flavors_taste as $flavor_taste){
-        // }
-        
-        // $flavors = Flavor::where('taste',$flavor_taste)->get();
-        // $resultFlavors = Flavor
-
-        //カラム夫々からIDを取得→ダブリ無し
-        // 取得したidを元にcreated_at降順で取得
+        if(isset($flavors_Obj['types'])){
+            $flavors_types = $flavors_Obj['types'];
+            foreach($flavors_types as $flavor_type){
+                $flavors_idList= Flavor::where('select_type',$flavor_type)->select('id')->get();
+                
+                foreach($flavors_idList as $flavor_idList){
+                    $flavors_ununique[] = strval($flavor_idList['id']);
+                }
+                $flavors_ids = array_unique($flavors_ununique);
+            }
+        }
+        if(isset($flavors_Obj['categories'])){
+            $flavors_categories = $flavors_Obj['categories'];
+            foreach($flavors_idList as $flavor_idList){
+                $flavors_ununique[] = strval($flavor_idList['id']);
+            }
+            $flavors_ids = array_unique($flavors_ununique);
+        }
+        $flavors = Flavor::whereIn('id',$flavors_ids)->orderby('id','desc')->get();
 
         return response()->json(['flavors' => $flavors]);
     }

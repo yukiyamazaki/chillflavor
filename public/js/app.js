@@ -71249,9 +71249,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Navbar */ "./resources/js/components/Navbar.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Navbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Navbar */ "./resources/js/components/Navbar.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -71283,6 +71285,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var Searchflavors = function Searchflavors() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -71297,11 +71300,12 @@ var Searchflavors = function Searchflavors() {
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
       keyword = _useState6[0],
-      setKeyword = _useState6[1]; //絞り込みエリアのcheckbox
+      setKeyword = _useState6[1];
+
+  console.log(!flavors.length); //絞り込みエリアのcheckbox
   // 元のデータ
   // const [checkdata,setCheckdata] = useState([]);
   //  taste
-
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -71375,26 +71379,7 @@ var Searchflavors = function Searchflavors() {
       // ON
       setCategory([].concat(_toConsumableArray(categories), [e.target.value]));
     }
-  }; //axios searchflavor dataの取得
-
-
-  var getFlavors = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function getFlavors() {
-      return _ref.apply(this, arguments);
-    };
-  }(); //do the modal ON
+  }; //do the modal ON
 
 
   var handdleModal = function handdleModal(e) {
@@ -71412,11 +71397,52 @@ var Searchflavors = function Searchflavors() {
     if (modal) {
       setModal(false);
     }
-  };
+  }; //flavorsフィールドの￥初期値は全件表示
+
+
+  var getFlavors = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/flavors');
+
+            case 3:
+              response = _context.sent;
+              setFlavors(response.data.flavors);
+              _context.next = 11;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              console.log('Searchflavor情報取得エラー');
+              return _context.abrupt("return");
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 7]]);
+    }));
+
+    return function getFlavors() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  if (!flavors.length) {
+    getFlavors();
+  }
 
   var narrowFlavor = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-      var params, _params;
+      var sendParams, params, _params;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
@@ -71432,11 +71458,16 @@ var Searchflavors = function Searchflavors() {
               return _context2.abrupt("return");
 
             case 3:
-              //キーワード検索のinputに値があれば、checkboxは無視して検索
+              sendParams = {
+                tastes: tastes,
+                types: types,
+                categories: categories
+              }; //キーワード検索のinputに値があれば、checkboxは無視して検索
+
               if (keyword) {
                 params = new FormData();
                 params.append("search_keyword", keyword);
-                axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/Searchflavors', params).then(function (response) {
+                axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/Searchflavors', params).then(function (response) {
                   // 成功した時
                   console.log(response.data.flavors);
                   setFlavors(response.data.flavors);
@@ -71449,32 +71480,35 @@ var Searchflavors = function Searchflavors() {
 
                 setModal(false);
               } else {
-                //checkboxの検索
-                _params = new FormData(); // params.append("checkData",checkdata);
-                // params.append("checkData","王道");
-                // axios.post('api/checkedFlavors',params)
-                // .then(function(response){
-                //   setFlavors(response.data.flavors);
-                //   console.log(response.data);
+                _params = new FormData();
 
-                console.log(tastes); //checkされた全てのtasteをformDataに追加
-
-                tastes.forEach(function (taste) {
-                  _params.append("taste", taste);
+                lodash__WEBPACK_IMPORTED_MODULE_3___default.a.forEach(sendParams, function (value, key) {
+                  if (Array.isArray(value)) {
+                    lodash__WEBPACK_IMPORTED_MODULE_3___default.a.forEach(value, function (v, _) {
+                      _params.append(key + '[]', v);
+                    });
+                  } else {
+                    _params.append(key, value);
+                  }
                 });
 
-                _params.append("aaaaa", "aaaa");
-
-                console.log(_params.getAll('taste'));
-                console.log(_toConsumableArray(_params.entries()));
-                axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/checkedFlavors', _params).then(function (response) {
-                  console.log(response); // alert(response.data.flavors);
+                axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/checkedFlavors', _params).then(function (response) {
+                  console.log(response.data.flavors);
+                  setFlavors(response.data.flavors);
                 })["catch"](function (error) {
-                  console.log('Checkedエラー');
-                });
+                  console.log(error.data, 'formdataエラー');
+                }); //初期化
+
+                setTaste("");
+                setType("");
+                setCategory(""); //input初期化
+
+                setKeyword(""); //modalを閉じる
+
+                setModal(false);
               }
 
-            case 4:
+            case 5:
             case "end":
               return _context2.stop();
           }
@@ -71489,7 +71523,7 @@ var Searchflavors = function Searchflavors() {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "contents_header_wrap"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
     id: "12345",
     name: "zakizaki",
     look: "pppppppp"
