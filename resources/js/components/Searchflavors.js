@@ -142,9 +142,11 @@ const Searchflavors = () => {
       tastes.forEach(function(taste){
         params.append("taste",taste);
       })
-      params.append("aaaaa","aaaa");
+  
+      params.delete("aaaaa");
       console.log(params.getAll('taste'));
       console.log([...params.entries()]);
+      
       
       axios.post('api/checkedFlavors',params)
       .then(function(response){

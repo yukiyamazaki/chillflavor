@@ -34,7 +34,6 @@ Route::post('/checkedFlavors',function (Request $request){
             $flavors_taste[] = $flavor;
         }
         
-        
         //$flavors_taste = ['sweet','hot'];//これはできる
         $flavors = Flavor::whereIn('taste',$flavors_taste)->get();
         
