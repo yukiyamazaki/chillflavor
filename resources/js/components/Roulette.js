@@ -11,19 +11,19 @@ const Roulette = () => {
         <ul className="select_feeling">
           <li className="style_roulette_testeItme">
             <input className="style_roulette_teste" id="roulette-sweet" type="checkbox"></input>
-            <label className="style_roulette_label" for="roulette-sweet">
+            <label className="style_roulette_label" htmlFor="roulette-sweet">
               <div className="style_roulette_label_name">Sweet</div>
             </label>
           </li>
           <li className="style_roulette_testeItme">
             <input className="style_roulette_teste" id="roulette-flash" type="checkbox"></input>
-            <label className="style_roulette_label" for="roulette-flash">
+            <label className="style_roulette_label" htmlFor="roulette-flash">
               <div className="style_roulette_label_name">Flash</div>
             </label>
           </li>
           <li className="style_roulette_testeItme">
             <input className="style_roulette_teste" id="roulette-hot" type="checkbox"></input>
-            <label className="style_roulette_label" for="roulette-hot">
+            <label className="style_roulette_label" htmlFor="roulette-hot">
               <div className="style_roulette_label_name">Hot</div>
             </label>
           </li>
@@ -32,13 +32,13 @@ const Roulette = () => {
         <ul className="select_feeling">
           <li className="style_roulette_testeItme">
             <input className="style_roulette_teste" id="roulette-main" type="checkbox"></input>
-            <label className="style_roulette_label" for="roulette-main">
+            <label className="style_roulette_label" htmlFor="roulette-main">
               <div className="style_roulette_label_name">王道</div>
             </label>
           </li>
           <li className="style_roulette_testeItme">
             <input className="style_roulette_teste" id="roulette-weard" type="checkbox"></input>
-            <label className="style_roulette_label" for="roulette-weard">
+            <label className="style_roulette_label" htmlFor="roulette-weard">
               <div className="style_roulette_label_name">変わり種</div>
             </label>
           </li>
