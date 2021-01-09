@@ -12,7 +12,6 @@ const Searchflavors = () => {
   console.log(!flavors.length);
   //絞り込みエリアのcheckbox
   // 元のデータ
-  // const [checkdata,setCheckdata] = useState([]);
   //  taste
   const [tastes,setTaste] = useState([]);
   //  type
@@ -27,19 +26,7 @@ const Searchflavors = () => {
     setKeyword(e.target.value);
   }
 
-  //inputに入力した内容をコンソールに表示
-  //キーワード検索
-  // console.log(keyword);
-  // // チェックボックス
-  // // taste
-  // console.log(tastes);
-  // // type
-  // console.log(types);
-  // // category
-  // console.log(categories);
-
   // チェックボックス
-  
   //taste
   const changeTaste = (e) =>{
     if(tastes.includes(e.target.value)){
@@ -167,7 +154,6 @@ const Searchflavors = () => {
         //modalを閉じる
         setModal(false);
     }
-    
   }
 
   return(

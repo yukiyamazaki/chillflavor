@@ -71304,7 +71304,6 @@ var Searchflavors = function Searchflavors() {
 
   console.log(!flavors.length); //絞り込みエリアのcheckbox
   // 元のデータ
-  // const [checkdata,setCheckdata] = useState([]);
   //  taste
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -71329,17 +71328,7 @@ var Searchflavors = function Searchflavors() {
   var handleChange = function handleChange(e) {
     // setKeyword(e.target.value);
     setKeyword(e.target.value);
-  }; //inputに入力した内容をコンソールに表示
-  //キーワード検索
-  // console.log(keyword);
-  // // チェックボックス
-  // // taste
-  // console.log(tastes);
-  // // type
-  // console.log(types);
-  // // category
-  // console.log(categories);
-  // チェックボックス
+  }; // チェックボックス
   //taste
 
 
