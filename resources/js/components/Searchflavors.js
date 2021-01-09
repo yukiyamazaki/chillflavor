@@ -99,27 +99,27 @@ const Searchflavors = () => {
   //表示件数の制限
   useEffect(() => {
     setList(limitFlavors);
-    console.log(lists);
   },[flavors,limit])
-
+  
   //初期状態のflavor表示
   if(!flavors.length){
     getFlavors();
   }
-
+  
+  
   const narrowFlavor = async(e) =>{
     e.preventDefault();
     //formに入力された値をもとに検索結果の取得
     if(!confirm('送信します。よろしいですか？')) {
       return;
     }
-
+    
     let sendParams = {
       tastes: tastes,
       types:types,
       categories:categories,
     }
-
+    
     //キーワード検索のinputに値があれば、checkboxは無視して検索
     if(keyword){
       const params = new FormData();
@@ -137,10 +137,10 @@ const Searchflavors = () => {
       setKeyword("");
       //modalを閉じる
       setModal(false);
-
+      
     }else{
       const params = new FormData;
-
+      
       _.forEach(sendParams, (value, key) => {
         if (Array.isArray(value)) {
           _.forEach(value, (v, _) => {
@@ -152,33 +152,47 @@ const Searchflavors = () => {
       })
       
       axios.post('api/checkedFlavors',params)
-        .then((response)=>{
-          setFlavors(response.data.flavors);
-        })
-        .catch((error)=>{
-            console.log(error.data,'formdataエラー');
-        });
-
-        //初期化
-        setTaste("");
-        setType("");
-        setCategory("");
-        //input初期化
-        setKeyword("");
-        //limit初期値
-        setLimit(4);
-        //modalを閉じる
-        setModal(false);
+      .then((response)=>{
+        setFlavors(response.data.flavors);
+      })
+      .catch((error)=>{
+        console.log(error.data,'formdataエラー');
+      });
+      
+      //初期化
+      setTaste("");
+      setType("");
+      setCategory("");
+      //input初期化
+      setKeyword("");
+      //limit初期値
+      setLimit(4);
+      //modalを閉じる
+      setModal(false);
     }
   }
-
+  
   //もっとみるで、取得件数を＋５
   const isMoreflavors = e => {
     e.preventDefault();
     setLimit(limit + 5);
-    console.log(limit);
   }
+  
+  useEffect(() => {
+    console.log(limit,'limit');
+    console.log(flavors.length,'flavors');
+    //取得したflavorsが全て表示された場合は、もっとみるを非表示
+    if(limit>=flavors.length){
+      console.log('over');
 
+
+    }else{
+      console.log('still');
+    }
+  },[limit]);
+
+
+  
   return(
     <>
       {/* header */}
@@ -191,7 +205,7 @@ const Searchflavors = () => {
        />
         
         {/* ここからMain */}
-        <main>
+        <main >
           <div className="style_wrap_intro">
             <div className="style_topImage">
               <img src="images/design/electnic.svg"></img>
@@ -242,6 +256,7 @@ const Searchflavors = () => {
           <div className="style_wrap_more">
             <button
               onClick={isMoreflavors}
+              style={{}}
             >
               もっとみる
               <img src="images/design/cheak_blue.svg"/>
@@ -252,7 +267,7 @@ const Searchflavors = () => {
 
             {/* 絞り込みbuttonをクリック時に表示 */}
             <div 
-              className={modal ? "style_modalMenu_wrapper" : "style_modalMenu_wrapper style_modal_disable"}
+              className={modal ? "style_modalMenu_wrapper style_able_btn" : "style_modalMenu_wrapper style_modal_disable"}
             >
             <div className="style_modalMenu_bg"></div>
             <div className="style_modal_content">
@@ -445,7 +460,8 @@ const Searchflavors = () => {
               <div className="style_modal_headerwapper">
                 フレイバーを絞り込む
                 <button       
-                  className="style_modal_header_close"
+                  className=
+                  "style_modal_header_close"
                   onClick={isModal_off}
                 >
                   <img src="images/design/batumark.svg"></img>

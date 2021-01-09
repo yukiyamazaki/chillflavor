@@ -71433,7 +71433,6 @@ var Searchflavors = function Searchflavors() {
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     setList(limitFlavors);
-    console.log(lists);
   }, [flavors, limit]); //初期状態のflavor表示
 
   if (!flavors.length) {
@@ -71525,9 +71524,18 @@ var Searchflavors = function Searchflavors() {
   var isMoreflavors = function isMoreflavors(e) {
     e.preventDefault();
     setLimit(limit + 5);
-    console.log(limit);
   };
 
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    console.log(limit, 'limit');
+    console.log(flavors.length, 'flavors'); //取得したflavorsが全て表示された場合は、もっとみるを非表示
+
+    if (limit >= flavors.length) {
+      console.log('over');
+    } else {
+      console.log('still');
+    }
+  }, [limit]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "contents_header_wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -71579,13 +71587,14 @@ var Searchflavors = function Searchflavors() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_wrap_more"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    onClick: isMoreflavors
+    onClick: isMoreflavors,
+    style: {}
   }, "\u3082\u3063\u3068\u307F\u308B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: "images/design/cheak_blue.svg"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
     className: "style_subTitle"
   }, "\u30D5\u30EC\u30A4\u30D0\u30FC\u9078\u3073\u306B\u304A\u56F0\u308A\u3067\u3059\u304B\uFF1F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: modal ? "style_modalMenu_wrapper" : "style_modalMenu_wrapper style_modal_disable"
+    className: modal ? "style_modalMenu_wrapper style_able_btn" : "style_modalMenu_wrapper style_modal_disable"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modalMenu_bg"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {

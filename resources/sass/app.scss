@@ -391,6 +391,9 @@ h1.contents_title {
   max-width: 375px;
 }
 
+
+
+
 .style_wrap_more button{
   width: 100%;
   border: 1px solid #0584d2;
@@ -704,12 +707,8 @@ h1.contents_title {
   margin-right: 27px;
 }
 
-.style_main_modalFooter button.style_modal_btn{
-  background: #0584d2;
-  pointer-events: auto;
-}
 
-.style_main_modalFooter button{
+.style_main_modalFooter > button{
   width: 216px;
   height: 48px;
   flex: 0 0 216px;
@@ -724,6 +723,11 @@ h1.contents_title {
   color: #fff;
   transition: background-color .3s ease-in-out;
   pointer-events: none;
+}
+
+.style_able_btn .style_modal_btn{
+  background: #0584d2;
+  pointer-events: auto;
 }
 
 .style_modal_headerwapper{
