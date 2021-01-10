@@ -54,7 +54,7 @@ button, input, select, textarea {
 }
 
 .home-wrap {
-  max-width: 600px;
+  max-width: 375px;
   margin: auto;
   position: relative;
 }
@@ -307,7 +307,7 @@ h1.contents_title {
 }
 
 .style_wraper_content {
-  margin-bottom: 9px;
+  margin-bottom: 15px;
   max-width: 375px;
 }
 
@@ -364,6 +364,7 @@ h1.contents_title {
 
 .style_flavor_discription {
   font-size: 11px;
+  height: 46px;
   margin: 5px 2px 4px 2px;
 }
 
@@ -387,6 +388,14 @@ h1.contents_title {
   max-width: 375px;
 }
 
+.active_limit {
+  margin: 33px auto 27px;
+  color: grey;
+  max-width: 375px;
+  text-align: center;
+  padding: 0;
+}
+
 .style_wrap_more button {
   width: 100%;
   border: 1px solid #0584d2;
@@ -401,6 +410,20 @@ h1.contents_title {
   line-height: 16px;
   color: #0584d2;
   background: #fff;
+}
+
+.active_limit button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.style_wrap_more div {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.active_limit div {
+  opacity: 1;
 }
 
 .style_wrap_more img {
@@ -494,7 +517,7 @@ h1.contents_title {
 }
 
 .style_main_choices {
-  padding: 0 20px 140px;
+  padding: 0 20px 14px;
 }
 
 .style_main_inputkeyword {
@@ -510,7 +533,7 @@ h1.contents_title {
 
 .style_inputkeyword_text {
   height: 56px;
-  width: 100%;
+  width: 99%;
   border: 1px solid #ebedee;
   box-sizing: border-box;
   border-radius: 4px;
@@ -836,7 +859,7 @@ h1.contents_title {
 
 .footer_wave {
   height: 40px;
-  width: 100%;
+  width: 99%;
   position: relative;
   bottom: -1px;
 }
@@ -849,7 +872,7 @@ h1.contents_title {
 
 .footer_contents_logo {
   padding-top: 48px;
-  width: 100%;
+  width: 99%;
   height: auto;
   text-align: center;
   font-family: "Josefin Sans";
@@ -869,7 +892,7 @@ h1.contents_title {
 .header_floatMenu_usual {
   top: 65px;
   height: 100%;
-  width: 100%;
+  width: 99%;
   position: fixed;
   background: #fff;
   transition: opacity 0.3s;
@@ -886,7 +909,7 @@ h1.contents_title {
 }
 
 .header_floatMenu_wraper {
-  max-width: 600px;
+  max-width: 375px;
   padding: 32px;
   margin: auto;
 }
@@ -931,7 +954,7 @@ h1.contents_title {
 }
 
 .content_flavor_img {
-  width: 100px;
+  width: 99px;
   height: 100px;
   margin: 7px auto 0 auto;
 }
@@ -1042,7 +1065,7 @@ h1.contents_title {
   color: black;
   font-size: 14px;
   margin-top: 4px;
-  width: 100%;
+  width: 99%;
   height: 43px;
 }
 

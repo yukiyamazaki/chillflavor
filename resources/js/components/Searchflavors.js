@@ -9,20 +9,14 @@ const Searchflavors = () => {
   const [modal,setModal] = useState(false);
   const [flavors,setFlavors] = useState([]);
   const [keyword,setKeyword] = useState("");
-  const [limit,setLimit] = useState(5)
+  const [limit,setLimit] = useState(5);
   const [lists,setList] = useState([]);
-
-  // console.log(limit);
-
-  // const flavorsList = flavors->take(1);
+  const [moreBtn,setMoreBtn] = useState(true);
   //絞り込みエリアのcheckbox
-  // 元のデータ
-  //  taste
   const [tastes,setTaste] = useState([]);
-  //  type
   const [types,setType] = useState([]);
-  //  category
   const [categories,setCategory] = useState([]);
+  const flavorCount = flavors.length;
 
   //検索inputの定義
   //keyword input
@@ -84,7 +78,7 @@ const Searchflavors = () => {
   //flavorsフィールドの￥初期値は全件表示
   const getFlavors = async() =>{
     const params = new FormData();
-      axios.post('api/flavors',params)
+      await axios.post('api/flavors',params)
       .then(function(response){
         // 成功した時
         setFlavors(response.data.flavors);
@@ -95,16 +89,18 @@ const Searchflavors = () => {
       });
   }
 
+  //初期状態のflavor表示
+  if(!flavorCount){
+    getFlavors();
+  }
+ 
   const limitFlavors = flavors.slice(0,limit);
   //表示件数の制限
   useEffect(() => {
     setList(limitFlavors);
   },[flavors,limit])
   
-  //初期状態のflavor表示
-  if(!flavors.length){
-    getFlavors();
-  }
+
   
   
   const narrowFlavor = async(e) =>{
@@ -124,7 +120,7 @@ const Searchflavors = () => {
     if(keyword){
       const params = new FormData();
       params.append("search_keyword",keyword);
-      axios.post('api/Searchflavors',params)
+      await axios.post('api/Searchflavors',params)
       .then(function(response){
         // 成功した時
         setFlavors(response.data.flavors);
@@ -140,7 +136,6 @@ const Searchflavors = () => {
       
     }else{
       const params = new FormData;
-      
       _.forEach(sendParams, (value, key) => {
         if (Array.isArray(value)) {
           _.forEach(value, (v, _) => {
@@ -151,7 +146,7 @@ const Searchflavors = () => {
         }
       })
       
-      axios.post('api/checkedFlavors',params)
+      await axios.post('api/checkedFlavors',params)
       .then((response)=>{
         setFlavors(response.data.flavors);
       })
@@ -177,17 +172,21 @@ const Searchflavors = () => {
     e.preventDefault();
     setLimit(limit + 5);
   }
+
+  useEffect(() => {
+    console.log(flavorCount,'p');
+  },[flavors]);
   
   useEffect(() => {
     console.log(limit,'limit');
-    console.log(flavors.length,'flavors');
+    console.log(flavorCount,'flavors');
     //取得したflavorsが全て表示された場合は、もっとみるを非表示
-    if(limit>=flavors.length){
+    if(limit>=flavorCount && flavorCount){
       console.log('over');
-
-
+      setMoreBtn(false);
     }else{
       console.log('still');
+      setMoreBtn(true);
     }
   },[limit]);
 
@@ -228,7 +227,7 @@ const Searchflavors = () => {
               </button>
             </div>
             <div className="style_count">
-              20人
+              該当：{flavorCount}件
             </div>
           </div>
 
@@ -253,10 +252,15 @@ const Searchflavors = () => {
             )}            
           </ul>
 
-          <div className="style_wrap_more">
+          <div 
+            className={moreBtn ? "style_wrap_more ":"style_wrap_more active_limit"}
+          >
+           <div>
+              <p>--end--</p>
+            </div>
             <button
+              // {modal ? "" : "content_limit"}
               onClick={isMoreflavors}
-              style={{}}
             >
               もっとみる
               <img src="images/design/cheak_blue.svg"/>
