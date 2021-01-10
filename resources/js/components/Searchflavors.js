@@ -243,7 +243,10 @@ const Searchflavors = () => {
                       <img src="images/coaches/S__6979644.jpg" alt="" />
                     </div>
                     <div className="style_flavor_text">
-                      <div className="style_flavor_name">{flavor.name}</div>
+                      <div className="style_flavor_top">
+                        <div className="style_flavor_name">{flavor.name}</div>
+                        <div>aaaa</div>
+                      </div>
                       <div className="style_flavor_discription">
                         {flavor.feature_intro}
                       </div>

@@ -53,7 +53,9 @@ const Flavor = () =>  {
             </div>
             <div className="content_flavor_tags">
               <h2>タグ</h2>
-              <div className="content_flavor_tag">a</div>
+              <div className="content_flavor_tag">{detailflavor.taste}</div>
+              <div className="content_flavor_tag">{detailflavor.category}</div>
+              <div className="content_flavor_tag">{detailflavor.select_type}</div>
               <div className="content_flavor_tag">b</div>
               <div className="content_flavor_tag">c</div>
             </div>
