@@ -1,26 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import {Link,useParams} from 'react-router-dom';
 import Navbar from './Navbar';
 import axios from 'axios';
 
 const Flavor = () =>  {
   const [detailflavor,setDetailFlavor] = useState([]);
-
+  //パラメーターを取得
+  const {id} = useParams();
+  const idNum = parseInt(id);
+  
+  //Flavorの情報を取得
+  const detailFavor = async() => {
+    if(idNum){
+      const params = new FormData();
+      params.append('id',idNum);
+      await axios.post('api/Flavor',params)
+      .then(function(response){
+        // 成功した時
+        setDetailFlavor(response.data.flavor);
+        
+      })
+      .catch(function(error){
+        // 失敗したとき
+        console.log('flavor data取得エラー');
+        return;
+      });
+    }else{
+      console.log('このidのフレイバー情報がありません。')
+    }
+  }
+ 
   useEffect(() => {
     detailFavor();
   },[])
   console.log(detailflavor);
 
-  //flavor詳細情報の取得
-    const detailFavor = async() => {
-      try{
-        const response = await axios.get('api/Flavor');
-        setDetailFlavor(response.data.flavor);
-      }catch(error){
-        console.log('flavor data取得エラー');
-        return;
-      }
-    }
 
   return(
     <>
@@ -29,7 +43,7 @@ const Flavor = () =>  {
         <div className="flavor_main_content">
           <div className="content_flavor_name">{detailflavor.name}</div>
           <div className="content_flavor_img">
-            <img src="images/flavors/lemon.svg"/>
+            <img src={`images/flavors/${detailflavor.image_id}`}/>
           </div>
 
           <div className="content_flavor_detail">

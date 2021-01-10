@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
@@ -234,9 +235,10 @@ const Searchflavors = () => {
           {/* ここからFlavorの検索結果を表示 */}
           <ul className="contents_style_ul">
           {lists.map((flavor) =>
-              <li key={flavor.id}>
+            <Link to={`/Flavor/${flavor.id}`} key={flavor.id}>
+              <li>
                 <div className="style_wraper_content">
-                  <a className="content_main">
+                  <div className="content_main">
                     <div className="style_img">
                       <img src="images/coaches/S__6979644.jpg" alt="" />
                     </div>
@@ -246,9 +248,10 @@ const Searchflavors = () => {
                         {flavor.feature_intro}
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </div>
               </li>
+            </Link>
             )}            
           </ul>
 

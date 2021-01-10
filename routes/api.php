@@ -74,9 +74,16 @@ Route::post('/checkedFlavors',function (Request $request){
 
 
 //フレイバー詳細
-Route::get('/Flavor',function (Request $request){
-    //テストでid=2
-    $flavor = Flavor::where('id',4)->first();
+Route::post('/Flavor',function (Request $request){
+    //id取得
+    if (!$request->id) {
+        // 通常パターン
+        return "id取得エラー";
+    }
+    // id取得
+    $res = $request->id;
+    // idを元に情報取得
+    $flavor = Flavor::where('id',$res)->first();
     return response()->json(['flavor' => $flavor]);
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, Switch} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 import Navbar from './Navbar';
 
@@ -13,22 +13,22 @@ const Flavorlist = () => {
             <h2 className="category_title">フルーツ系</h2>
             <ul className="flavor_category_lists">
               <li>
-                <Link to="/Flavor">
+                <Link to="/Flavor/1">
                   <span>▶レモン</span>
                 </Link>
               </li>
               <li>
-                <Link to="/Flavor">
+                <Link to="/Flavor/2">
                   <span>▶ダブルアップル</span>
                 </Link>
               </li>
               <li>
-                <Link to="/">
+                <Link to="/Flavor/3">
                   <span>▶オレンジ</span>
                 </Link>
               </li>
               <li>
-                <Link to="/">
+                <Link to="/Flavor/4">
                   <span>▶かぼす</span>
                 </Link>
               </li>
