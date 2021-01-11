@@ -17,6 +17,11 @@ const Searchflavors = () => {
   const [tastes,setTaste] = useState([]);
   const [types,setType] = useState([]);
   const [categories,setCategory] = useState([]);
+  //絞り込みカウント
+  // const [countnow,setCountnow] = useState([0]);
+  //全件分のID
+  const [allflavors,setAllflavors] = useState([]);
+  const [allflavorid,setAllflavorid] = useState([]);
   const flavorCount = flavors.length;
 
   //検索inputの定義
@@ -26,6 +31,16 @@ const Searchflavors = () => {
     setKeyword(e.target.value);
   }
 
+  
+  //forEach抜けた後でないと、値を更新しない。
+  useEffect(() => {
+    let addflavorids=[];
+    allflavors.forEach(flavor =>{
+      addflavorids.push(flavor.id);
+    })
+    setAllflavorid(addflavorids);//ここで更新されないのが問題
+  },[allflavors]);
+  
   // チェックボックス
   //taste
   const changeTaste = (e) =>{
@@ -83,6 +98,7 @@ const Searchflavors = () => {
       .then(function(response){
         // 成功した時
         setFlavors(response.data.flavors);
+        setAllflavors(response.data.flavors);
       })
       .catch(function(error){
         // 失敗したとき
@@ -101,17 +117,17 @@ const Searchflavors = () => {
     setList(limitFlavors);
   },[flavors,limit])
   
-
-  
-  
+  //絞り込みをClick
   const narrowFlavor = async(e) =>{
     e.preventDefault();
+    setLimit(5);
     //formに入力された値をもとに検索結果の取得
-    if(!confirm('送信します。よろしいですか？')) {
+    if(!confirm('検索します。よろしいですか？')) {
       return;
     }
     
     let sendParams = {
+      allflavorid:allflavorid,
       tastes: tastes,
       types:types,
       categories:categories,
@@ -137,6 +153,7 @@ const Searchflavors = () => {
       
     }else{
       const params = new FormData;
+      console.log(sendParams);
       _.forEach(sendParams, (value, key) => {
         if (Array.isArray(value)) {
           _.forEach(value, (v, _) => {
@@ -146,12 +163,20 @@ const Searchflavors = () => {
           params.append(key, value)
         }
       })
-      
+     
       await axios.post('api/checkedFlavors',params)
       .then((response)=>{
-        setFlavors(response.data.flavors);
+        console.log(response.data,'res');
+        if(!response.data.flavors.length == 0){
+          setFlavors(response.data.flavors);
+        }else{
+          setFlavors([]);
+          alert('フレイバーが見つかりませんでした');
+        };
       })
       .catch((error)=>{
+        alert('フレイバーが見つかりませんでした');
+        setFlavors([]);
         console.log(error.data,'formdataエラー');
       });
       
@@ -162,11 +187,14 @@ const Searchflavors = () => {
       //input初期化
       setKeyword("");
       //limit初期値
-      setLimit(4);
+      setLimit(5);
       //modalを閉じる
       setModal(false);
+      //countnow初期化
+      // setCountnow("");
     }
   }
+
   
   //もっとみるで、取得件数を＋５
   const isMoreflavors = e => {
@@ -182,16 +210,14 @@ const Searchflavors = () => {
     console.log(limit,'limit');
     console.log(flavorCount,'flavors');
     //取得したflavorsが全て表示された場合は、もっとみるを非表示
-    if(limit>=flavorCount && flavorCount){
+    if(limit>=flavorCount && flavorCount && flavorCount<=5){
       console.log('over');
       setMoreBtn(false);
     }else{
       console.log('still');
       setMoreBtn(true);
     }
-  },[limit]);
-
-
+  },[limit,flavorCount]);
   
   return(
     <>
@@ -240,12 +266,15 @@ const Searchflavors = () => {
                 <div className="style_wraper_content">
                   <div className="content_main">
                     <div className="style_img">
-                      <img src="images/coaches/S__6979644.jpg" alt="" />
+                      <img src={`images/flavors/${flavor.image_id}`} alt="" />
                     </div>
                     <div className="style_flavor_text">
                       <div className="style_flavor_top">
                         <div className="style_flavor_name">{flavor.name}</div>
-                        <div>aaaa</div>
+                        <div className="style_flavor_contents">
+                          <div className="style_flavor_taste">{flavor.taste}</div>
+                          <div className="style_flavor_category">{flavor.category}${flavor.select_type}</div>
+                        </div>
                       </div>
                       <div className="style_flavor_discription">
                         {flavor.feature_intro}
@@ -458,7 +487,7 @@ const Searchflavors = () => {
                 </div>
                 <div className="style_main_modalFooter">
                   <div className="style_modal_result">
-                    該当10つ
+                    該当：0件
                   </div>
                   <button 
                     className="style_modal_btn"

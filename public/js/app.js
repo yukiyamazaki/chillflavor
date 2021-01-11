@@ -71350,7 +71350,20 @@ var Searchflavors = function Searchflavors() {
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
       categories = _useState18[0],
-      setCategory = _useState18[1];
+      setCategory = _useState18[1]; //絞り込みカウント
+  // const [countnow,setCountnow] = useState([0]);
+  //全件分のID
+
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState20 = _slicedToArray(_useState19, 2),
+      allflavors = _useState20[0],
+      setAllflavors = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState22 = _slicedToArray(_useState21, 2),
+      allflavorid = _useState22[0],
+      setAllflavorid = _useState22[1];
 
   var flavorCount = flavors.length; //検索inputの定義
   //keyword input
@@ -71358,9 +71371,17 @@ var Searchflavors = function Searchflavors() {
   var handleChange = function handleChange(e) {
     // setKeyword(e.target.value);
     setKeyword(e.target.value);
-  }; // チェックボックス
-  //taste
+  }; //forEach抜けた後でないと、値を更新しない。
 
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var addflavorids = [];
+    allflavors.forEach(function (flavor) {
+      addflavorids.push(flavor.id);
+    });
+    setAllflavorid(addflavorids); //ここで更新されないのが問題
+  }, [allflavors]); // チェックボックス
+  //taste
 
   var changeTaste = function changeTaste(e) {
     if (tastes.includes(e.target.value)) {
@@ -71431,6 +71452,7 @@ var Searchflavors = function Searchflavors() {
               return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/flavors', params).then(function (response) {
                 // 成功した時
                 setFlavors(response.data.flavors);
+                setAllflavors(response.data.flavors);
               })["catch"](function (error) {
                 // 失敗したとき
                 console.log('Fitstエラー');
@@ -71458,7 +71480,7 @@ var Searchflavors = function Searchflavors() {
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     setList(limitFlavors);
-  }, [flavors, limit]);
+  }, [flavors, limit]); //絞り込みをClick
 
   var narrowFlavor = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
@@ -71468,30 +71490,32 @@ var Searchflavors = function Searchflavors() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              e.preventDefault(); //formに入力された値をもとに検索結果の取得
+              e.preventDefault();
+              setLimit(5); //formに入力された値をもとに検索結果の取得
 
-              if (confirm('送信します。よろしいですか？')) {
-                _context2.next = 3;
+              if (confirm('検索します。よろしいですか？')) {
+                _context2.next = 4;
                 break;
               }
 
               return _context2.abrupt("return");
 
-            case 3:
+            case 4:
               sendParams = {
+                allflavorid: allflavorid,
                 tastes: tastes,
                 types: types,
                 categories: categories
               }; //キーワード検索のinputに値があれば、checkboxは無視して検索
 
               if (!keyword) {
-                _context2.next = 13;
+                _context2.next = 14;
                 break;
               }
 
               params = new FormData();
               params.append("search_keyword", keyword);
-              _context2.next = 9;
+              _context2.next = 10;
               return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/Searchflavors', params).then(function (response) {
                 // 成功した時
                 setFlavors(response.data.flavors);
@@ -71500,16 +71524,17 @@ var Searchflavors = function Searchflavors() {
                 console.log('Keywordエラー');
               });
 
-            case 9:
+            case 10:
               //input初期化
               setKeyword(""); //modalを閉じる
 
               setModal(false);
-              _context2.next = 23;
+              _context2.next = 25;
               break;
 
-            case 13:
+            case 14:
               _params = new FormData();
+              console.log(sendParams);
 
               lodash__WEBPACK_IMPORTED_MODULE_4___default.a.forEach(sendParams, function (value, key) {
                 if (Array.isArray(value)) {
@@ -71521,14 +71546,25 @@ var Searchflavors = function Searchflavors() {
                 }
               });
 
-              _context2.next = 17;
+              _context2.next = 19;
               return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/checkedFlavors', _params).then(function (response) {
-                setFlavors(response.data.flavors);
+                console.log(response.data, 'res');
+
+                if (!response.data.flavors.length == 0) {
+                  setFlavors(response.data.flavors);
+                } else {
+                  setFlavors([]);
+                  alert('フレイバーが見つかりませんでした');
+                }
+
+                ;
               })["catch"](function (error) {
+                alert('フレイバーが見つかりませんでした');
+                setFlavors([]);
                 console.log(error.data, 'formdataエラー');
               });
 
-            case 17:
+            case 19:
               //初期化
               setTaste("");
               setType("");
@@ -71536,11 +71572,12 @@ var Searchflavors = function Searchflavors() {
 
               setKeyword(""); //limit初期値
 
-              setLimit(4); //modalを閉じる
+              setLimit(5); //modalを閉じる
 
-              setModal(false);
+              setModal(false); //countnow初期化
+              // setCountnow("");
 
-            case 23:
+            case 25:
             case "end":
               return _context2.stop();
           }
@@ -71566,14 +71603,14 @@ var Searchflavors = function Searchflavors() {
     console.log(limit, 'limit');
     console.log(flavorCount, 'flavors'); //取得したflavorsが全て表示された場合は、もっとみるを非表示
 
-    if (limit >= flavorCount && flavorCount) {
+    if (limit >= flavorCount && flavorCount && flavorCount <= 5) {
       console.log('over');
       setMoreBtn(false);
     } else {
       console.log('still');
       setMoreBtn(true);
     }
-  }, [limit]);
+  }, [limit, flavorCount]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "contents_header_wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -71614,7 +71651,7 @@ var Searchflavors = function Searchflavors() {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "style_img"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-      src: "\bimages/coaches/S__6979644.jpg",
+      src: "images/flavors/".concat(flavor.image_id),
       alt: ""
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "style_flavor_text"
@@ -71622,7 +71659,13 @@ var Searchflavors = function Searchflavors() {
       className: "style_flavor_top"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "style_flavor_name"
-    }, flavor.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "aaaa")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, flavor.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "style_flavor_contents"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "style_flavor_taste"
+    }, flavor.taste), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "style_flavor_category"
+    }, flavor.category, "$", flavor.select_type))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "style_flavor_discription"
     }, flavor.feature_intro))))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -71792,7 +71835,7 @@ var Searchflavors = function Searchflavors() {
     className: "style_main_modalFooter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modal_result"
-  }, "\u8A72\u5F5310\u3064"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, "\u8A72\u5F53\uFF1A0\u4EF6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "style_modal_btn",
     onClick: narrowFlavor
   }, "\u3053\u306E\u6761\u4EF6\u3067\u7D5E\u308A\u8FBC\u3080"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
