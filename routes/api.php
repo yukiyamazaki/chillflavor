@@ -39,6 +39,34 @@ Route::post('/getFlavornames',function (Request $request){
 
 });
 
+//FlavorList
+Route::post('/getBrand',function (Request $request){
+    if(!$request){
+        return "エラー";
+    }
+
+    $alfakhels = Flavor::where('brand','AlFakhel')->select('id','name')->get();
+    $fumaris = Flavor::where('brand','Fumari')->select('id','name')->get();
+    $socialsmokes = Flavor::where('brand','Social smoke')->select('id','name')->get();
+    $declouds = Flavor::where('brand','De cloud')->select('id','name')->get();
+    $trifectas = Flavor::where('brand','Trifecta')->select('id','name')->get();
+    $butas = Flavor::where('brand','Buta tobacco')->select('id','name')->get();
+    $goldenlavas = Flavor::where('brand','Golden lavalina')->select('id','name')->get();
+
+    $params = (object) [
+        "alfakhels" => $alfakhels,
+        "fumaris" => $fumaris,
+        "socialsmokes" => $socialsmokes,
+        "declouds" =>$declouds,
+        "trifectas" =>$trifectas,
+        "butas" =>$butas,
+        "goldenlavas" =>$goldenlavas,
+    ];
+
+    return response()->json(['params' => $params]);
+
+});
+
 //キーワード検索時
 Route::post('/Searchflavors',function (Request $request) {
     // 全件取得パターン

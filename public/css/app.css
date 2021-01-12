@@ -981,7 +981,7 @@ h1.contents_title {
 .flavor_list_main {
   width: 100%;
   display: block;
-  margin-top: 30px;
+  margin-top: 6px;
   border: 1px solid white;
 }
 
@@ -994,8 +994,9 @@ h1.contents_title {
 
 .flavor_category_lists {
   margin: 7px 7px;
-  display: flex;
   flex-wrap: wrap;
+  -moz-column-count: 2;
+       column-count: 2;
 }
 
 .flavor_category_lists li {
@@ -1012,9 +1013,9 @@ h1.contents_title {
 }
 
 .flavor_category_lists span {
-  font-size: 15px;
+  font-size: 9px;
   color: #797977;
-  padding: 5px 2px;
+  padding: 2px 0px;
 }
 
 .flavor_main_wrapper {
@@ -1444,9 +1445,28 @@ h1.contents_title {
     transform: translateX(100%);
   }
 }
+.brand_list_main {
+  width: 100%;
+  display: block;
+  margin-top: 3px;
+  border: 1px solid white;
+}
+
 .brand_title {
-  font-size: 16px;
-  width: 126px;
-  padding: 0px 0px 0px 3px;
+  font-size: 14px;
+  width: 114px;
+  padding: 0px 7px 0px 5px;
   background: #cfd2cf;
+  margin-bottom: 7px;
+}
+
+.flavor_brand_lists span {
+  font-size: 8px;
+  color: #797977;
+  padding: 5px 2px;
+}
+
+ul.flavor_brand_lists {
+  -moz-column-count: 2;
+       column-count: 2;
 }

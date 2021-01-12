@@ -70788,28 +70788,43 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Brand = function Brand() {
+var Flavorlist = function Flavorlist() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
-      fruits = _useState2[0],
-      setFruits = _useState2[1];
+      alfakhels = _useState2[0],
+      setAlfakhel = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      spices = _useState4[0],
-      setSpices = _useState4[1];
+      fumaris = _useState4[0],
+      setFumari = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      cocktails = _useState6[0],
-      setCocktail = _useState6[1];
+      socialsmokes = _useState6[0],
+      setSocialsmoke = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      others = _useState8[0],
-      setOther = _useState8[1];
+      declouds = _useState8[0],
+      setDecloud = _useState8[1];
 
-  var getFlavornames = /*#__PURE__*/function () {
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      trifectas = _useState10[0],
+      setTrifecta = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      butas = _useState12[0],
+      setButa = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      goldenlavas = _useState14[0],
+      setGoldenlava = _useState14[1];
+
+  var getBrand = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
       var params;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -70818,12 +70833,15 @@ var Brand = function Brand() {
             case 0:
               params = new FormData();
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('api/getFlavornames', params).then(function (response) {
-                setFruits(response.data.params.fruits);
-                setSpices(response.data.params.spices);
-                setCocktail(response.data.params.cocktail);
-                setOther(response.data.params.other);
-                console.log(response.data.params.fruits);
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('api/getBrand', params).then(function (response) {
+                setAlfakhel(response.data.params.alfakhels);
+                setFumari(response.data.params.fumaris);
+                setSocialsmoke(response.data.params.socialsmokes);
+                setDecloud(response.data.params.declouds);
+                setTrifecta(response.data.params.trifectas);
+                setButa(response.data.params.butas);
+                setGoldenlava(response.data.params.goldenlavas);
+                console.log(response.data.params.alfakhels);
               })["catch"](function (error) {
                 console.log('getエラー');
               });
@@ -70836,100 +70854,99 @@ var Brand = function Brand() {
       }, _callee);
     }));
 
-    return function getFlavornames() {
+    return function getBrand() {
       return _ref.apply(this, arguments);
     };
   }();
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    getFlavornames();
+    getBrand();
   }, []);
-  console.log(fruits, 'fruit');
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "flavor_list_main"
+    className: "brand_list_main"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_category_contents"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_category_content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "brand_title"
+  }, "Alfakhe"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "flavor_brand_lists"
+  }, alfakhels.map(function (alfakhel, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      to: "/Flavor/".concat(alfakhel.id),
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, alfakhel.name)));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "flavor_category_content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    className: "brand_title"
   }, "Fumari"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-    className: "flavor_category_lists"
-  }, fruits.map(function (fruit, index) {
+    className: "flavor_brand_lists"
+  }, fumaris.map(function (fumari, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/Flavor/".concat(fruit.id),
+      to: "/Flavor/".concat(fumari.id),
       key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, fruit.name)));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, fumari.name)));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_category_content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "brand_title"
-  }, "Socal smoke"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-    className: "flavor_category_lists"
-  }, spices.map(function (spice, index) {
+  }, "Social smokes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "flavor_brand_lists"
+  }, socialsmokes.map(function (socialsmoke, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/Flavor/".concat(spice.id),
+      to: "/Flavor/".concat(socialsmoke.id),
       key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, spice.name)));
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "flavor_category_content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
-    className: "brand_title"
-  }, "Trifecta"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-    className: "flavor_category_lists"
-  }, cocktails.map(function (cocktail, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/Flavor/".concat(cocktail.id),
-      key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, cocktail.name)));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, socialsmoke.name)));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_category_content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "brand_title"
   }, "De cloud"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-    className: "flavor_category_lists"
-  }, others.map(function (other, index) {
+    className: "flavor_brand_lists"
+  }, declouds.map(function (decloud, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/Flavor/".concat(other.id),
+      to: "/Flavor/".concat(decloud.id),
       key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, other.name)));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, decloud.name)));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_category_content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "brand_title"
-  }, "Alfakhel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-    className: "flavor_category_lists"
-  }, others.map(function (other, index) {
+  }, "Trifecta"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "flavor_brand_lists"
+  }, trifectas.map(function (trifecta, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/Flavor/".concat(other.id),
+      to: "/Flavor/".concat(trifecta.id),
       key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, other.name)));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, trifecta.name)));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_category_content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "brand_title"
   }, "Buta tabacco"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-    className: "flavor_category_lists"
-  }, others.map(function (other, index) {
+    className: "flavor_brand_lists"
+  }, butas.map(function (buta, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/Flavor/".concat(other.id),
+      to: "/Flavor/".concat(buta.id),
       key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, other.name)));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, buta.name)));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_category_content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "brand_title"
   }, "Golden lavalina"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
-    className: "flavor_category_lists"
-  }, others.map(function (other, index) {
+    className: "flavor_brand_lists"
+  }, goldenlavas.map(function (goldenlava, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/Flavor/".concat(other.id),
+      to: "/Flavor/".concat(goldenlava.id),
       key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, other.name)));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, goldenlava.name)));
   }))))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Brand);
+/* harmony default export */ __webpack_exports__["default"] = (Flavorlist);
 
 /***/ }),
 
