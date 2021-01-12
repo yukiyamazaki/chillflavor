@@ -28,8 +28,8 @@ const GlobalNav = () => {
           <button className="home-btn">カテゴリ<p>から探す</p></button>
         </Link>
 
-        <Link to="/Roulette">
-          <button className="home-btn_dev">開発中</button>
+        <Link to="/Brand">
+          <button className="home-btn">Brand<p>から探す</p></button>
         </Link>
 
         <Link to="/Magazines">

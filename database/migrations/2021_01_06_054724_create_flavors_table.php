@@ -17,6 +17,7 @@ class CreateFlavorsTable extends Migration
                 $table->bigIncrements('id');
                 $table->string('name',50);
                 $table->string('englishName',50);
+                $table->string('brand',50);
                 $table->string('feature_intro',280)->nullable();
                 $table->string('image_id')->nullable();
                 $table->string('taste')->nullable();

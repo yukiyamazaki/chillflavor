@@ -47,13 +47,13 @@ const Flavor = () =>  {
             </Link>
           </li> 
           <li>
-            <Link to="/">
+            <Link to="/searchflavors">
               <span>THE FLAVOR SEARCH</span>
             </Link>
           </li> 
           <li>
-            <Link to="/">
-              <span>{detailflavor.englishName}</span>
+            <Link to="/Flavorlist">
+              <span>{detailflavor.category}</span>
             </Link>
           </li> 
         </ol>
