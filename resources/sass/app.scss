@@ -412,8 +412,12 @@ h1.contents_title {
 
 .style_flavor_discription {
   font-size: 1px;
-  height: 46px;
+  height: 38px;
+  width: 224px;
   margin: 5px 2px 4px 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-top: 6px;
 }
 
 .contents_style_ul {
