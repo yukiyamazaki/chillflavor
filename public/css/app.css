@@ -431,8 +431,8 @@ h1.contents_title {
 }
 
 .style_wrap_more {
-  margin: 12px auto 48px;
-  padding: 20px;
+  margin: 0px auto 48px;
+  padding: 0 27px 0 27px;
   max-width: 375px;
 }
 
@@ -1342,4 +1342,105 @@ h1.contents_title {
   border-radius: 12px;
   border: 1px solid #0484d1;
   transition: all 0.3s ease-in-out;
+}
+
+#logo_loader {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 101;
+  background-color: #3a3a3a;
+}
+
+#logo_loader .f_logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 160px;
+  height: 50px;
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+}
+
+#logo_loader .f_logo img {
+  width: 100%;
+  height: auto;
+}
+
+#logo_loader .f_logo:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 164%;
+  background-color: #3a3a3a;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  -webkit-animation: loadLogo 1.5s;
+          animation: loadLogo 1.5s;
+}
+
+@-webkit-keyframes loadLogo {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes loadLogo {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
+#logo_loader.open {
+  -webkit-animation-name: slideOut;
+          animation-name: slideOut;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-duration: 1.7s;
+          animation-duration: 1.7s;
+  -webkit-animation-delay: 1.7s;
+          animation-delay: 1.7s;
+}
+
+@-webkit-keyframes slideOut {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
