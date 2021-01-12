@@ -19,6 +19,7 @@ class FlavorsearchSeeder extends Seeder
         DB::table('flavors')->insert([
             [
                 'name' => 'レモン',
+                'englishName' => 'Lemon',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'lemon.svg',
                 'taste' =>'flesh',
@@ -28,6 +29,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'オレンジ',
+                'englishName' => 'Orange',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'orange.svg',
                 'taste' =>'flesh',
@@ -37,6 +39,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'かぼす',
+                'englishName' => 'Kabosu',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'kabosu.svg',
                 'taste' =>'flesh',
@@ -46,6 +49,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'いちご',
+                'englishName' => 'Strawberry',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'storvery.svg',
                 'taste' =>'sweet',
@@ -55,6 +59,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'アーモンド',
+                'englishName' => 'almond',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'armondo.svg',
                 'taste' =>'hot',
@@ -64,6 +69,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'カクテル',
+                'englishName' => 'Cocktail',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'kakuteru.svg',
                 'taste' =>'flesh',
@@ -73,6 +79,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'ミルク',
+                'englishName' => 'Milk',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'milk.svg',
                 'taste' =>'sweet',
@@ -82,6 +89,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'ピーチ',
+                'englishName' => 'Peach',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'piech.svg',
                 'taste' =>'flesh',
@@ -91,6 +99,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'ピザ',
+                'englishName' => 'Piza',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'piza.svg',
                 'taste' =>'hot',
@@ -100,6 +109,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'ローズ',
+                'englishName' => 'Rose',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'rose.svg',
                 'taste' =>'flesh',
@@ -109,6 +119,7 @@ class FlavorsearchSeeder extends Seeder
             ],
             [
                 'name' => 'ワイン',
+                'englishName' => 'Wine',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
                 'image_id' => 'wine.svg',
                 'taste' =>'flesh',

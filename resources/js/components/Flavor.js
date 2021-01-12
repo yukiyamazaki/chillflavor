@@ -53,7 +53,7 @@ const Flavor = () =>  {
           </li> 
           <li>
             <Link to="/">
-              <span>{detailflavor.name}</span>
+              <span>{detailflavor.englishName}</span>
             </Link>
           </li> 
         </ol>
@@ -67,7 +67,7 @@ const Flavor = () =>  {
           <div className="content_detail_wapper">
             <div className="content_detail_box">
               <div className="content_detail_name">
-                <span>{detailflavor.name}</span>
+                <span>{detailflavor.englishName}</span>
               </div>
               
               <div className="content_detail_description">
