@@ -43,29 +43,23 @@ const Navbar = () =>{
         <ul className="header_floatMenu_wraper">
           <div>
             <li>
-              <a>マイページ</a>
+              <a>ABOUT</a>
             </li>
             <li>
-              <a>登録情報の変更</a>
-            </li>
-            <li>
-              <a>ログアウト</a>
+              <a>FLAVOR</a>
             </li>
           </div>
           <li>
             <div></div>
           </li>
           <li>
-            <a>運営会社</a>
+            <a>CHEAM</a>
           </li>
           <li>
-            <a>利用規約</a>
+            <a>TERMS OF SERVICE</a>
           </li>
           <li>
-            <a>プライバシーポリシー</a>
-          </li>
-          <li>
-            <a>お問い合わせ</a>
+            <a>CONTACT</a>
           </li>
         </ul>
       </div>

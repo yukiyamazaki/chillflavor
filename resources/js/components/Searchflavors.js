@@ -91,7 +91,7 @@ const Searchflavors = () => {
     }
   }
 
-  //flavorsフィールドの￥初期値は全件表示
+  //flavorsフィールドの初期値は全件表示
   const getFlavors = async() =>{
     const params = new FormData();
       await axios.post('api/flavors',params)
@@ -210,7 +210,7 @@ const Searchflavors = () => {
     console.log(limit,'limit');
     console.log(flavorCount,'flavors');
     //取得したflavorsが全て表示された場合は、もっとみるを非表示
-    if(limit>=flavorCount && flavorCount && flavorCount<=5){
+    if(limit>=flavorCount && flavorCount){
       console.log('over');
       setMoreBtn(false);
     }else{
@@ -249,7 +249,7 @@ const Searchflavors = () => {
                 className="search_btn_filter"
                 onClick={handdleModal} 
               >
-                <img/>
+                <img src="images/design/filter.svg"/>
                 <span>絞り込み</span>
               </button>
             </div>
@@ -298,7 +298,7 @@ const Searchflavors = () => {
               onClick={isMoreflavors}
             >
               もっとみる
-              <img src="images/design/cheak_blue.svg"/>
+              <img src="images/design/check_p.svg"/>
             </button>
           </div>
           <h3 className="style_subTitle">

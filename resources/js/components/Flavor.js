@@ -40,44 +40,94 @@ const Flavor = () =>  {
     <>
       <Navbar />
       <div className="flavor_main_wrapper">
+        <ol className="link_list">
+          <li>
+            <Link to="/">
+              <span>TOP</span>
+            </Link>
+          </li> 
+          <li>
+            <Link to="/">
+              <span>THE FLAVOR SEARCH</span>
+            </Link>
+          </li> 
+          <li>
+            <Link to="/">
+              <span>{detailflavor.name}</span>
+            </Link>
+          </li> 
+        </ol>
         <div className="flavor_main_content">
-          <div className="content_flavor_name">{detailflavor.name}</div>
-          <div className="content_flavor_img">
-            <img src={`images/flavors/${detailflavor.image_id}`}/>
+          <div className="content_flavor_imgwapper">
+            <div className="content_flavor_img">
+              <img src={`images/flavors/${detailflavor.image_id}`}/>
+            </div>
           </div>
 
-          <div className="content_flavor_detail">
-            <div className="content_flavor_feature">
-              <h2>特徴</h2>
-              <p>{detailflavor.feature_intro}</p>
-            </div>
-            <div className="content_flavor_tags">
-              <h2>タグ</h2>
-              <div className="content_flavor_tag">{detailflavor.taste}</div>
-              <div className="content_flavor_tag">{detailflavor.category}</div>
-              <div className="content_flavor_tag">{detailflavor.select_type}</div>
-              <div className="content_flavor_tag">b</div>
-              <div className="content_flavor_tag">c</div>
-            </div>
-            <div className="content_flavor_combination">
-              <h2>オススメの組み合わせ</h2>
-              <ul>
-                <li>
-                  <Link to="/flavor">
-                    <span>▶かぼす</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/flavor">
-                    <span>▶ダブルアップル</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/flavor">
-                    <span>▶スイカ</span>
-                  </Link>
-                </li>
-              </ul>           
+          <div className="content_detail_wapper">
+            <div className="content_detail_box">
+              <div className="content_detail_name">
+                <span>{detailflavor.name}</span>
+              </div>
+              
+              <div className="content_detail_description">
+                <h3><span>{detailflavor.name}</span></h3>
+                <p>{detailflavor.feature_intro}</p>
+              </div>
+              
+              <div className="content_chart">
+                <table>
+                  <tbody>
+                    <tr>
+                        <th>TASTE</th>
+                      <td>
+                        <div><span>sweet</span></div>
+                        <div><span>flesh</span></div>
+                        <div><span>hot</span></div>
+                      </td>
+                    </tr>
+                    <tr className="content_chart_type">
+                        <th>TYPE</th>
+                      <td>
+                        <div><span>王道</span></div>
+                        <div><span>変わり種</span></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="recommend_flavor">
+                <h3 className="recommend_title">おすすめ組み合わせ</h3>
+                  <ul className="recommend_flavor_box">
+                    <li>
+                      <Link to="/">
+                        <span>name</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <span>name2</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <span>name3</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <span>name4</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <span>name5</span>
+                      </Link>
+                    </li>
+                  </ul>
+               
+              </div>
             </div>
           </div>
         </div>

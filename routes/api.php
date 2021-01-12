@@ -17,6 +17,28 @@ Route::post('/flavors',function (Request $request) {
     return response()->json(['flavors' => $flavors]);
 });
 
+//FlavorList
+Route::post('/getFlavornames',function (Request $request){
+    if(!$request){
+        return "エラー";
+    }
+
+    $fruit = Flavor::where('category','fruit')->select('id','name')->get();
+    $spices = Flavor::where('category','spices')->select('id','name')->get();
+    $cocktail = Flavor::where('category','drink')->select('id','name')->get();
+    $other = Flavor::where('category','other')->select('id','name')->get();
+
+    $params = (object) [
+        "fruits" => $fruit,
+        "spices" => $spices,
+        "cocktail" => $cocktail,
+        "other" =>$other,
+    ];
+
+    return response()->json(['params' => $params]);
+
+});
+
 //キーワード検索時
 Route::post('/Searchflavors',function (Request $request) {
     // 全件取得パターン

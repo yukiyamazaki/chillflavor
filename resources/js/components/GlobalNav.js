@@ -21,11 +21,11 @@ const GlobalNav = () => {
         </Link>
 
         <Link to="/Roulette">
-          <button className="home-btn">ルーレット<p>で探す</p></button>
+          <button className="home-btn_dev">開発中</button>
         </Link>
 
         <Link to="/Magazines">
-         <button className="home-btn">マガジン</button>
+         <button className="home-btn_dev">開発中</button>
         </Link>
 
       </main>
