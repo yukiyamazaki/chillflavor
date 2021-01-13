@@ -5,6 +5,12 @@ import {Link} from 'react-router-dom';
 const Navbar = () =>{
   const [modalMenu,setNav] = useState(false);
 
+  ////Home画面表示を初回かそれ以降か判断
+  const to = {
+    pathname:'/',
+    state:'already'
+  }
+
   //do the modalMenu ON or OFF
   const isMenu_active = e => {
     e.preventDefault();
@@ -24,7 +30,7 @@ const Navbar = () =>{
       >
         <div className="home-header-inner">
           <div className="home-header-logo">
-            <Link to="/">
+            <Link to={to}>
               <span>CHOICE FLAVOR</span>
             </Link>
           </div>
@@ -32,7 +38,8 @@ const Navbar = () =>{
             className="home-header-menuTrigger"
             onClick={isMenu_active}
           >
-            <div className="menu-Trigger">=</div>
+            <div className="menu-Trigger_ecole">=</div>
+            <div className="menu-Trigger_batu">✕</div>
           </button>
         </div>
       </header>
@@ -43,29 +50,26 @@ const Navbar = () =>{
         <ul className="header_floatMenu_wraper">
           <div>
             <li>
-              <a>マイページ</a>
+              <Link to="/">TOP</Link>
             </li>
             <li>
-              <a>登録情報の変更</a>
+              <a>ABOUT</a>
             </li>
             <li>
-              <a>ログアウト</a>
+              <a>FLAVOR</a>
             </li>
           </div>
           <li>
             <div></div>
           </li>
           <li>
-            <a>運営会社</a>
+            <a>CHEAM</a>
           </li>
           <li>
-            <a>利用規約</a>
+            <a>TERMS OF SERVICE</a>
           </li>
           <li>
-            <a>プライバシーポリシー</a>
-          </li>
-          <li>
-            <a>お問い合わせ</a>
+            <a>CONTACT</a>
           </li>
         </ul>
       </div>

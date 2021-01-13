@@ -16,8 +16,10 @@ class CreateFlavorsTable extends Migration
         Schema::create("flavors", function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('name',50);
+                $table->string('englishName',50);
+                $table->string('brand',50);
                 $table->string('feature_intro',280)->nullable();
-                $table->integer('image_id')->nullable();
+                $table->string('image_id')->nullable();
                 $table->string('taste')->nullable();
                 $table->string('category',50);
                 $table->string('search_keyword',280)->nullable();
