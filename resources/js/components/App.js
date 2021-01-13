@@ -19,6 +19,7 @@ const App = () => {
     <React.Fragment>
       <Switch>
         <Route path="/" exact component={GlobalNav} />
+        <Route path="/already" exact component={GlobalNav} />
         <Route path="/searchflavors" exact component={Searchflavors} />
         <Route path="/Flavorlist" exact component={Flavorlist} />
         <Route path="/Flavor/:id" exact component={Flavor} />

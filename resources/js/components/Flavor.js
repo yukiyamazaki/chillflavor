@@ -8,6 +8,12 @@ const Flavor = () =>  {
   //パラメーターを取得
   const {id} = useParams();
   const idNum = parseInt(id);
+
+  ////Home画面表示を初回かそれ以降か判断
+  const to = {
+    pathname:'/',
+    state:'already'
+  }
   
   //Flavorの情報を取得
   const detailFavor = async() => {
@@ -42,7 +48,7 @@ const Flavor = () =>  {
       <div className="flavor_main_wrapper">
         <ol className="link_list">
           <li>
-            <Link to="/">
+            <Link to={to}>
               <span>TOP</span>
             </Link>
           </li> 

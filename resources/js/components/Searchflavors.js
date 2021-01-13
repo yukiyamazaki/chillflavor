@@ -229,7 +229,6 @@ const Searchflavors = () => {
         name='zakizaki'
         look='pppppppp'
        />
-        
         {/* ここからMain */}
         <main >
           <div className="style_wrap_intro">

@@ -1,12 +1,25 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React,{useState,useEffect} from 'react';
+import {Link,useLocation} from 'react-router-dom';
 import Navbar from './Navbar';
 
 
 const GlobalNav = () => {
+  const [animetion,setAnimation] = useState(true);
+  const location = useLocation();
+
+  //オープンアニメーションを初回だけ表示に制限
+  useEffect(() => {
+    if(location.state == 'already'){
+      setAnimation(false);
+    }
+  },[]);
+
   return(
     <React.Fragment>
-    <div id="logo_loader" className="open">
+    <div 
+      id={animetion ? "logo_loader" : "none_logo_loader"}
+      className="open"
+    >
       <div className="f_logo">
         <div src="logo.png" alt="logo">
           <p>CHOICE FLAVOR</p>

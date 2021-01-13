@@ -5,6 +5,12 @@ import {Link} from 'react-router-dom';
 const Navbar = () =>{
   const [modalMenu,setNav] = useState(false);
 
+  ////Home画面表示を初回かそれ以降か判断
+  const to = {
+    pathname:'/',
+    state:'already'
+  }
+
   //do the modalMenu ON or OFF
   const isMenu_active = e => {
     e.preventDefault();
@@ -24,7 +30,7 @@ const Navbar = () =>{
       >
         <div className="home-header-inner">
           <div className="home-header-logo">
-            <Link to="/">
+            <Link to={to}>
               <span>CHOICE FLAVOR</span>
             </Link>
           </div>
@@ -42,6 +48,9 @@ const Navbar = () =>{
       >
         <ul className="header_floatMenu_wraper">
           <div>
+            <li>
+              <Link to="/">TOP</Link>
+            </li>
             <li>
               <a>ABOUT</a>
             </li>
