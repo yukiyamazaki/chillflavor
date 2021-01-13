@@ -71488,8 +71488,10 @@ var Navbar = function Navbar() {
     className: "home-header-menuTrigger",
     onClick: isMenu_active
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "menu-Trigger"
-  }, "=")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu-Trigger_ecole"
+  }, "="), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu-Trigger_batu"
+  }, "\u2715")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: modalMenu ? "header_floatMenu_usual header_floatMenu_active" : "header_floatMenu_usual  "
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "header_floatMenu_wraper"

@@ -130,11 +130,38 @@ button, input, select, textarea {
   transition: background 0.3s;
 }
 
-.home-header-menuTrigger div{
+.menu-Trigger_ecole{
+  width: 16px;
+  height: 29px;
+  position: relative;
+  margin-left: 24px;
+  display: block;
+}
+
+.home-header-active .menu-Trigger_ecole{
   width: 16px;
   position: relative;
   margin-left: 24px;
+  display: none;
 }
+
+.menu-Trigger_batu{
+  width: 16px;
+  position: relative;
+  margin-left: 24px;
+  display: none;
+}
+
+.home-header-active .menu-Trigger_batu{
+  width: 17px;
+  height: 20px;
+  position: relative;
+  margin-left: 24px;
+  display: block;
+  font-size: 19px;
+}
+
+
 
 .home-main {
   display: flex;

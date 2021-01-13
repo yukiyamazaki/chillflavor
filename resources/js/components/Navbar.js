@@ -38,7 +38,8 @@ const Navbar = () =>{
             className="home-header-menuTrigger"
             onClick={isMenu_active}
           >
-            <div className="menu-Trigger">=</div>
+            <div className="menu-Trigger_ecole">=</div>
+            <div className="menu-Trigger_batu">✕</div>
           </button>
         </div>
       </header>
