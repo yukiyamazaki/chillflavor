@@ -255,7 +255,6 @@ Route::post('/countFlavors',function (Request $request){
         return response()->json(['countflavors' => $countflavors]);
     }
 });
-// Test部分
 
 //フレイバー詳細
 Route::post('/Flavor',function (Request $request){
