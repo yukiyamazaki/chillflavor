@@ -542,8 +542,8 @@ const Searchflavors = () => {
             <img />
           </div>
           <div className="footer_contents_main">
-            <div className="footer_contents_logo">TARUSHIRU</div>
-            <small>©TARUSHIRU inc.</small>
+            <div className="footer_contents_logo">CHOICE FLAVOR</div>
+            <small>CHOICE FLAVOR inc.</small>
           </div>
         </footer>
 

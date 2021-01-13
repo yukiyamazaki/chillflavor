@@ -180,7 +180,6 @@ header.contents_header {
 }
 
 .contents_title span {
-  font-family: "Josefin Sans";
   display: block;
   font-size: 18px;
   padding: 8px;
@@ -925,7 +924,6 @@ h1.contents_title {
   width: 99%;
   height: auto;
   text-align: center;
-  font-family: "Josefin Sans";
   font-size: 1.7rem;
   color: white;
 }

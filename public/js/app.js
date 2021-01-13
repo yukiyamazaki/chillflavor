@@ -72244,7 +72244,7 @@ var Searchflavors = function Searchflavors() {
     className: "footer_contents_main"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "footer_contents_logo"
-  }, "TARUSHIRU"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "\xA9TARUSHIRU inc.")))));
+  }, "CHOICE FLAVOR"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "CHOICE FLAVOR inc.")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Searchflavors);
