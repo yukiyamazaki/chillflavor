@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useRef } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -14,11 +14,11 @@ const Searchflavors = () => {
   const [lists,setList] = useState([]);
   const [moreBtn,setMoreBtn] = useState(true);
   //絞り込みエリアのcheckbox
-  const [tastes,setTaste] = useState([]);
-  const [types,setType] = useState([]);
-  const [categories,setCategory] = useState([]);
+  const inputtastes = useRef([]);
+  const inputypes = useRef([]);
+  const inputcate = useRef([]);
   //絞り込みカウント
-  // const [countnow,setCountnow] = useState([0]);
+  const [countnow,setCountnow] = useState(0);
   //全件分のID
   const [allflavors,setAllflavors] = useState([]);
   const [allflavorid,setAllflavorid] = useState([]);
@@ -30,7 +30,6 @@ const Searchflavors = () => {
     // setKeyword(e.target.value);
     setKeyword(e.target.value);
   }
-
   
   //forEach抜けた後でないと、値を更新しない。
   useEffect(() => {
@@ -44,37 +43,73 @@ const Searchflavors = () => {
   // チェックボックス
   //taste
   const changeTaste = (e) =>{
-    if(tastes.includes(e.target.value)){
+    if(inputtastes.current.includes(e.target.value)){
       //OFF
-      setTaste(tastes.filter(item => item !== e.target.value));
+      inputtastes.current= inputtastes.current.filter(item => item !== e.target.value);
+      countDatabase();
+
     }else{
       // ON
-      setTaste([...tastes, e.target.value]);
+      inputtastes.current = [...inputtastes.current, e.target.value];
+      countDatabase();
     }
   }
   
   //type
   const changeType = (e) =>{
-    if(types.includes(e.target.value)){
+    if(inputypes.current.includes(e.target.value)){
       //OFF
-      setType(types.filter(item => item !== e.target.value));
+      inputypes.current= inputypes.current.filter(item => item !== e.target.value);
+      countDatabase();
     }else{
       // ON
-      setType([...types, e.target.value]);
+      inputypes.current = [...inputypes.current, e.target.value];
+      countDatabase();
     }
   };
   
-  //type
+  //category
   const changeCategory = (e) =>{
-    if(categories.includes(e.target.value)){
+    if(inputcate.current.includes(e.target.value)){
       //OFF
-      setCategory(categories.filter(item => item !== e.target.value));
+      inputcate.current= inputcate.current.filter(item => item !== e.target.value);
+      countDatabase();
     }else{
-      // ON
-      setCategory([...categories, e.target.value]);
+      inputcate.current = [...inputcate.current, e.target.value];
+      countDatabase();
     }
   };
- 
+
+    //ここからテスト開始
+    const countDatabase = async() =>{
+      let changeParams = {
+        allflavorid:allflavorid,
+        tastes: inputtastes.current,
+        types:inputypes.current,
+        categories:inputcate.current,
+       }
+      //test部分
+      const params = new FormData;
+      _.forEach(changeParams, (value, key) => {
+        if (Array.isArray(value)) {
+          _.forEach(value, (v, _) => {
+            params.append(key + '[]', v)
+          })
+        } else {
+          params.append(key, value)
+        }
+      });
+      await axios.post('api/countFlavors',params)
+      .then((response)=>{
+        setCountnow(response.data.countflavors.length);
+      })
+      .catch((error)=>{
+        alert('フレイバーが見つかりませんでした');
+        setCountnow();
+        console.log(error.data,'formdataエラー');
+      });
+    }
+
   //do the modal ON
   const handdleModal = e =>{
     e.preventDefault();
@@ -90,33 +125,13 @@ const Searchflavors = () => {
       setModal(false);
     }
   }
-
-  //flavorsフィールドの初期値は全件表示
-  const getFlavors = async() =>{
-    const params = new FormData();
-      await axios.post('api/flavors',params)
-      .then(function(response){
-        // 成功した時
-        setFlavors(response.data.flavors);
-        setAllflavors(response.data.flavors);
-      })
-      .catch(function(error){
-        // 失敗したとき
-        console.log('Fitstエラー');
-      });
-  }
-
-  //初期状態のflavor表示
-  if(!flavorCount){
-    getFlavors();
-  }
  
   const limitFlavors = flavors.slice(0,limit);
   //表示件数の制限
   useEffect(() => {
     setList(limitFlavors);
   },[flavors,limit])
-  
+
   //絞り込みをClick
   const narrowFlavor = async(e) =>{
     e.preventDefault();
@@ -128,13 +143,13 @@ const Searchflavors = () => {
     
     let sendParams = {
       allflavorid:allflavorid,
-      tastes: tastes,
-      types:types,
-      categories:categories,
+      tastes: inputtastes.current,
+      types:inputypes.current,
+      categories:inputcate.current,
     }
     
-    //キーワード検索のinputに値があれば、checkboxは無視して検索
     if(keyword){
+      //キーワード検索のinputに値があれば、checkboxは無視して検索
       const params = new FormData();
       params.append("search_keyword",keyword);
       await axios.post('api/Searchflavors',params)
@@ -146,14 +161,20 @@ const Searchflavors = () => {
         // 失敗したとき
         console.log('Keywordエラー');
       });
+      //初期化
+      inputtastes.current = [];
+      inputypes.current = [];
+      inputcate.current = [];
+      //limit初期値
+      setLimit(5);
       //input初期化
       setKeyword("");
       //modalを閉じる
       setModal(false);
-      
+      //countnow初期化
+      setCountnow([]);
     }else{
       const params = new FormData;
-      console.log(sendParams);
       _.forEach(sendParams, (value, key) => {
         if (Array.isArray(value)) {
           _.forEach(value, (v, _) => {
@@ -166,7 +187,6 @@ const Searchflavors = () => {
      
       await axios.post('api/checkedFlavors',params)
       .then((response)=>{
-        console.log(response.data,'res');
         if(!response.data.flavors.length == 0){
           setFlavors(response.data.flavors);
         }else{
@@ -177,13 +197,12 @@ const Searchflavors = () => {
       .catch((error)=>{
         alert('フレイバーが見つかりませんでした');
         setFlavors([]);
-        console.log(error.data,'formdataエラー');
       });
       
       //初期化
-      setTaste("");
-      setType("");
-      setCategory("");
+      inputtastes.current = [];
+      inputypes.current = [];
+      inputcate.current = [];
       //input初期化
       setKeyword("");
       //limit初期値
@@ -191,11 +210,10 @@ const Searchflavors = () => {
       //modalを閉じる
       setModal(false);
       //countnow初期化
-      // setCountnow("");
+      setCountnow([]);
     }
   }
 
-  
   //もっとみるで、取得件数を＋５
   const isMoreflavors = e => {
     e.preventDefault();
@@ -203,32 +221,41 @@ const Searchflavors = () => {
   }
 
   useEffect(() => {
-    console.log(flavorCount,'p');
-  },[flavors]);
-  
-  useEffect(() => {
-    console.log(limit,'limit');
-    console.log(flavorCount,'flavors');
     //取得したflavorsが全て表示された場合は、もっとみるを非表示
     if(limit>=flavorCount && flavorCount){
-      console.log('over');
       setMoreBtn(false);
     }else{
-      console.log('still');
       setMoreBtn(true);
     }
   },[limit,flavorCount]);
+
+   //flavorsフィールドの初期値は全件表示
+  const getFlavors = async() =>{
+    const params = new FormData();
+    await axios.post('api/flavors',params)
+    .then(function(response){
+      // 成功した時
+      setFlavors(response.data.flavors);
+      setAllflavors(response.data.flavors);
+    })
+    .catch(function(error){
+      // 失敗したとき
+      console.log('Fitstエラー');
+    });
+  }
+  //初期状態のflavor表示
+  useEffect(() =>{
+    if(!flavorCount){
+      getFlavors();
+    }
+  },[])
   
   return(
     <>
       {/* header */}
       <div className="contents_header_wrap">
         {/* This is props TEST */}
-       <Navbar
-        id="12345"
-        name='zakizaki'
-        look='pppppppp'
-       />
+       <Navbar/>
         {/* ここからMain */}
         <main >
           <div className="style_wrap_intro">
@@ -335,7 +362,7 @@ const Searchflavors = () => {
                         type="checkbox"
                         id="taste_sweet"
                         value="sweet"
-                        checked={tastes.includes('sweet')}
+                        checked={inputtastes.current.includes('sweet')}
                         onChange={changeTaste}
                       />
                       <label 
@@ -353,7 +380,7 @@ const Searchflavors = () => {
                         type="checkbox"
                         id="taste_fefresh"
                         value="flesh"
-                        checked={tastes.includes('flesh')}
+                        checked={inputtastes.current.includes('flesh')}
                         onChange={changeTaste}
                       />
                       <label 
@@ -370,7 +397,7 @@ const Searchflavors = () => {
                         type="checkbox"
                         id="taste_hot"
                         value="hot"
-                        checked={tastes.includes('hot')}
+                        checked={inputtastes.current.includes('hot')}
                         onChange={changeTaste}
                         />
                       <label 
@@ -393,7 +420,7 @@ const Searchflavors = () => {
                         type="checkbox" 
                         id="type_main"
                         value="main"
-                        checked={types.includes('main')}
+                        checked={inputypes.current.includes('main')}
                         onChange={changeType}
                         />
                       <label 
@@ -411,7 +438,7 @@ const Searchflavors = () => {
                         type="checkbox" 
                         id="type_weird"
                         value="wired"
-                        checked={types.includes('wired')}
+                        checked={inputypes.current.includes('wired')}
                         onChange={changeType}
                         />
                       <label 
@@ -435,7 +462,7 @@ const Searchflavors = () => {
                           type="checkbox" 
                           id="category_fruit" className="style_checkbox_category"
                           value="fruit"
-                          checked={categories.includes('fruit')}
+                          checked={inputcate.current.includes('fruit')}
                           onChange={changeCategory}
                           />
                         <label 
@@ -448,7 +475,7 @@ const Searchflavors = () => {
                           type="checkbox" 
                           id="category_drink" className="style_checkbox_category"
                           value="drink"
-                          checked={categories.includes('drink')}
+                          checked={inputcate.current.includes('drink')}
                           onChange={changeCategory}
                         />
                         <label 
@@ -461,7 +488,7 @@ const Searchflavors = () => {
                           type="checkbox" 
                           id="category_spices" className="style_checkbox_category"
                           value="spices"
-                          checked={categories.includes('spices')}
+                          checked={inputcate.current.includes('spices')}
                           onChange={changeCategory}
                         />
                         <label 
@@ -474,7 +501,7 @@ const Searchflavors = () => {
                           type="checkbox" 
                           id="category_other" className="style_checkbox_category"
                           value="other"
-                          checked={categories.includes('other')}
+                          checked={inputcate.current.includes('other')}
                           onChange={changeCategory}
                         />
                         <label 
@@ -486,7 +513,7 @@ const Searchflavors = () => {
                 </div>
                 <div className="style_main_modalFooter">
                   <div className="style_modal_result">
-                    該当：0件
+                    該当：{countnow}件
                   </div>
                   <button 
                     className="style_modal_btn"

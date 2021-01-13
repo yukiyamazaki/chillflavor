@@ -71684,33 +71684,25 @@ var Searchflavors = function Searchflavors() {
       setMoreBtn = _useState12[1]; //絞り込みエリアのcheckbox
 
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var inputtastes = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]);
+  var inputypes = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]);
+  var inputcate = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]); //絞り込みカウント
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState14 = _slicedToArray(_useState13, 2),
-      tastes = _useState14[0],
-      setTaste = _useState14[1];
+      countnow = _useState14[0],
+      setCountnow = _useState14[1]; //全件分のID
+
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      types = _useState16[0],
-      setType = _useState16[1];
+      allflavors = _useState16[0],
+      setAllflavors = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      categories = _useState18[0],
-      setCategory = _useState18[1]; //絞り込みカウント
-  // const [countnow,setCountnow] = useState([0]);
-  //全件分のID
-
-
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState20 = _slicedToArray(_useState19, 2),
-      allflavors = _useState20[0],
-      setAllflavors = _useState20[1];
-
-  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState22 = _slicedToArray(_useState21, 2),
-      allflavorid = _useState22[0],
-      setAllflavorid = _useState22[1];
+      allflavorid = _useState18[0],
+      setAllflavorid = _useState18[1];
 
   var flavorCount = flavors.length; //検索inputの定義
   //keyword input
@@ -71731,42 +71723,96 @@ var Searchflavors = function Searchflavors() {
   //taste
 
   var changeTaste = function changeTaste(e) {
-    if (tastes.includes(e.target.value)) {
+    if (inputtastes.current.includes(e.target.value)) {
       //OFF
-      setTaste(tastes.filter(function (item) {
+      inputtastes.current = inputtastes.current.filter(function (item) {
         return item !== e.target.value;
-      }));
+      });
+      countDatabase();
     } else {
       // ON
-      setTaste([].concat(_toConsumableArray(tastes), [e.target.value]));
+      inputtastes.current = [].concat(_toConsumableArray(inputtastes.current), [e.target.value]);
+      countDatabase();
     }
   }; //type
 
 
   var changeType = function changeType(e) {
-    if (types.includes(e.target.value)) {
+    if (inputypes.current.includes(e.target.value)) {
       //OFF
-      setType(types.filter(function (item) {
+      inputypes.current = inputypes.current.filter(function (item) {
         return item !== e.target.value;
-      }));
+      });
+      countDatabase();
     } else {
       // ON
-      setType([].concat(_toConsumableArray(types), [e.target.value]));
+      inputypes.current = [].concat(_toConsumableArray(inputypes.current), [e.target.value]);
+      countDatabase();
     }
-  }; //type
+  }; //category
 
 
   var changeCategory = function changeCategory(e) {
-    if (categories.includes(e.target.value)) {
+    if (inputcate.current.includes(e.target.value)) {
       //OFF
-      setCategory(categories.filter(function (item) {
+      inputcate.current = inputcate.current.filter(function (item) {
         return item !== e.target.value;
-      }));
+      });
+      countDatabase();
     } else {
-      // ON
-      setCategory([].concat(_toConsumableArray(categories), [e.target.value]));
+      inputcate.current = [].concat(_toConsumableArray(inputcate.current), [e.target.value]);
+      countDatabase();
     }
-  }; //do the modal ON
+  }; //ここからテスト開始
+
+
+  var countDatabase = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var changeParams, params;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              changeParams = {
+                allflavorid: allflavorid,
+                tastes: inputtastes.current,
+                types: inputypes.current,
+                categories: inputcate.current
+              }; //test部分
+
+              params = new FormData();
+
+              lodash__WEBPACK_IMPORTED_MODULE_4___default.a.forEach(changeParams, function (value, key) {
+                if (Array.isArray(value)) {
+                  lodash__WEBPACK_IMPORTED_MODULE_4___default.a.forEach(value, function (v, _) {
+                    params.append(key + '[]', v);
+                  });
+                } else {
+                  params.append(key, value);
+                }
+              });
+
+              _context.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/countFlavors', params).then(function (response) {
+                setCountnow(response.data.countflavors.length);
+              })["catch"](function (error) {
+                alert('フレイバーが見つかりませんでした');
+                setCountnow();
+                console.log(error.data, 'formdataエラー');
+              });
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function countDatabase() {
+      return _ref.apply(this, arguments);
+    };
+  }(); //do the modal ON
 
 
   var handdleModal = function handdleModal(e) {
@@ -71784,44 +71830,7 @@ var Searchflavors = function Searchflavors() {
     if (modal) {
       setModal(false);
     }
-  }; //flavorsフィールドの初期値は全件表示
-
-
-  var getFlavors = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var params;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              params = new FormData();
-              _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/flavors', params).then(function (response) {
-                // 成功した時
-                setFlavors(response.data.flavors);
-                setAllflavors(response.data.flavors);
-              })["catch"](function (error) {
-                // 失敗したとき
-                console.log('Fitstエラー');
-              });
-
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function getFlavors() {
-      return _ref.apply(this, arguments);
-    };
-  }(); //初期状態のflavor表示
-
-
-  if (!flavorCount) {
-    getFlavors();
-  }
+  };
 
   var limitFlavors = flavors.slice(0, limit); //表示件数の制限
 
@@ -71850,16 +71859,17 @@ var Searchflavors = function Searchflavors() {
             case 4:
               sendParams = {
                 allflavorid: allflavorid,
-                tastes: tastes,
-                types: types,
-                categories: categories
-              }; //キーワード検索のinputに値があれば、checkboxは無視して検索
+                tastes: inputtastes.current,
+                types: inputypes.current,
+                categories: inputcate.current
+              };
 
               if (!keyword) {
-                _context2.next = 14;
+                _context2.next = 19;
                 break;
               }
 
+              //キーワード検索のinputに値があれば、checkboxは無視して検索
               params = new FormData();
               params.append("search_keyword", keyword);
               _context2.next = 10;
@@ -71872,16 +71882,23 @@ var Searchflavors = function Searchflavors() {
               });
 
             case 10:
-              //input初期化
+              //初期化
+              inputtastes.current = [];
+              inputypes.current = [];
+              inputcate.current = []; //limit初期値
+
+              setLimit(5); //input初期化
+
               setKeyword(""); //modalを閉じる
 
-              setModal(false);
-              _context2.next = 25;
+              setModal(false); //countnow初期化
+
+              setCountnow([]);
+              _context2.next = 30;
               break;
 
-            case 14:
+            case 19:
               _params = new FormData();
-              console.log(sendParams);
 
               lodash__WEBPACK_IMPORTED_MODULE_4___default.a.forEach(sendParams, function (value, key) {
                 if (Array.isArray(value)) {
@@ -71893,10 +71910,8 @@ var Searchflavors = function Searchflavors() {
                 }
               });
 
-              _context2.next = 19;
+              _context2.next = 23;
               return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/checkedFlavors', _params).then(function (response) {
-                console.log(response.data, 'res');
-
                 if (!response.data.flavors.length == 0) {
                   setFlavors(response.data.flavors);
                 } else {
@@ -71908,23 +71923,23 @@ var Searchflavors = function Searchflavors() {
               })["catch"](function (error) {
                 alert('フレイバーが見つかりませんでした');
                 setFlavors([]);
-                console.log(error.data, 'formdataエラー');
               });
 
-            case 19:
+            case 23:
               //初期化
-              setTaste("");
-              setType("");
-              setCategory(""); //input初期化
+              inputtastes.current = [];
+              inputypes.current = [];
+              inputcate.current = []; //input初期化
 
               setKeyword(""); //limit初期値
 
               setLimit(5); //modalを閉じる
 
               setModal(false); //countnow初期化
-              // setCountnow("");
 
-            case 25:
+              setCountnow([]);
+
+            case 30:
             case "end":
               return _context2.stop();
           }
@@ -71944,27 +71959,54 @@ var Searchflavors = function Searchflavors() {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    console.log(flavorCount, 'p');
-  }, [flavors]);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    console.log(limit, 'limit');
-    console.log(flavorCount, 'flavors'); //取得したflavorsが全て表示された場合は、もっとみるを非表示
-
+    //取得したflavorsが全て表示された場合は、もっとみるを非表示
     if (limit >= flavorCount && flavorCount) {
-      console.log('over');
       setMoreBtn(false);
     } else {
-      console.log('still');
       setMoreBtn(true);
     }
-  }, [limit, flavorCount]);
+  }, [limit, flavorCount]); //flavorsフィールドの初期値は全件表示
+
+  var getFlavors = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var params;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              params = new FormData();
+              _context3.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/flavors', params).then(function (response) {
+                // 成功した時
+                setFlavors(response.data.flavors);
+                setAllflavors(response.data.flavors);
+              })["catch"](function (error) {
+                // 失敗したとき
+                console.log('Fitstエラー');
+              });
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function getFlavors() {
+      return _ref3.apply(this, arguments);
+    };
+  }(); //初期状態のflavor表示
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (!flavorCount) {
+      getFlavors();
+    }
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "contents_header_wrap"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    id: "12345",
-    name: "zakizaki",
-    look: "pppppppp"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_wrap_intro"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_topImage"
@@ -72059,7 +72101,7 @@ var Searchflavors = function Searchflavors() {
     type: "checkbox",
     id: "taste_sweet",
     value: "sweet",
-    checked: tastes.includes('sweet'),
+    checked: inputtastes.current.includes('sweet'),
     onChange: changeTaste
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_teste",
@@ -72073,7 +72115,7 @@ var Searchflavors = function Searchflavors() {
     type: "checkbox",
     id: "taste_fefresh",
     value: "flesh",
-    checked: tastes.includes('flesh'),
+    checked: inputtastes.current.includes('flesh'),
     onChange: changeTaste
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_teste",
@@ -72087,7 +72129,7 @@ var Searchflavors = function Searchflavors() {
     type: "checkbox",
     id: "taste_hot",
     value: "hot",
-    checked: tastes.includes('hot'),
+    checked: inputtastes.current.includes('hot'),
     onChange: changeTaste
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_teste",
@@ -72105,7 +72147,7 @@ var Searchflavors = function Searchflavors() {
     type: "checkbox",
     id: "type_main",
     value: "main",
-    checked: types.includes('main'),
+    checked: inputypes.current.includes('main'),
     onChange: changeType
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_type",
@@ -72119,7 +72161,7 @@ var Searchflavors = function Searchflavors() {
     type: "checkbox",
     id: "type_weird",
     value: "wired",
-    checked: types.includes('wired'),
+    checked: inputypes.current.includes('wired'),
     onChange: changeType
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     className: "style_label_type",
@@ -72139,7 +72181,7 @@ var Searchflavors = function Searchflavors() {
     id: "category_fruit",
     className: "style_checkbox_category",
     value: "fruit",
-    checked: categories.includes('fruit'),
+    checked: inputcate.current.includes('fruit'),
     onChange: changeCategory
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "category_fruit",
@@ -72151,7 +72193,7 @@ var Searchflavors = function Searchflavors() {
     id: "category_drink",
     className: "style_checkbox_category",
     value: "drink",
-    checked: categories.includes('drink'),
+    checked: inputcate.current.includes('drink'),
     onChange: changeCategory
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "category_drink",
@@ -72163,7 +72205,7 @@ var Searchflavors = function Searchflavors() {
     id: "category_spices",
     className: "style_checkbox_category",
     value: "spices",
-    checked: categories.includes('spices'),
+    checked: inputcate.current.includes('spices'),
     onChange: changeCategory
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "category_spices",
@@ -72175,7 +72217,7 @@ var Searchflavors = function Searchflavors() {
     id: "category_other",
     className: "style_checkbox_category",
     value: "other",
-    checked: categories.includes('other'),
+    checked: inputcate.current.includes('other'),
     onChange: changeCategory
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "category_other",
@@ -72184,7 +72226,7 @@ var Searchflavors = function Searchflavors() {
     className: "style_main_modalFooter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modal_result"
-  }, "\u8A72\u5F53\uFF1A0\u4EF6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, "\u8A72\u5F53\uFF1A", countnow, "\u4EF6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "style_modal_btn",
     onClick: narrowFlavor
   }, "\u3053\u306E\u6761\u4EF6\u3067\u7D5E\u308A\u8FBC\u3080"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
