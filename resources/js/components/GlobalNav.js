@@ -31,7 +31,7 @@ const GlobalNav = () => {
       {/* headerコンポーネント */}
       <Navbar />
       <main className="home-main">
-
+        
         <Link to="/Searchflavors">
           <button className="home-btn">今日の気分<p>から探す</p>
         </button>
@@ -48,9 +48,8 @@ const GlobalNav = () => {
         <Link to="/Magazines">
          <button className="home-btn_dev">開発中</button>
         </Link>
-
+        
       </main>
-
     </div>
     </React.Fragment>
   )

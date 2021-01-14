@@ -8,11 +8,17 @@ import Navbar from './Navbar';
 
 const Searchflavors = () => {
   const [modal,setModal] = useState(false);
+  //DBから取得したflavor情報
   const [flavors,setFlavors] = useState([]);
+  //キーワード検索
   const [keyword,setKeyword] = useState("");
+   //表示件数の制限
   const [limit,setLimit] = useState(5);
+  //表示するリスト
   const [lists,setList] = useState([]);
+  //もっとみるボタン
   const [moreBtn,setMoreBtn] = useState(true);
+  //選び方のモーダルを表示するボタン
   const [modalhow,setModalhow] = useState(false);
   //絞り込みエリアのcheckbox
   const inputtastes = useRef([]);
@@ -23,6 +29,7 @@ const Searchflavors = () => {
   //全件分のID
   const [allflavors,setAllflavors] = useState([]);
   const [allflavorid,setAllflavorid] = useState([]);
+  //DBからから取得したflavoerの件数
   const flavorCount = flavors.length;
 
   //検索inputの定義
@@ -41,16 +48,6 @@ const Searchflavors = () => {
       setModalhow(false);
     }
   }
-
-  
-  //forEach抜けた後でないと、値を更新しない。
-  useEffect(() => {
-    let addflavorids=[];
-    allflavors.forEach(flavor =>{
-      addflavorids.push(flavor.id);
-    })
-    setAllflavorid(addflavorids);//ここで更新されないのが問題
-  },[allflavors]);
   
   // チェックボックス
   //taste
@@ -59,7 +56,6 @@ const Searchflavors = () => {
       //OFF
       inputtastes.current= inputtastes.current.filter(item => item !== e.target.value);
       countDatabase();
-
     }else{
       // ON
       inputtastes.current = [...inputtastes.current, e.target.value];
@@ -93,7 +89,7 @@ const Searchflavors = () => {
     }
   };
 
-    //count取得エリア
+  //count取得エリア
     const countDatabase = async() =>{
       let changeParams = {
         allflavorid:allflavorid,
@@ -115,7 +111,6 @@ const Searchflavors = () => {
       await axios.post('api/countFlavors',params)
       .then((response)=>{
         setCountnow(response.data.countflavors.length);
-        console.log(response.data,'テスト');
       })
       .catch((error)=>{
         alert('フレイバーが見つかりませんでした');
@@ -140,11 +135,8 @@ const Searchflavors = () => {
     }
   }
  
+  //表示件数の制限する変数
   const limitFlavors = flavors.slice(0,limit);
-  //表示件数の制限
-  useEffect(() => {
-    setList(limitFlavors);
-  },[flavors,limit])
 
   //絞り込みをClick
   const narrowFlavor = async(e) =>{
@@ -154,14 +146,12 @@ const Searchflavors = () => {
     if(!confirm('検索します。よろしいですか？')) {
       return;
     }
-    
     let sendParams = {
       allflavorid:allflavorid,
       tastes: inputtastes.current,
       types:inputypes.current,
       categories:inputcate.current,
     }
-    
     if(keyword){
       //キーワード検索のinputに値があれば、checkboxは無視して検索
       const params = new FormData();
@@ -234,15 +224,6 @@ const Searchflavors = () => {
     setLimit(limit + 5);
   }
 
-  useEffect(() => {
-    //取得したflavorsが全て表示された場合は、もっとみるを非表示
-    if(limit>=flavorCount && flavorCount){
-      setMoreBtn(false);
-    }else{
-      setMoreBtn(true);
-    }
-  },[limit,flavorCount]);
-
    //flavorsフィールドの初期値は全件表示
   const getFlavors = async() =>{
     const params = new FormData();
@@ -257,6 +238,31 @@ const Searchflavors = () => {
       console.log('Fitstエラー');
     });
   }
+
+  //以下useEffect
+  //forEach抜けた後でないと、値を更新しない。
+  useEffect(() => {
+    let addflavorids=[];
+    allflavors.forEach(flavor =>{
+      addflavorids.push(flavor.id);
+    })
+    setAllflavorid(addflavorids);//ここで更新されないのが問題
+  },[allflavors]);
+
+ //表示件数の制限
+  useEffect(() => {
+    setList(limitFlavors);
+  },[flavors,limit])
+
+  //取得したflavorsが全て表示された場合は、もっとみるを非表示
+  useEffect(() => {
+    if(limit>=flavorCount && flavorCount){
+      setMoreBtn(false);
+    }else{
+      setMoreBtn(true);
+    }
+  },[limit,flavorCount]);
+
   //初期状態のflavor表示
   useEffect(() =>{
     if(!flavorCount){

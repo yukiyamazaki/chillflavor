@@ -17,8 +17,9 @@ Route::post('/flavors',function (Request $request) {
     return response()->json(['flavors' => $flavors]);
 });
 
-//FlavorList
+//FlavorList(カテゴリにフレイバー名を取得)
 Route::post('/getFlavornames',function (Request $request){
+    
     if(!$request){
         return "エラー";
     }
@@ -34,12 +35,10 @@ Route::post('/getFlavornames',function (Request $request){
         "cocktail" => $cocktail,
         "other" =>$other,
     ];
-
     return response()->json(['params' => $params]);
-
 });
 
-//FlavorList
+//Brand（ブランド別にフレイバー名を取得）
 Route::post('/getBrand',function (Request $request){
     if(!$request){
         return "エラー";
@@ -64,7 +63,6 @@ Route::post('/getBrand',function (Request $request){
     ];
 
     return response()->json(['params' => $params]);
-
 });
 
 //キーワード検索時
@@ -87,13 +85,11 @@ Route::post('/checkedFlavors',function (Request $request){
     }else{
         $flavors_Obj = $request->all();
         $flavors_ids = array();
-
         //Requestデータの有無確認
         $check_all = isset($flavors_Obj['allflavorid']);
         $check_taste = isset($flavors_Obj['tastes']);
         $check_types = isset($flavors_Obj['types']);
         $check_categories = isset($flavors_Obj['categories']);
-
         //flavor全データのid配列
         if($check_all){
             $allflavorid = $flavors_Obj['allflavorid'];
@@ -163,7 +159,6 @@ Route::post('/checkedFlavors',function (Request $request){
         }
 
         $flavors = Flavor::whereIn('id',$flavors_ids)->orderby('id','desc')->get();
-       
         return response()->json(['flavors' => $flavors]);
     }
 });
@@ -175,13 +170,11 @@ Route::post('/countFlavors',function (Request $request){
     }else{
         $flavors_Obj = $request->all();
         $flavors_ids = array();
-
         //Requestデータの有無確認
         $check_all = isset($flavors_Obj['allflavorid']);
         $check_taste = isset($flavors_Obj['tastes']);
         $check_types = isset($flavors_Obj['types']);
         $check_categories = isset($flavors_Obj['categories']);
-
         //flavor全データのid配列
         if($check_all){
             $allflavorid = $flavors_Obj['allflavorid'];
@@ -251,7 +244,6 @@ Route::post('/countFlavors',function (Request $request){
         }
 
         $countflavors = Flavor::whereIn('id',$flavors_ids)->orderby('id','desc')->get();
-       
         return response()->json(['countflavors' => $countflavors]);
     }
 });

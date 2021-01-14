@@ -70790,7 +70790,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
+ //ブランド別にフレイバー名を表示
 
 var Flavorlist = function Flavorlist() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -70826,7 +70826,8 @@ var Flavorlist = function Flavorlist() {
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState14 = _slicedToArray(_useState13, 2),
       goldenlavas = _useState14[0],
-      setGoldenlava = _useState14[1];
+      setGoldenlava = _useState14[1]; //ブランド別にフレイバー名を取得
+
 
   var getBrand = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -70995,6 +70996,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Flavor = function Flavor() {
+  //DBから取得するフレイバー情報をset
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       detailflavor = _useState2[0],
@@ -71035,7 +71037,7 @@ var Flavor = function Flavor() {
   var to = {
     pathname: '/',
     state: 'already'
-  }; //Flavorの情報を取得
+  }; //Flavorの情報を取得する関数
 
   var detailFavor = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -71079,7 +71081,8 @@ var Flavor = function Flavor() {
     return function detailFavor() {
       return _ref.apply(this, arguments);
     };
-  }();
+  }(); //Flavorの情報を取得
+
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     detailFavor();
@@ -71101,7 +71104,6 @@ var Flavor = function Flavor() {
       setWired(true);
     }
   }, [detailflavor]);
-  console.log(detailflavor);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_main_wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
@@ -71552,7 +71554,9 @@ var Navbar = function Navbar() {
     className: "header_floatMenu_wraper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
-  }, "TOP")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "ABOUT")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "FLAVOR"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "CHEAM")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "TERMS OF SERVICE")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "CONTACT")))));
+  }, "TOP")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/Searchflavors"
+  }, "SEARCH FLAVOR"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "THEAM")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "TERMS OF SERVICE")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "CONTACT")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Navbar);
@@ -71713,32 +71717,38 @@ var Searchflavors = function Searchflavors() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       modal = _useState2[0],
-      setModal = _useState2[1];
+      setModal = _useState2[1]; //DBから取得したflavor情報
+
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
       flavors = _useState4[0],
-      setFlavors = _useState4[1];
+      setFlavors = _useState4[1]; //キーワード検索
+
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
       keyword = _useState6[0],
-      setKeyword = _useState6[1];
+      setKeyword = _useState6[1]; //表示件数の制限
+
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(5),
       _useState8 = _slicedToArray(_useState7, 2),
       limit = _useState8[0],
-      setLimit = _useState8[1];
+      setLimit = _useState8[1]; //表示するリスト
+
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
       lists = _useState10[0],
-      setList = _useState10[1];
+      setList = _useState10[1]; //もっとみるボタン
+
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState12 = _slicedToArray(_useState11, 2),
       moreBtn = _useState12[0],
-      setMoreBtn = _useState12[1];
+      setMoreBtn = _useState12[1]; //選び方のモーダルを表示するボタン
+
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState14 = _slicedToArray(_useState13, 2),
@@ -71764,7 +71774,8 @@ var Searchflavors = function Searchflavors() {
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState20 = _slicedToArray(_useState19, 2),
       allflavorid = _useState20[0],
-      setAllflavorid = _useState20[1];
+      setAllflavorid = _useState20[1]; //DBからから取得したflavoerの件数
+
 
   var flavorCount = flavors.length; //検索inputの定義
   //keyword input
@@ -71783,17 +71794,9 @@ var Searchflavors = function Searchflavors() {
     } else {
       setModalhow(false);
     }
-  }; //forEach抜けた後でないと、値を更新しない。
-
-
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var addflavorids = [];
-    allflavors.forEach(function (flavor) {
-      addflavorids.push(flavor.id);
-    });
-    setAllflavorid(addflavorids); //ここで更新されないのが問題
-  }, [allflavors]); // チェックボックス
+  }; // チェックボックス
   //taste
+
 
   var changeTaste = function changeTaste(e) {
     if (inputtastes.current.includes(e.target.value)) {
@@ -71868,7 +71871,6 @@ var Searchflavors = function Searchflavors() {
               _context.next = 5;
               return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/countFlavors', params).then(function (response) {
                 setCountnow(response.data.countflavors.length);
-                console.log(response.data, 'テスト');
               })["catch"](function (error) {
                 alert('フレイバーが見つかりませんでした');
                 setCountnow();
@@ -71904,13 +71906,10 @@ var Searchflavors = function Searchflavors() {
     if (modal) {
       setModal(false);
     }
-  };
+  }; //表示件数の制限する変数
 
-  var limitFlavors = flavors.slice(0, limit); //表示件数の制限
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    setList(limitFlavors);
-  }, [flavors, limit]); //絞り込みをClick
+  var limitFlavors = flavors.slice(0, limit); //絞り込みをClick
 
   var narrowFlavor = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
@@ -72030,16 +72029,8 @@ var Searchflavors = function Searchflavors() {
   var isMoreflavors = function isMoreflavors(e) {
     e.preventDefault();
     setLimit(limit + 5);
-  };
+  }; //flavorsフィールドの初期値は全件表示
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    //取得したflavorsが全て表示された場合は、もっとみるを非表示
-    if (limit >= flavorCount && flavorCount) {
-      setMoreBtn(false);
-    } else {
-      setMoreBtn(true);
-    }
-  }, [limit, flavorCount]); //flavorsフィールドの初期値は全件表示
 
   var getFlavors = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
@@ -72070,8 +72061,29 @@ var Searchflavors = function Searchflavors() {
     return function getFlavors() {
       return _ref3.apply(this, arguments);
     };
-  }(); //初期状態のflavor表示
+  }(); //以下useEffect
+  //forEach抜けた後でないと、値を更新しない。
 
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var addflavorids = [];
+    allflavors.forEach(function (flavor) {
+      addflavorids.push(flavor.id);
+    });
+    setAllflavorid(addflavorids); //ここで更新されないのが問題
+  }, [allflavors]); //表示件数の制限
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    setList(limitFlavors);
+  }, [flavors, limit]); //取得したflavorsが全て表示された場合は、もっとみるを非表示
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (limit >= flavorCount && flavorCount) {
+      setMoreBtn(false);
+    } else {
+      setMoreBtn(true);
+    }
+  }, [limit, flavorCount]); //初期状態のflavor表示
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (!flavorCount) {

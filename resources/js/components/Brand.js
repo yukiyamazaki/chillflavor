@@ -4,6 +4,8 @@ import {Link, useParams} from 'react-router-dom';
 import Navbar from './Navbar';
 import axios from 'axios';
 
+
+//ブランド別にフレイバー名を表示
 const Flavorlist = () => {
   const [alfakhels,setAlfakhel] = useState([]);
   const [fumaris,setFumari] = useState([]);
@@ -13,6 +15,7 @@ const Flavorlist = () => {
   const [butas,setButa] = useState([]);
   const [goldenlavas,setGoldenlava] = useState([]);
 
+  //ブランド別にフレイバー名を取得
   const getBrand = async() => {
     const params = new FormData();
     await axios.post('api/getBrand',params)
@@ -35,12 +38,13 @@ const Flavorlist = () => {
     getBrand();
   }, []);
 
-
   return(
     <>
       <Navbar />
       <div className="brand_list_main">
         <div className="flavor_category_contents">
+
+        {/* Alfakhe */}
           <div className="flavor_category_content">
             <h2 className="brand_title">Alfakhe</h2>
             <ul className="flavor_brand_lists">
@@ -54,6 +58,7 @@ const Flavorlist = () => {
             </ul>
           </div>
 
+          {/* Fumari */}
           <div className="flavor_category_content">
             <h2 className="brand_title">Fumari</h2>
             <ul className="flavor_brand_lists">
@@ -67,6 +72,7 @@ const Flavorlist = () => {
             </ul>
           </div>
 
+          {/* Social smokes */}
           <div className="flavor_category_content">
             <h2 className="brand_title">Social smokes</h2>
             <ul className="flavor_brand_lists">
@@ -80,6 +86,7 @@ const Flavorlist = () => {
             </ul>
           </div>
 
+          {/* De cloud */}
           <div className="flavor_category_content">
             <h2 className="brand_title">De cloud</h2>
             <ul className="flavor_brand_lists">
@@ -92,6 +99,8 @@ const Flavorlist = () => {
             )}
             </ul>
           </div>
+
+          {/* Trifecta */}
           <div className="flavor_category_content">
             <h2 className="brand_title">Trifecta</h2>
             <ul className="flavor_brand_lists">
@@ -104,6 +113,8 @@ const Flavorlist = () => {
             )}
             </ul>
           </div>
+
+          {/* Buta tabacco */}
           <div className="flavor_category_content">
             <h2 className="brand_title">Buta tabacco</h2>
             <ul className="flavor_brand_lists">
@@ -116,6 +127,8 @@ const Flavorlist = () => {
             )}
             </ul>
           </div>
+
+          {/*  Golden lavalina  */}
           <div className="flavor_category_content">
             <h2 className="brand_title">Golden lavalina</h2>
             <ul className="flavor_brand_lists">

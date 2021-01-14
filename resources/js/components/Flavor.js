@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import axios from 'axios';
 
 const Flavor = () =>  {
+  //DBから取得するフレイバー情報をset
   const [detailflavor,setDetailFlavor] = useState([]);
   //パラメーターを取得
   const {id} = useParams();
@@ -20,7 +21,7 @@ const Flavor = () =>  {
     state:'already'
   }
   
-  //Flavorの情報を取得
+  //Flavorの情報を取得する関数
   const detailFavor = async() => {
     if(idNum){
       const params = new FormData();
@@ -40,7 +41,8 @@ const Flavor = () =>  {
       console.log('このidのフレイバー情報がありません。')
     }
   }
- 
+
+  //Flavorの情報を取得
   useEffect(() => {
     detailFavor();
   },[])
@@ -62,11 +64,6 @@ const Flavor = () =>  {
     setWired(true);
   } 
   },[detailflavor]);
-
-  console.log(detailflavor);
-
-
-
 
   return(
     <>
@@ -95,18 +92,15 @@ const Flavor = () =>  {
               <img src={`images/flavors/${detailflavor.image_id}`}/>
             </div>
           </div>
-
           <div className="content_detail_wapper">
             <div className="content_detail_box">
               <div className="content_detail_name">
                 <span>{detailflavor.englishName}</span>
               </div>
-              
               <div className="content_detail_description">
                 <h3><span>{detailflavor.name}</span></h3>
                 <p>{detailflavor.feature_intro}</p>
               </div>
-              
               <div className="content_chart content_chart_active">
                 <table>
                   <tbody>
@@ -137,7 +131,6 @@ const Flavor = () =>  {
                   </tbody>
                 </table>
               </div>
-
               <div className="recommend_flavor">
                 <h3 className="recommend_title">おすすめ組み合わせ</h3>
                   <ul className="recommend_flavor_box">
@@ -167,7 +160,6 @@ const Flavor = () =>  {
                       </Link>
                     </li>
                   </ul>
-               
               </div>
             </div>
           </div>
@@ -175,7 +167,6 @@ const Flavor = () =>  {
       </div>
     </>
   )
-
 }
 
 export default Flavor;
