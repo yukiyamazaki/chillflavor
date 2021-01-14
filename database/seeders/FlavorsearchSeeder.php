@@ -769,7 +769,7 @@ class FlavorsearchSeeder extends Seeder
                 'name' => 'ローズガーデン',
                 'englishName' => 'Rose garden',
                 'feature_intro' => '説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明説明',
-                'image_id' => 'Rosegarden.svg',
+                'image_id' => 'Rosegarden.png',
                 'taste' =>'flesh',
                 'category' =>'spices',
                 'search_keyword' => 'ローズガーデンRosegarden ',
