@@ -13,6 +13,7 @@ const Searchflavors = () => {
   const [limit,setLimit] = useState(5);
   const [lists,setList] = useState([]);
   const [moreBtn,setMoreBtn] = useState(true);
+  const [modalhow,setModalhow] = useState(false);
   //絞り込みエリアのcheckbox
   const inputtastes = useRef([]);
   const inputypes = useRef([]);
@@ -30,6 +31,17 @@ const Searchflavors = () => {
     // setKeyword(e.target.value);
     setKeyword(e.target.value);
   }
+
+  //選び方のモーダル開閉
+  const howmodalCkick = (e) => {
+    e.preventDefault();
+    if(!modalhow){
+      setModalhow(true);
+    }else{
+      setModalhow(false);
+    }
+  }
+
   
   //forEach抜けた後でないと、値を更新しない。
   useEffect(() => {
@@ -61,6 +73,7 @@ const Searchflavors = () => {
       //OFF
       inputypes.current= inputypes.current.filter(item => item !== e.target.value);
       countDatabase();
+      
     }else{
       // ON
       inputypes.current = [...inputypes.current, e.target.value];
@@ -80,7 +93,7 @@ const Searchflavors = () => {
     }
   };
 
-    //ここからテスト開始
+    //count取得エリア
     const countDatabase = async() =>{
       let changeParams = {
         allflavorid:allflavorid,
@@ -102,6 +115,7 @@ const Searchflavors = () => {
       await axios.post('api/countFlavors',params)
       .then((response)=>{
         setCountnow(response.data.countflavors.length);
+        console.log(response.data,'テスト');
       })
       .catch((error)=>{
         alert('フレイバーが見つかりませんでした');
@@ -267,7 +281,9 @@ const Searchflavors = () => {
           </div>
           <div className="style_wrap_search">
             <div className="search_btn_wrap">
-              <button className="search_btn_how">
+              <button 
+                className="search_btn_how" onClick={howmodalCkick}
+              >
                 <img/>
                 <span>フレイバの選び方</span>
               </button>
@@ -282,6 +298,36 @@ const Searchflavors = () => {
             <div className="style_count">
               該当：{flavorCount}件
             </div>
+          </div>
+
+          {/* シーシャの探し方  modal */}
+          <div className={modalhow? "onmodal_howchoice_wraper style_modal_show":"onmodal_howchoice_wraper"}
+          >
+            <div className="onmodal_howchoice_bg"></div>
+            <div className="onmadal_howchoice_main slick-initialized">
+              <div 
+                className="onmadal_howchoice_close"
+                onClick={howmodalCkick}
+              ></div>
+              <div className="onmadal_howchoice_slider">
+                <button className="modal_slick_next slick_disable"></button>
+                <div className="sllicc_list">
+                  <div className="slick_track">
+                    <div className="slick-slide slick-active slick-current">
+                      <div>
+                        <div className="slick_content">
+                          <div className="img">開発中</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button className="modal_slick_prev"></button>
+              </div>
+
+            </div>
+            
+
           </div>
 
           {/* ここからFlavorの検索結果を表示 */}
@@ -511,7 +557,7 @@ const Searchflavors = () => {
                 </div>
                 <div className="style_main_modalFooter">
                   <div className="style_modal_result">
-                    該当：{countnow}件
+                    該当：<span>{countnow}</span>件
                   </div>
                   <button 
                     className="style_modal_btn"

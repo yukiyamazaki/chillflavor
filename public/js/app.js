@@ -71738,28 +71738,33 @@ var Searchflavors = function Searchflavors() {
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState12 = _slicedToArray(_useState11, 2),
       moreBtn = _useState12[0],
-      setMoreBtn = _useState12[1]; //絞り込みエリアのcheckbox
+      setMoreBtn = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      modalhow = _useState14[0],
+      setModalhow = _useState14[1]; //絞り込みエリアのcheckbox
 
 
   var inputtastes = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]);
   var inputypes = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]);
   var inputcate = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]); //絞り込みカウント
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState14 = _slicedToArray(_useState13, 2),
-      countnow = _useState14[0],
-      setCountnow = _useState14[1]; //全件分のID
-
-
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState16 = _slicedToArray(_useState15, 2),
-      allflavors = _useState16[0],
-      setAllflavors = _useState16[1];
+      countnow = _useState16[0],
+      setCountnow = _useState16[1]; //全件分のID
+
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      allflavorid = _useState18[0],
-      setAllflavorid = _useState18[1];
+      allflavors = _useState18[0],
+      setAllflavors = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState20 = _slicedToArray(_useState19, 2),
+      allflavorid = _useState20[0],
+      setAllflavorid = _useState20[1];
 
   var flavorCount = flavors.length; //検索inputの定義
   //keyword input
@@ -71767,6 +71772,17 @@ var Searchflavors = function Searchflavors() {
   var handleChange = function handleChange(e) {
     // setKeyword(e.target.value);
     setKeyword(e.target.value);
+  }; //選び方のモーダル開閉
+
+
+  var howmodalCkick = function howmodalCkick(e) {
+    e.preventDefault();
+
+    if (!modalhow) {
+      setModalhow(true);
+    } else {
+      setModalhow(false);
+    }
   }; //forEach抜けた後でないと、値を更新しない。
 
 
@@ -71820,7 +71836,7 @@ var Searchflavors = function Searchflavors() {
       inputcate.current = [].concat(_toConsumableArray(inputcate.current), [e.target.value]);
       countDatabase();
     }
-  }; //ここからテスト開始
+  }; //count取得エリア
 
 
   var countDatabase = /*#__PURE__*/function () {
@@ -71852,6 +71868,7 @@ var Searchflavors = function Searchflavors() {
               _context.next = 5;
               return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('api/countFlavors', params).then(function (response) {
                 setCountnow(response.data.countflavors.length);
+                console.log(response.data, 'テスト');
               })["catch"](function (error) {
                 alert('フレイバーが見つかりませんでした');
                 setCountnow();
@@ -72078,7 +72095,8 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "search_btn_wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    className: "search_btn_how"
+    className: "search_btn_how",
+    onClick: howmodalCkick
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "\u30D5\u30EC\u30A4\u30D0\u306E\u9078\u3073\u65B9")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "search_btn_filter",
     onClick: handdleModal
@@ -72086,7 +72104,32 @@ var Searchflavors = function Searchflavors() {
     src: "images/design/filter.svg"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "\u7D5E\u308A\u8FBC\u307F"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_count"
-  }, "\u8A72\u5F53\uFF1A", flavorCount, "\u4EF6")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+  }, "\u8A72\u5F53\uFF1A", flavorCount, "\u4EF6")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: modalhow ? "onmodal_howchoice_wraper style_modal_show" : "onmodal_howchoice_wraper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "onmodal_howchoice_bg"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "onmadal_howchoice_main slick-initialized"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "onmadal_howchoice_close",
+    onClick: howmodalCkick
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "onmadal_howchoice_slider"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "modal_slick_next slick_disable"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "sllicc_list"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "slick_track"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "slick-slide slick-active slick-current"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "slick_content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "img"
+  }, "\u958B\u767A\u4E2D")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "modal_slick_prev"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
     className: "contents_style_ul"
   }, lists.map(function (flavor) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -72281,7 +72324,7 @@ var Searchflavors = function Searchflavors() {
     className: "style_main_modalFooter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modal_result"
-  }, "\u8A72\u5F53\uFF1A", countnow, "\u4EF6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, "\u8A72\u5F53\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, countnow), "\u4EF6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "style_modal_btn",
     onClick: narrowFlavor
   }, "\u3053\u306E\u6761\u4EF6\u3067\u7D5E\u308A\u8FBC\u3080"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {

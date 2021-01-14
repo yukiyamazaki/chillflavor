@@ -346,6 +346,204 @@ h1.contents_title {
   margin: auto;
 }
 
+.onmodal_howchoice_wraper {
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.style_modal_show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.onmodal_howchoice_bg {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(23, 23, 23, 0.87);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.onmadal_howchoice_main {
+  max-width: 375px;
+  margin: auto;
+  position: relative;
+}
+
+.onmadal_howchoice_close {
+  width: 33px;
+  height: 33px;
+  display: block;
+  position: absolute;
+  right: 8px;
+  top: 108px;
+  z-index: 1000;
+}
+
+.onmadal_howchoice_close:after, .onmadal_howchoice_close:before {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 4px;
+  background: #fff;
+  position: absolute;
+  top: 12px;
+  bottom: 0;
+  left: 4px;
+  right: 0;
+  margin: 0;
+}
+
+.onmadal_howchoice_close:before {
+  transform: rotate(-45deg);
+}
+
+.onmadal_howchoice_close:after {
+  transform: rotate(45deg);
+}
+
+.onmadal_howchoice_slider {
+  padding: 150px 8px 0;
+}
+
+.modal_slick_next, .modal_slick_next::before {
+  display: block;
+  position: absolute;
+  margin: auto;
+  background: none;
+}
+
+.modal_slick_next {
+  top: 318px;
+  left: 25px;
+  right: auto;
+  height: 18px;
+  width: 18px;
+  border-color: #7d8b93;
+  border-style: solid;
+  border-width: 0 0 4px 4px;
+  transform: rotate(45deg);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+  font-size: 0;
+}
+
+.modal_slick_next::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  top: -4px;
+  right: 0;
+  bottom: 0;
+  left: -4px;
+}
+
+.slick_disable {
+  opacity: 0 !important;
+}
+
+.slick-slider .slick-list, .slick-slider .slick-track {
+  transform: translateZ(0);
+}
+
+.slick_list {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-list, .slick-slider {
+  position: relative;
+  display: block;
+}
+
+.slick_track {
+  width: 1077px;
+  opacity: 1;
+  transform: translate3d(0px, 0px, 0px);
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slick-track:after, .slick-track:before {
+  display: table;
+  content: "";
+}
+
+.slick-slide {
+  outline: none;
+  width: 359px;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+}
+
+.slick-initialized .slick-slide {
+  display: block;
+}
+
+.slick_content {
+  width: 100%;
+  display: inline-block;
+}
+
+.onmadal_howchoice_main .img {
+  align-items: center;
+  width: 359px;
+  background: white;
+  height: 359px;
+  display: flex;
+  justify-content: center;
+  font-size: 62px;
+}
+
+.modal_slick_prev, modal_slick_prev::before {
+  display: block;
+  display: block;
+  position: absolute;
+  margin: auto;
+  background: none;
+}
+
+.modal_slick_prev {
+  top: 318px;
+  right: 25px;
+  left: auto;
+  height: 18px;
+  width: 18px;
+  border-color: #7d8b93;
+  border-style: solid;
+  border-width: 0 0 4px 4px;
+  transform: rotate(-135deg);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+  font-size: 0;
+}
+
+.modal_slick_prev {
+  display: block;
+  position: absolute;
+  margin: auto;
+  background: none;
+}
+
 .ul_count {
   margin: 0;
   padding: 0;
@@ -815,6 +1013,10 @@ h1.contents_title {
   line-height: 18px;
   color: #bdc4c8;
   margin-right: 27px;
+}
+
+.style_modal_result span {
+  font-size: 16px;
 }
 
 .style_main_modalFooter > button {
