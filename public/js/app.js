@@ -71004,7 +71004,33 @@ var Flavor = function Flavor() {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       id = _useParams.id;
 
-  var idNum = parseInt(id); ////Home画面表示を初回かそれ以降か判断
+  var idNum = parseInt(id);
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      sweet = _useState4[0],
+      setSweet = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      flash = _useState6[0],
+      setFlash = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      hot = _useState8[0],
+      setHot = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      main = _useState10[0],
+      setMain = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      wired = _useState12[0],
+      setWired = _useState12[1]; ////Home画面表示を初回かそれ以降か判断
+
 
   var to = {
     pathname: '/',
@@ -71058,6 +71084,23 @@ var Flavor = function Flavor() {
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     detailFavor();
   }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    //tableのtaste表記変更
+    if (detailflavor.taste == "sweet") {
+      setSweet(true);
+    } else if (detailflavor.taste == "flesh") {
+      setFlash(true);
+    } else if (detailflavor.taste == "hot") {
+      setHot(true);
+    } //tableのtype表記変更
+
+
+    if (detailflavor.select_type == "main") {
+      setMain(true);
+    } else if (detailflavor.select_type == "wired") {
+      setWired(true);
+    }
+  }, [detailflavor]);
   console.log(detailflavor);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_main_wrapper"
@@ -71086,10 +71129,22 @@ var Flavor = function Flavor() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, detailflavor.englishName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "content_detail_description"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, detailflavor.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, detailflavor.feature_intro)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "content_chart"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "TASTE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "sweet")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "flesh")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "hot")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    className: "content_chart content_chart_active"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    className: "content_chart_taste"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "TASTE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: sweet ? "chart_taste_active" : ""
+  }, "\u7518\u3081"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: flash ? "chart_taste_active" : ""
+  }, "\u3055\u3063\u3071\u308A\u3081"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: hot ? "chart_taste_active" : ""
+  }, "\u304B\u3089\u3081"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
     className: "content_chart_type"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "TYPE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "\u738B\u9053")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "\u5909\u308F\u308A\u7A2E"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "TYPE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: main ? "chart_type_active" : ""
+  }, "\u738B\u9053"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: wired ? "chart_type_active" : ""
+  }, "\u5909\u308F\u308A\u7A2E")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "recommend_flavor"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
     className: "recommend_title"
@@ -71895,7 +71950,7 @@ var Searchflavors = function Searchflavors() {
 
               setModal(false); //countnow初期化
 
-              setCountnow([]);
+              setCountnow([0]);
               _context2.next = 30;
               break;
 
@@ -71939,7 +71994,7 @@ var Searchflavors = function Searchflavors() {
 
               setModal(false); //countnow初期化
 
-              setCountnow([]);
+              setCountnow([0]);
 
             case 30:
             case "end":
@@ -72058,7 +72113,7 @@ var Searchflavors = function Searchflavors() {
       className: "style_flavor_taste"
     }, flavor.taste), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "style_flavor_category"
-    }, flavor.category, "$", flavor.select_type))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, flavor.category))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "style_flavor_discription"
     }, flavor.feature_intro))))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -72068,9 +72123,7 @@ var Searchflavors = function Searchflavors() {
     onClick: isMoreflavors
   }, "\u3082\u3063\u3068\u307F\u308B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: "images/design/check_p.svg"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
-    className: "style_subTitle"
-  }, "\u30D5\u30EC\u30A4\u30D0\u30FC\u9078\u3073\u306B\u304A\u56F0\u308A\u3067\u3059\u304B\uFF1F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: modal ? "style_modalMenu_wrapper style_able_btn" : "style_modalMenu_wrapper style_modal_disable"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modalMenu_bg"

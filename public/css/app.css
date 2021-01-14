@@ -260,12 +260,14 @@ h1.contents_title {
   line-height: 30px;
   text-align: center;
   margin-bottom: 16px;
+  color: #3a3a3a;
 }
 
 .style_description {
   margin-bottom: 24px;
   font-size: 16px;
   line-height: 24px;
+  color: #3a3a3a;
 }
 
 .style_description span {
@@ -417,19 +419,28 @@ h1.contents_title {
 
 .style_flavor_taste {
   margin-right: 9px;
-  background: grey;
+  background: #3a3a3a;
   border-radius: 4px;
+  width: 39px;
+  height: 16px;
+  text-align: center;
+  padding-top: 1px;
 }
 
 .style_flavor_category {
-  background: grey;
+  background: #3a3a3a;
   border-radius: 4px;
+  width: 39px;
+  height: 16px;
+  text-align: center;
+  padding-top: 1px;
 }
 
 .style_flavor_name {
   color: #3a3a3a;
   font-size: 13px;
   font-weight: bold;
+  margin-top: 8px;
 }
 
 .style_flavor_discription {
@@ -512,6 +523,7 @@ h1.contents_title {
   line-height: 24px;
   font-size: 22px;
   padding-bottom: 24px;
+  color: #3a3a3a;
 }
 
 .style_Linebtn_wrap {
@@ -599,6 +611,7 @@ h1.contents_title {
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 8px;
+  color: #3a3a3a;
 }
 
 .style_inputkeyword_wrap {
@@ -634,6 +647,7 @@ h1.contents_title {
 
 .style_main_inputTitle {
   font-weight: bold;
+  color: #3a3a3a;
 }
 
 .style_checkbox_teste {
@@ -840,6 +854,7 @@ h1.contents_title {
   font-weight: 700;
   font-size: 20px;
   text-align: center;
+  color: #3a3a3a;
 }
 
 .style_modal_header_close {
@@ -1120,6 +1135,7 @@ h1.contents_title {
 .content_detail_name {
   font-size: 12px;
   margin-bottom: 10px;
+  color: #3a3a3a;
 }
 
 .content_detail_description {
@@ -1135,6 +1151,7 @@ h1.contents_title {
 
 .content_detail_description h3 span {
   background: #cfd2cf;
+  color: #3a3a3a;
 }
 
 .content_detail_description p {
@@ -1178,6 +1195,7 @@ h1.contents_title {
   font-weight: normal;
   font-size: 0.8rem;
   padding: 1px 4px;
+  color: #3a3a3a;
 }
 
 .content_chart table td {
@@ -1193,32 +1211,44 @@ h1.contents_title {
 }
 
 .content_chart table div {
-  display: block;
-  padding: 11px 29px;
+  text-align: center;
   border-right: 1px solid #b3b3b3;
+  font-size: 10px;
+  display: block;
+  opacity: 0.2;
+  flex: 1;
+  padding: 11px 0;
 }
 
 .content_chart table div:nth-child(3) {
   display: block;
-  padding: 11px 38px;
   border-right: none;
+  flex: 1;
 }
 
-.content_chart table div span {
-  font-size: 10px;
-  display: block;
+.content_chart table .chart_taste_active {
+  opacity: 1;
+  border-left: 1px solid #b3b3b3;
+  font-weight: bold;
 }
 
 .content_chart_type td div:nth-child(2) {
   display: block;
-  padding: 11px 46px;
+  padding: 11px 0px;
   border-right: none;
+  flex: 1;
 }
 
 .content_chart_type td div {
   display: block;
-  padding: 11px 54px;
   border-right: 1px solid #b3b3b3;
+  flex: 1;
+}
+
+.content_chart_type td .chart_type_active {
+  opacity: 1;
+  border-left: 1px solid #b3b3b3;
+  font-weight: bold;
 }
 
 .recommend_flavor {
@@ -1230,6 +1260,7 @@ h1.contents_title {
 .recommend_title {
   font-size: 16px;
   margin-bottom: 10px;
+  color: #3a3a3a;
 }
 
 .recommend_flavor_box {

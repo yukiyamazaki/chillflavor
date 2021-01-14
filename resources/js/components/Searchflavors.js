@@ -172,7 +172,7 @@ const Searchflavors = () => {
       //modalを閉じる
       setModal(false);
       //countnow初期化
-      setCountnow([]);
+      setCountnow([0]);
     }else{
       const params = new FormData;
       _.forEach(sendParams, (value, key) => {
@@ -210,7 +210,7 @@ const Searchflavors = () => {
       //modalを閉じる
       setModal(false);
       //countnow初期化
-      setCountnow([]);
+      setCountnow([0]);
     }
   }
 
@@ -299,7 +299,7 @@ const Searchflavors = () => {
                         <div className="style_flavor_name">{flavor.name}</div>
                         <div className="style_flavor_contents">
                           <div className="style_flavor_taste">{flavor.taste}</div>
-                          <div className="style_flavor_category">{flavor.category}${flavor.select_type}</div>
+                          <div className="style_flavor_category">{flavor.category}</div>
                         </div>
                       </div>
                       <div className="style_flavor_discription">
@@ -327,8 +327,6 @@ const Searchflavors = () => {
               <img src="images/design/check_p.svg"/>
             </button>
           </div>
-          <h3 className="style_subTitle">
-            フレイバー選びにお困りですか？</h3>
 
             {/* 絞り込みbuttonをクリック時に表示 */}
             <div 
