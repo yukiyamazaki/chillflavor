@@ -70790,7 +70790,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
+ //ブランド別にフレイバー名を表示
 
 var Flavorlist = function Flavorlist() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -70826,7 +70826,8 @@ var Flavorlist = function Flavorlist() {
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState14 = _slicedToArray(_useState13, 2),
       goldenlavas = _useState14[0],
-      setGoldenlava = _useState14[1];
+      setGoldenlava = _useState14[1]; //ブランド別にフレイバー名を取得
+
 
   var getBrand = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -70995,6 +70996,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Flavor = function Flavor() {
+  //DBから取得するフレイバー情報をset
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       detailflavor = _useState2[0],
@@ -71004,12 +71006,38 @@ var Flavor = function Flavor() {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       id = _useParams.id;
 
-  var idNum = parseInt(id); ////Home画面表示を初回かそれ以降か判断
+  var idNum = parseInt(id);
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      sweet = _useState4[0],
+      setSweet = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      flash = _useState6[0],
+      setFlash = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      hot = _useState8[0],
+      setHot = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      main = _useState10[0],
+      setMain = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      wired = _useState12[0],
+      setWired = _useState12[1]; ////Home画面表示を初回かそれ以降か判断
+
 
   var to = {
     pathname: '/',
     state: 'already'
-  }; //Flavorの情報を取得
+  }; //Flavorの情報を取得する関数
 
   var detailFavor = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -71053,12 +71081,29 @@ var Flavor = function Flavor() {
     return function detailFavor() {
       return _ref.apply(this, arguments);
     };
-  }();
+  }(); //Flavorの情報を取得
+
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     detailFavor();
   }, []);
-  console.log(detailflavor);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    //tableのtaste表記変更
+    if (detailflavor.taste == "sweet") {
+      setSweet(true);
+    } else if (detailflavor.taste == "flesh") {
+      setFlash(true);
+    } else if (detailflavor.taste == "hot") {
+      setHot(true);
+    } //tableのtype表記変更
+
+
+    if (detailflavor.select_type == "main") {
+      setMain(true);
+    } else if (detailflavor.select_type == "wired") {
+      setWired(true);
+    }
+  }, [detailflavor]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flavor_main_wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
@@ -71086,10 +71131,22 @@ var Flavor = function Flavor() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, detailflavor.englishName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "content_detail_description"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, detailflavor.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, detailflavor.feature_intro)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "content_chart"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "TASTE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "sweet")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "flesh")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "hot")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    className: "content_chart content_chart_active"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+    className: "content_chart_taste"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "TASTE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: sweet ? "chart_taste_active" : ""
+  }, "\u7518\u3081"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: flash ? "chart_taste_active" : ""
+  }, "\u3055\u3063\u3071\u308A\u3081"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: hot ? "chart_taste_active" : ""
+  }, "\u304B\u3089\u3081"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
     className: "content_chart_type"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "TYPE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "\u738B\u9053")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "\u5909\u308F\u308A\u7A2E"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "TYPE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: main ? "chart_type_active" : ""
+  }, "\u738B\u9053"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: wired ? "chart_type_active" : ""
+  }, "\u5909\u308F\u308A\u7A2E")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "recommend_flavor"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
     className: "recommend_title"
@@ -71497,7 +71554,9 @@ var Navbar = function Navbar() {
     className: "header_floatMenu_wraper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
-  }, "TOP")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "ABOUT")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "FLAVOR"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "CHEAM")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "TERMS OF SERVICE")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "CONTACT")))));
+  }, "TOP")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/Searchflavors"
+  }, "SEARCH FLAVOR"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "THEAM")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "TERMS OF SERVICE")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, "CONTACT")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Navbar);
@@ -71658,53 +71717,65 @@ var Searchflavors = function Searchflavors() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       modal = _useState2[0],
-      setModal = _useState2[1];
+      setModal = _useState2[1]; //DBから取得したflavor情報
+
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
       flavors = _useState4[0],
-      setFlavors = _useState4[1];
+      setFlavors = _useState4[1]; //キーワード検索
+
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
       keyword = _useState6[0],
-      setKeyword = _useState6[1];
+      setKeyword = _useState6[1]; //表示件数の制限
+
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(5),
       _useState8 = _slicedToArray(_useState7, 2),
       limit = _useState8[0],
-      setLimit = _useState8[1];
+      setLimit = _useState8[1]; //表示するリスト
+
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
       lists = _useState10[0],
-      setList = _useState10[1];
+      setList = _useState10[1]; //もっとみるボタン
+
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState12 = _slicedToArray(_useState11, 2),
       moreBtn = _useState12[0],
-      setMoreBtn = _useState12[1]; //絞り込みエリアのcheckbox
+      setMoreBtn = _useState12[1]; //選び方のモーダルを表示するボタン
+
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      modalhow = _useState14[0],
+      setModalhow = _useState14[1]; //絞り込みエリアのcheckbox
 
 
   var inputtastes = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]);
   var inputypes = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]);
   var inputcate = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])([]); //絞り込みカウント
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState14 = _slicedToArray(_useState13, 2),
-      countnow = _useState14[0],
-      setCountnow = _useState14[1]; //全件分のID
-
-
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState16 = _slicedToArray(_useState15, 2),
-      allflavors = _useState16[0],
-      setAllflavors = _useState16[1];
+      countnow = _useState16[0],
+      setCountnow = _useState16[1]; //全件分のID
+
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      allflavorid = _useState18[0],
-      setAllflavorid = _useState18[1];
+      allflavors = _useState18[0],
+      setAllflavors = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState20 = _slicedToArray(_useState19, 2),
+      allflavorid = _useState20[0],
+      setAllflavorid = _useState20[1]; //DBからから取得したflavoerの件数
+
 
   var flavorCount = flavors.length; //検索inputの定義
   //keyword input
@@ -71712,17 +71783,20 @@ var Searchflavors = function Searchflavors() {
   var handleChange = function handleChange(e) {
     // setKeyword(e.target.value);
     setKeyword(e.target.value);
-  }; //forEach抜けた後でないと、値を更新しない。
+  }; //選び方のモーダル開閉
 
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var addflavorids = [];
-    allflavors.forEach(function (flavor) {
-      addflavorids.push(flavor.id);
-    });
-    setAllflavorid(addflavorids); //ここで更新されないのが問題
-  }, [allflavors]); // チェックボックス
+  var howmodalCkick = function howmodalCkick(e) {
+    e.preventDefault();
+
+    if (!modalhow) {
+      setModalhow(true);
+    } else {
+      setModalhow(false);
+    }
+  }; // チェックボックス
   //taste
+
 
   var changeTaste = function changeTaste(e) {
     if (inputtastes.current.includes(e.target.value)) {
@@ -71765,7 +71839,7 @@ var Searchflavors = function Searchflavors() {
       inputcate.current = [].concat(_toConsumableArray(inputcate.current), [e.target.value]);
       countDatabase();
     }
-  }; //ここからテスト開始
+  }; //count取得エリア
 
 
   var countDatabase = /*#__PURE__*/function () {
@@ -71832,13 +71906,10 @@ var Searchflavors = function Searchflavors() {
     if (modal) {
       setModal(false);
     }
-  };
+  }; //表示件数の制限する変数
 
-  var limitFlavors = flavors.slice(0, limit); //表示件数の制限
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    setList(limitFlavors);
-  }, [flavors, limit]); //絞り込みをClick
+  var limitFlavors = flavors.slice(0, limit); //絞り込みをClick
 
   var narrowFlavor = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
@@ -71895,7 +71966,7 @@ var Searchflavors = function Searchflavors() {
 
               setModal(false); //countnow初期化
 
-              setCountnow([]);
+              setCountnow([0]);
               _context2.next = 30;
               break;
 
@@ -71939,7 +72010,7 @@ var Searchflavors = function Searchflavors() {
 
               setModal(false); //countnow初期化
 
-              setCountnow([]);
+              setCountnow([0]);
 
             case 30:
             case "end":
@@ -71958,16 +72029,8 @@ var Searchflavors = function Searchflavors() {
   var isMoreflavors = function isMoreflavors(e) {
     e.preventDefault();
     setLimit(limit + 5);
-  };
+  }; //flavorsフィールドの初期値は全件表示
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    //取得したflavorsが全て表示された場合は、もっとみるを非表示
-    if (limit >= flavorCount && flavorCount) {
-      setMoreBtn(false);
-    } else {
-      setMoreBtn(true);
-    }
-  }, [limit, flavorCount]); //flavorsフィールドの初期値は全件表示
 
   var getFlavors = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
@@ -71998,8 +72061,29 @@ var Searchflavors = function Searchflavors() {
     return function getFlavors() {
       return _ref3.apply(this, arguments);
     };
-  }(); //初期状態のflavor表示
+  }(); //以下useEffect
+  //forEach抜けた後でないと、値を更新しない。
 
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var addflavorids = [];
+    allflavors.forEach(function (flavor) {
+      addflavorids.push(flavor.id);
+    });
+    setAllflavorid(addflavorids); //ここで更新されないのが問題
+  }, [allflavors]); //表示件数の制限
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    setList(limitFlavors);
+  }, [flavors, limit]); //取得したflavorsが全て表示された場合は、もっとみるを非表示
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (limit >= flavorCount && flavorCount) {
+      setMoreBtn(false);
+    } else {
+      setMoreBtn(true);
+    }
+  }, [limit, flavorCount]); //初期状態のflavor表示
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (!flavorCount) {
@@ -72023,7 +72107,8 @@ var Searchflavors = function Searchflavors() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "search_btn_wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    className: "search_btn_how"
+    className: "search_btn_how",
+    onClick: howmodalCkick
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "\u30D5\u30EC\u30A4\u30D0\u306E\u9078\u3073\u65B9")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "search_btn_filter",
     onClick: handdleModal
@@ -72031,7 +72116,32 @@ var Searchflavors = function Searchflavors() {
     src: "images/design/filter.svg"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "\u7D5E\u308A\u8FBC\u307F"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_count"
-  }, "\u8A72\u5F53\uFF1A", flavorCount, "\u4EF6")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+  }, "\u8A72\u5F53\uFF1A", flavorCount, "\u4EF6")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: modalhow ? "onmodal_howchoice_wraper style_modal_show" : "onmodal_howchoice_wraper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "onmodal_howchoice_bg"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "onmadal_howchoice_main slick-initialized"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "onmadal_howchoice_close",
+    onClick: howmodalCkick
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "onmadal_howchoice_slider"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "modal_slick_next slick_disable"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "sllicc_list"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "slick_track"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "slick-slide slick-active slick-current"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "slick_content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "img"
+  }, "\u958B\u767A\u4E2D")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "modal_slick_prev"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
     className: "contents_style_ul"
   }, lists.map(function (flavor) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -72058,7 +72168,7 @@ var Searchflavors = function Searchflavors() {
       className: "style_flavor_taste"
     }, flavor.taste), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "style_flavor_category"
-    }, flavor.category, "$", flavor.select_type))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, flavor.category))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "style_flavor_discription"
     }, flavor.feature_intro))))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -72068,9 +72178,7 @@ var Searchflavors = function Searchflavors() {
     onClick: isMoreflavors
   }, "\u3082\u3063\u3068\u307F\u308B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: "images/design/check_p.svg"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
-    className: "style_subTitle"
-  }, "\u30D5\u30EC\u30A4\u30D0\u30FC\u9078\u3073\u306B\u304A\u56F0\u308A\u3067\u3059\u304B\uFF1F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: modal ? "style_modalMenu_wrapper style_able_btn" : "style_modalMenu_wrapper style_modal_disable"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modalMenu_bg"
@@ -72228,7 +72336,7 @@ var Searchflavors = function Searchflavors() {
     className: "style_main_modalFooter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "style_modal_result"
-  }, "\u8A72\u5F53\uFF1A", countnow, "\u4EF6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }, "\u8A72\u5F53\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, countnow), "\u4EF6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "style_modal_btn",
     onClick: narrowFlavor
   }, "\u3053\u306E\u6761\u4EF6\u3067\u7D5E\u308A\u8FBC\u3080"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {

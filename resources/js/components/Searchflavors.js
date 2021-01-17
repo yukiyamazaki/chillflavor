@@ -8,11 +8,18 @@ import Navbar from './Navbar';
 
 const Searchflavors = () => {
   const [modal,setModal] = useState(false);
+  //DBから取得したflavor情報
   const [flavors,setFlavors] = useState([]);
+  //キーワード検索
   const [keyword,setKeyword] = useState("");
+   //表示件数の制限
   const [limit,setLimit] = useState(5);
+  //表示するリスト
   const [lists,setList] = useState([]);
+  //もっとみるボタン
   const [moreBtn,setMoreBtn] = useState(true);
+  //選び方のモーダルを表示するボタン
+  const [modalhow,setModalhow] = useState(false);
   //絞り込みエリアのcheckbox
   const inputtastes = useRef([]);
   const inputypes = useRef([]);
@@ -22,6 +29,7 @@ const Searchflavors = () => {
   //全件分のID
   const [allflavors,setAllflavors] = useState([]);
   const [allflavorid,setAllflavorid] = useState([]);
+  //DBからから取得したflavoerの件数
   const flavorCount = flavors.length;
 
   //検索inputの定義
@@ -30,15 +38,16 @@ const Searchflavors = () => {
     // setKeyword(e.target.value);
     setKeyword(e.target.value);
   }
-  
-  //forEach抜けた後でないと、値を更新しない。
-  useEffect(() => {
-    let addflavorids=[];
-    allflavors.forEach(flavor =>{
-      addflavorids.push(flavor.id);
-    })
-    setAllflavorid(addflavorids);//ここで更新されないのが問題
-  },[allflavors]);
+
+  //選び方のモーダル開閉
+  const howmodalCkick = (e) => {
+    e.preventDefault();
+    if(!modalhow){
+      setModalhow(true);
+    }else{
+      setModalhow(false);
+    }
+  }
   
   // チェックボックス
   //taste
@@ -47,7 +56,6 @@ const Searchflavors = () => {
       //OFF
       inputtastes.current= inputtastes.current.filter(item => item !== e.target.value);
       countDatabase();
-
     }else{
       // ON
       inputtastes.current = [...inputtastes.current, e.target.value];
@@ -61,6 +69,7 @@ const Searchflavors = () => {
       //OFF
       inputypes.current= inputypes.current.filter(item => item !== e.target.value);
       countDatabase();
+      
     }else{
       // ON
       inputypes.current = [...inputypes.current, e.target.value];
@@ -80,7 +89,7 @@ const Searchflavors = () => {
     }
   };
 
-    //ここからテスト開始
+  //count取得エリア
     const countDatabase = async() =>{
       let changeParams = {
         allflavorid:allflavorid,
@@ -126,11 +135,8 @@ const Searchflavors = () => {
     }
   }
  
+  //表示件数の制限する変数
   const limitFlavors = flavors.slice(0,limit);
-  //表示件数の制限
-  useEffect(() => {
-    setList(limitFlavors);
-  },[flavors,limit])
 
   //絞り込みをClick
   const narrowFlavor = async(e) =>{
@@ -140,14 +146,12 @@ const Searchflavors = () => {
     if(!confirm('検索します。よろしいですか？')) {
       return;
     }
-    
     let sendParams = {
       allflavorid:allflavorid,
       tastes: inputtastes.current,
       types:inputypes.current,
       categories:inputcate.current,
     }
-    
     if(keyword){
       //キーワード検索のinputに値があれば、checkboxは無視して検索
       const params = new FormData();
@@ -172,7 +176,7 @@ const Searchflavors = () => {
       //modalを閉じる
       setModal(false);
       //countnow初期化
-      setCountnow([]);
+      setCountnow([0]);
     }else{
       const params = new FormData;
       _.forEach(sendParams, (value, key) => {
@@ -210,7 +214,7 @@ const Searchflavors = () => {
       //modalを閉じる
       setModal(false);
       //countnow初期化
-      setCountnow([]);
+      setCountnow([0]);
     }
   }
 
@@ -219,15 +223,6 @@ const Searchflavors = () => {
     e.preventDefault();
     setLimit(limit + 5);
   }
-
-  useEffect(() => {
-    //取得したflavorsが全て表示された場合は、もっとみるを非表示
-    if(limit>=flavorCount && flavorCount){
-      setMoreBtn(false);
-    }else{
-      setMoreBtn(true);
-    }
-  },[limit,flavorCount]);
 
    //flavorsフィールドの初期値は全件表示
   const getFlavors = async() =>{
@@ -243,6 +238,31 @@ const Searchflavors = () => {
       console.log('Fitstエラー');
     });
   }
+
+  //以下useEffect
+  //forEach抜けた後でないと、値を更新しない。
+  useEffect(() => {
+    let addflavorids=[];
+    allflavors.forEach(flavor =>{
+      addflavorids.push(flavor.id);
+    })
+    setAllflavorid(addflavorids);//ここで更新されないのが問題
+  },[allflavors]);
+
+ //表示件数の制限
+  useEffect(() => {
+    setList(limitFlavors);
+  },[flavors,limit])
+
+  //取得したflavorsが全て表示された場合は、もっとみるを非表示
+  useEffect(() => {
+    if(limit>=flavorCount && flavorCount){
+      setMoreBtn(false);
+    }else{
+      setMoreBtn(true);
+    }
+  },[limit,flavorCount]);
+
   //初期状態のflavor表示
   useEffect(() =>{
     if(!flavorCount){
@@ -267,7 +287,9 @@ const Searchflavors = () => {
           </div>
           <div className="style_wrap_search">
             <div className="search_btn_wrap">
-              <button className="search_btn_how">
+              <button 
+                className="search_btn_how" onClick={howmodalCkick}
+              >
                 <img/>
                 <span>フレイバの選び方</span>
               </button>
@@ -282,6 +304,36 @@ const Searchflavors = () => {
             <div className="style_count">
               該当：{flavorCount}件
             </div>
+          </div>
+
+          {/* シーシャの探し方  modal */}
+          <div className={modalhow? "onmodal_howchoice_wraper style_modal_show":"onmodal_howchoice_wraper"}
+          >
+            <div className="onmodal_howchoice_bg"></div>
+            <div className="onmadal_howchoice_main slick-initialized">
+              <div 
+                className="onmadal_howchoice_close"
+                onClick={howmodalCkick}
+              ></div>
+              <div className="onmadal_howchoice_slider">
+                <button className="modal_slick_next slick_disable"></button>
+                <div className="sllicc_list">
+                  <div className="slick_track">
+                    <div className="slick-slide slick-active slick-current">
+                      <div>
+                        <div className="slick_content">
+                          <div className="img">開発中</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button className="modal_slick_prev"></button>
+              </div>
+
+            </div>
+            
+
           </div>
 
           {/* ここからFlavorの検索結果を表示 */}
@@ -299,7 +351,7 @@ const Searchflavors = () => {
                         <div className="style_flavor_name">{flavor.name}</div>
                         <div className="style_flavor_contents">
                           <div className="style_flavor_taste">{flavor.taste}</div>
-                          <div className="style_flavor_category">{flavor.category}${flavor.select_type}</div>
+                          <div className="style_flavor_category">{flavor.category}</div>
                         </div>
                       </div>
                       <div className="style_flavor_discription">
@@ -327,8 +379,6 @@ const Searchflavors = () => {
               <img src="images/design/check_p.svg"/>
             </button>
           </div>
-          <h3 className="style_subTitle">
-            フレイバー選びにお困りですか？</h3>
 
             {/* 絞り込みbuttonをクリック時に表示 */}
             <div 
@@ -513,7 +563,7 @@ const Searchflavors = () => {
                 </div>
                 <div className="style_main_modalFooter">
                   <div className="style_modal_result">
-                    該当：{countnow}件
+                    該当：<span>{countnow}</span>件
                   </div>
                   <button 
                     className="style_modal_btn"

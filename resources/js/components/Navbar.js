@@ -53,17 +53,11 @@ const Navbar = () =>{
               <Link to="/">TOP</Link>
             </li>
             <li>
-              <a>ABOUT</a>
-            </li>
-            <li>
-              <a>FLAVOR</a>
+              <Link to="/Searchflavors">SEARCH FLAVOR</Link>
             </li>
           </div>
           <li>
-            <div></div>
-          </li>
-          <li>
-            <a>CHEAM</a>
+            <a>THEAM</a>
           </li>
           <li>
             <a>TERMS OF SERVICE</a>

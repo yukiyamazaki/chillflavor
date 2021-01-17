@@ -271,13 +271,14 @@ h1.contents_title {
   line-height: 30px;
   text-align: center;
   margin-bottom: 16px;
+  color: #3a3a3a;
 }
 
 .style_description{
   margin-bottom: 24px;
   font-size: 16px;
   line-height: 24px;
-
+  color: #3a3a3a;
 }
 
 .style_description span{
@@ -354,6 +355,206 @@ h1.contents_title {
   margin: auto;
 }
 
+//シーシャの選び方   modal
+.onmodal_howchoice_wraper{
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: opacity .3s ease-in;
+}
+
+.style_modal_show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.onmodal_howchoice_bg{
+  width: 100vw;
+  height: 100vh;
+  background: hsla(0,0%,9%,.87);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.onmadal_howchoice_main{
+  max-width: 375px;
+  margin: auto;
+  position: relative;
+}
+
+.onmadal_howchoice_close{
+  width: 33px;
+  height: 33px;
+  display: block;
+  position: absolute;
+  right: 8px;
+  top: 108px;
+  z-index: 1000;
+}
+
+.onmadal_howchoice_close:after, .onmadal_howchoice_close:before {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 4px;
+  background: #fff;
+  position: absolute;
+  top: 12px;
+  bottom: 0;
+  left: 4px;
+  right: 0;
+  margin: 0;
+}
+
+.onmadal_howchoice_close:before {
+  transform: rotate(-45deg);
+}
+
+.onmadal_howchoice_close:after {
+  transform: rotate(45deg);
+}
+
+.onmadal_howchoice_slider{
+  padding: 150px 8px 0;
+}
+
+.modal_slick_next,.modal_slick_next::before{
+  display: block;
+  position: absolute;
+  margin: auto;
+  background: none;
+}
+
+.modal_slick_next{
+  top: 318px;
+  left: 25px;
+  right: auto;
+  height: 18px;
+  width: 18px;
+  border-color: #7d8b93;
+  border-style: solid;
+  border-width: 0 0 4px 4px;
+  transform: rotate(45deg);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity .3s ease-out;
+  font-size: 0;
+}
+
+.modal_slick_next::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  top: -4px;
+  right: 0;
+  bottom: 0;
+  left: -4px;
+}
+
+.slick_disable{
+  opacity: 0!important;
+}
+
+.slick-slider .slick-list, .slick-slider .slick-track {
+  transform: translateZ(0);
+}
+
+.slick_list{
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-list, .slick-slider {
+  position: relative;
+  display: block;
+}
+
+.slick_track{
+  width: 1077px;
+  opacity: 1;
+  transform: translate3d(0px, 0px, 0px);
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slick-track:after, .slick-track:before {
+  display: table;
+  content: "";
+}
+
+.slick-slide{
+  outline: none;
+  width: 359px;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+}
+
+.slick-initialized .slick-slide {
+  display: block;
+}
+
+.slick_content{
+  width: 100%;
+  display: inline-block;
+}
+
+.onmadal_howchoice_main .img{
+  align-items: center;
+  width: 359px;
+  background: white;
+  height: 359px;
+  display: flex;
+  justify-content: center;
+  font-size: 62px;
+}
+
+.modal_slick_prev,modal_slick_prev::before{
+  display: block;
+  display: block;
+  position: absolute;
+  margin: auto;
+  background: none;
+}
+
+.modal_slick_prev{
+  top: 318px;
+  right: 25px;
+  left: auto;
+  height: 18px;
+  width: 18px;
+  border-color: #7d8b93;
+  border-style: solid;
+  border-width: 0 0 4px 4px;
+  transform: rotate(-135deg);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity .3s ease-out;
+  font-size: 0;
+}
+
+.modal_slick_prev{
+  display: block;
+  position: absolute;
+  margin: auto;
+  background: none;
+}
+
+// flavor検索結果表示エリア
 .ul_count{
   margin: 0;
   padding: 0;
@@ -423,19 +624,28 @@ h1.contents_title {
 
 .style_flavor_taste{
   margin-right: 9px;
-  background: grey;
+  background: #3a3a3a;
   border-radius: 4px;
+  width: 39px;
+  height: 16px;
+  text-align: center;
+  padding-top: 1px;
 }
 
 .style_flavor_category{
-  background: grey;
+  background: #3a3a3a;
   border-radius: 4px;
+  width: 39px;
+  height: 16px;
+  text-align: center;
+  padding-top: 1px;
 }
 
 .style_flavor_name{
   color: #3a3a3a;
   font-size: 13px;
   font-weight: bold;
+  margin-top: 8px;
 }
 
 .style_flavor_discription {
@@ -521,6 +731,7 @@ h1.contents_title {
   line-height: 24px;
   font-size: 22px;
   padding-bottom: 24px;
+  color: #3a3a3a;
 }
 
 .style_Linebtn_wrap{
@@ -581,8 +792,8 @@ h1.contents_title {
 .style_modalMenu_bg{
   width: 100%;
   height: 38px;
-  background: #111e26;
-  opacity: .3;
+  background: rgba(23, 23, 23, 0.87);
+  opacity: 0.7;
 }
 .style_modal_content{
   background: #fff;
@@ -606,6 +817,7 @@ h1.contents_title {
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 8px;
+  color: #3a3a3a;
 }
 
 .style_inputkeyword_wrap{
@@ -640,6 +852,7 @@ h1.contents_title {
 
 .style_main_inputTitle {
   font-weight: bold;
+  color: #3a3a3a;
 }
 
 .style_checkbox_teste{
@@ -806,6 +1019,10 @@ h1.contents_title {
   margin-right: 27px;
 }
 
+.style_modal_result span{
+  font-size: 16px;
+}
+
 
 .style_main_modalFooter > button{
   width: 216px;
@@ -844,6 +1061,7 @@ h1.contents_title {
   font-weight: 700;
   font-size: 20px;
   text-align: center;
+  color: #3a3a3a;
 }
 
 .style_modal_header_close{
@@ -1130,6 +1348,7 @@ h1.contents_title {
 .content_detail_name{
   font-size: 12px;
   margin-bottom: 10px;
+  color: #3a3a3a;
 }
 
 .content_detail_description{
@@ -1145,6 +1364,7 @@ h1.contents_title {
 
 .content_detail_description h3 span{
   background: #cfd2cf;
+  color: #3a3a3a;
 }
 
 .content_detail_description p{
@@ -1188,6 +1408,7 @@ h1.contents_title {
   font-weight: normal;
   font-size: 0.8rem;
   padding: 1px 4px;
+  color: #3a3a3a;
 }
 
 .content_chart table td{
@@ -1203,31 +1424,47 @@ h1.contents_title {
 }
 
 .content_chart table div{
-  display: block;
-  padding: 11px 29px;
+  text-align: center;
   border-right: 1px solid #b3b3b3;
+  font-size: 10px;
+  display: block;
+  opacity: 0.2;
+  flex: 1;
+  padding: 11px 0;
 }
 
 .content_chart table div:nth-child(3){
   display: block;
-  padding: 11px 38px;
   border-right: none;
+  flex: 1;
 }
 
-.content_chart table div span{
-  font-size: 10px;
-  display: block;
+.content_chart table .chart_taste_active{
+  opacity: 1;
+  border-left: 1px solid #b3b3b3;
+  font-weight: bold;
 }
+
 
 .content_chart_type td div:nth-child(2){
   display: block;
-  padding: 11px 46px;
+  padding: 11px 0px;
   border-right: none;
+  flex: 1;
+
 }
+
 .content_chart_type td div{
   display: block;
-  padding: 11px 54px;
   border-right: 1px solid #b3b3b3;
+  flex: 1;
+}
+
+.content_chart_type td .chart_type_active{
+  opacity: 1;
+  border-left: 1px solid #b3b3b3;
+  font-weight: bold;
+
 }
 
 .recommend_flavor{
@@ -1239,6 +1476,7 @@ h1.contents_title {
 .recommend_title {
   font-size: 16px;
   margin-bottom: 10px;
+  color: #3a3a3a;
 }
 
 .recommend_flavor_box{

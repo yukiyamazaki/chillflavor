@@ -4,10 +4,16 @@ import Navbar from './Navbar';
 import axios from 'axios';
 
 const Flavor = () =>  {
+  //DBから取得するフレイバー情報をset
   const [detailflavor,setDetailFlavor] = useState([]);
   //パラメーターを取得
   const {id} = useParams();
   const idNum = parseInt(id);
+  const [sweet, setSweet] = useState(false);
+  const [flash, setFlash] = useState(false);
+  const [hot, setHot] = useState(false);
+  const [main, setMain] = useState(false);
+  const [wired, setWired] = useState(false);
 
   ////Home画面表示を初回かそれ以降か判断
   const to = {
@@ -15,7 +21,7 @@ const Flavor = () =>  {
     state:'already'
   }
   
-  //Flavorの情報を取得
+  //Flavorの情報を取得する関数
   const detailFavor = async() => {
     if(idNum){
       const params = new FormData();
@@ -35,12 +41,29 @@ const Flavor = () =>  {
       console.log('このidのフレイバー情報がありません。')
     }
   }
- 
+
+  //Flavorの情報を取得
   useEffect(() => {
     detailFavor();
   },[])
-  console.log(detailflavor);
 
+  useEffect(() => {
+   //tableのtaste表記変更
+   if(detailflavor.taste == "sweet"){
+    setSweet(true);
+  }else if(detailflavor.taste == "flesh"){
+    setFlash(true);
+  }else if(detailflavor.taste == "hot"){
+    setHot(true);
+  }
+
+  //tableのtype表記変更
+  if(detailflavor.select_type == "main"){
+    setMain(true);
+  }else if(detailflavor.select_type == "wired"){
+    setWired(true);
+  } 
+  },[detailflavor]);
 
   return(
     <>
@@ -69,40 +92,45 @@ const Flavor = () =>  {
               <img src={`images/flavors/${detailflavor.image_id}`}/>
             </div>
           </div>
-
           <div className="content_detail_wapper">
             <div className="content_detail_box">
               <div className="content_detail_name">
                 <span>{detailflavor.englishName}</span>
               </div>
-              
               <div className="content_detail_description">
                 <h3><span>{detailflavor.name}</span></h3>
                 <p>{detailflavor.feature_intro}</p>
               </div>
-              
-              <div className="content_chart">
+              <div className="content_chart content_chart_active">
                 <table>
                   <tbody>
-                    <tr>
+                    <tr className="content_chart_taste">
                         <th>TASTE</th>
                       <td>
-                        <div><span>sweet</span></div>
-                        <div><span>flesh</span></div>
-                        <div><span>hot</span></div>
+                        <div className={sweet?  "chart_taste_active": ""}
+                        >甘め</div>
+                        <div 
+                          className={flash? "chart_taste_active" : ""}
+                        >さっぱりめ</div>
+                        <div 
+                          className={hot? "chart_taste_active" :"" }
+                          >からめ</div>
                       </td>
                     </tr>
                     <tr className="content_chart_type">
                         <th>TYPE</th>
                       <td>
-                        <div><span>王道</span></div>
-                        <div><span>変わり種</span></div>
+                        <div 
+                          className={main?  "chart_type_active": ""}
+                        >王道</div>
+                        <div 
+                          className={wired? "chart_type_active" : ""
+                        }>変わり種</div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-
               <div className="recommend_flavor">
                 <h3 className="recommend_title">おすすめ組み合わせ</h3>
                   <ul className="recommend_flavor_box">
@@ -132,7 +160,6 @@ const Flavor = () =>  {
                       </Link>
                     </li>
                   </ul>
-               
               </div>
             </div>
           </div>
@@ -140,7 +167,6 @@ const Flavor = () =>  {
       </div>
     </>
   )
-
 }
 
 export default Flavor;
