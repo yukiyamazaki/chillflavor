@@ -31,7 +31,7 @@ const Navbar = () =>{
         <div className="home-header-inner">
           <div className="home-header-logo">
             <Link to={to}>
-              <span>CHOICE FLAVOR</span>
+              <span>CHILL FLAVOR</span>
             </Link>
           </div>
           <button 

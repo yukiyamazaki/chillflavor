@@ -22,7 +22,7 @@ const GlobalNav = () => {
     >
       <div className="f_logo">
         <div src="logo.png" alt="logo">
-          <p>CHOICE FLAVOR</p>
+          <p>CHILL FLAVOR</p>
         </div>
       </div>
     </div>
