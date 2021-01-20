@@ -1632,6 +1632,11 @@ h1.contents_title {
   font-size: 30px;
 }
 
+#logo_loader .f_logo span{
+  letter-spacing: 7.5px;
+}
+
+
 #logo_loader .f_logo img {
   width: 100%;
   height: auto;

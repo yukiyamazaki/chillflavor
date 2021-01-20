@@ -22,11 +22,10 @@ const GlobalNav = () => {
     >
       <div className="f_logo">
         <div src="logo.png" alt="logo">
-          <p>CHILL FLAVOR</p>
+          <p><span>CHILL</span> FLAVOR</p>
         </div>
       </div>
-    </div>
-
+    </div> 
     <div className="home-wrap">
       {/* headerコンポーネント */}
       <Navbar />
